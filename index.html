@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jivitesh  | AI/DS Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <style>
+    .resume-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .skill-wheel {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    .skill-item {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom right, #00b894, #0984e3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="logo">Jivi</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button id="theme-toggle">🌙</button>
+  </nav>
+
+  <header class="hero">
+    <h1 class="hero-title">Hi, I'm Jivi</h1>
+    <h2><span id="typed-title"></span></h2>
+    <div class="resume-container">
+      <a href="Jivi_Resume.pdf" class="btn" download>Download Resume</a>
+    </div>
+    <canvas id="hero-bg"></canvas>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <p>I’m Jivi, an aspiring AI & Data Science Engineer with a passion for transforming bold ideas into real-world tech solutions. I thrive at the intersection of creativity, logic, and innovation—building systems that not only work but make a difference. With a growth mindset and startup spirit, I’m always exploring emerging tech, automating problems, and collaborating on projects that move the needle forward. Let’s innovate the future, one line of code at a time.</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-filters">
+      <button class="filter-btn" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="html">HTML</button>
+      <button class="filter-btn" data-filter="js">JS</button>
+      <button class="filter-btn" data-filter="ml">ML</button>
+    </div>
+    <div class="projects-grid">
+      <div class="project" data-category="html js" onclick="openModal('Attendance Alert System', 'HTML, JS, Firebase')">
+        <h3>Attendance Alert System</h3>
+        <p>HTML, JS, Python,css</p>
+        <a href="https://github.com/jivi001/push-sms.git" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3 id="modal-title"></h3>
+      <p id="modal-tech"></p>
+    </div>
+  </div>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill-wheel" id="skillWheel">
+      <div class="skill-item">Python</div>
+      <div class="skill-item">HTML/CSS</div>
+      <div class="skill-item">JavaScript</div>
+      <div class="skill-item">SQL</div>
+      <div class="skill-item">Machine Learning</div>
+      <div class="skill-item">Git/GitHub</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Connect With Me</h2>
+    <div class="social-redirect">
+      <a href="https://www.linkedin.com/in/jivi001" target="_blank" class="social-link linkedin">LinkedIn</a>
+      <a href="https://github.com/jivi001" target="_blank" class="social-link github">GitHub</a>
+      <a href="https://www.instagram.com/exu_01" target="_blank" class="social-link instagram">Instagram</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; ©2025 Jivitesh.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    new Typed('#typed-title', {
+      strings: ["AI/DS Engineer", "Innovator", "Visionary"],
+      typeSpeed: 80,
+      backSpeed: 50,
+      loop: true
+    });
+
+    gsap.from(".hero-title", { duration: 1.2, y: -50, opacity: 0, ease: "power2.out" });
+    gsap.from(".btn", { duration: 1, delay: 0.5, y: 20, opacity: 0 });
+
+    VanillaTilt.init(document.querySelectorAll(".project"), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.2,
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.project').forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category.includes(filter)) ? 'block' : 'none';
+        });
+      });
+    });
+
+    function openModal(title, tech) {
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-tech").textContent = tech;
+      document.getElementById("project-modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("project-modal").style.display = "none";
+    }
+
+    // Skill Wheel Scroll Animation
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to("#skillWheel", {
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 1,
+      scale: 1,
+      duration: 1,
+      ease: "power2.out"
+    });
+  </script>
+</body>
+</html>
