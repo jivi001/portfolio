@@ -1,4 +1,4 @@
-
+/* ======= Reset & Fonts ======= */
 * {
   margin: 0;
   padding: 0;
@@ -6,37 +6,40 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* ======= Themes ======= */
 body {
   background: linear-gradient(to bottom right, #003049, #669bbc);
   color: #f8f9fa;
   transition: background 0.3s, color 0.3s;
 }
 
-body.dark {
+body.dark-theme {
   background: linear-gradient(to bottom right, #1a1a2e, #16213e);
   color: #e0e0e0;
 }
 
+/* ======= Navbar ======= */
 .navbar {
   position: sticky;
   top: 0;
-  background: rgba(0, 48, 73, 0.95);
-  backdrop-filter: blur(10px);
+  width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  z-index: 1000;
+  background: rgba(0, 48, 73, 0.95);
+  backdrop-filter: blur(10px);
 }
 
-.navbar.dark {
+body.dark-theme .navbar {
   background: rgba(26, 38, 60, 0.95);
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.2rem;
+  gap: 1.5rem;
 }
 
 .nav-links a {
@@ -58,20 +61,33 @@ body.dark {
   cursor: pointer;
 }
 
+/* ======= Hero (Vanta) ======= */
 .hero {
+  min-height: 100vh;
+  position: relative;
   text-align: center;
-  padding: 6rem 1rem;
-  background: linear-gradient(145deg, #1d3557, #a8dadc);
-  color: #ffffff;
+  color: white;
+  padding: 6rem 1rem 4rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
 }
 
 .hero h1 {
   font-size: 3rem;
+  font-weight: 700;
 }
 
 .hero h2 {
   font-size: 1.5rem;
+  font-weight: 300;
   margin-top: 0.5rem;
+}
+
+.resume-container {
+  margin-top: 2rem;
 }
 
 .btn {
@@ -80,15 +96,15 @@ body.dark {
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
   text-decoration: none;
-  margin-top: 1.5rem;
-  display: inline-block;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
+  font-weight: 500;
 }
 
 .btn:hover {
   background: #008000;
 }
 
+/* ======= Sections ======= */
 section {
   padding: 4rem 1rem;
   max-width: 960px;
@@ -99,72 +115,124 @@ h2 {
   margin-bottom: 1rem;
   font-size: 2rem;
   color: #38b000;
+  text-align: center;
 }
 
+/* ======= About Section ======= */
 .about-content {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
+  text-align: center;
+  line-height: 1.6;
+  font-size: 1rem;
+  padding: 0 1rem;
 }
 
-.about-content img {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #f77f00;
+/* ======= Projects ======= */
+.project-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  background: #056ea7;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filter-btn:hover {
+  background: #f77f00;
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-.project img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
+.project {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.skills .skill {
-  margin-bottom: 1.5rem;
-}
-
-.bar {
-  background: #056ea7;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.progress {
-  background: #f77f00;
-  height: 1rem;
-  transition: width 0.5s ease;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: none;
-  border-radius: 8px;
-  background: #1d3557;
-  color: #f1f1f1;
-}
-
-.contact-form button {
-  padding: 0.75rem 1.5rem;
-  background: #e63946;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  transition: transform 0.3s;
   cursor: pointer;
 }
 
+.project:hover {
+  transform: translateY(-5px);
+}
+
+.project a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #f8f9fa;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* ======= Modal ======= */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #003049;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 480px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ======= Skill Wheel ======= */
+.skill-wheel {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.skill-item {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #00b894, #0984e3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ======= Social Links ======= */
 .social-redirect {
   display: flex;
   justify-content: center;
@@ -179,7 +247,7 @@ h2 {
   text-decoration: none;
   border-radius: 12px;
   font-weight: bold;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 .social-link.linkedin { background: #0077b5; }
@@ -190,9 +258,28 @@ h2 {
   opacity: 0.9;
 }
 
+/* ======= Footer ======= */
 footer {
   text-align: center;
   padding: 2rem 0;
   font-size: 0.9rem;
   color: #f1faee;
+}
+
+/* ======= Responsive Design ======= */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  .hero h2 {
+    font-size: 1.2rem;
+  }
+  .project {
+    padding: 1rem;
+  }
+  .skill-item {
+    width: 80px;
+    height: 80px;
+    font-size: 0.9rem;
+  }
 }
