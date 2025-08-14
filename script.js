@@ -1,10 +1,23 @@
-// Theme Toggle
-const themeToggle = document.getElementById("theme-toggle");
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  document.getElementById("navbar").classList.toggle("dark");
-  themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
-});
+// Theme Switch
+const toggleSwitch = document.querySelector('#checkbox');
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme) {
+    document.body.classList[currentTheme === 'dark' ? 'add' : 'remove']('dark-theme');
+    toggleSwitch.checked = currentTheme === 'dark';
+}
+
+function switchTheme(e) {
+    if (e.target.checked) {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+    }    
+}
+
+toggleSwitch.addEventListener('change', switchTheme);
 
 // Sticky Nav Shadow on Scroll
 window.addEventListener("scroll", () => {
@@ -80,10 +93,43 @@ if (window.gsap && window.ScrollTrigger) {
     ease: "power2.out"
   });
 }
-strings: [
-  "AI/DS Engineer",
-  "Creative Coder",
-  "Problem Solver",
-  "Tech Visionary",
-  "Startup Mindset"
-]
+
+// Remove duplicate typed strings and consolidate them here
+const typedStrings = [
+    "Aspiring Student",
+    "Innovator",
+    "Visionary",
+    "Lifelong Learner",
+    "Problem Solver",
+    "Tech Visionary",
+    "Startup Mindset"
+];
+
+// Initialize Typed.js
+new Typed('#typed-title', {
+    strings: typedStrings,
+    typeSpeed: 80,
+    backSpeed: 50,
+    loop: true
+});
+
+// Initialize VANTA.NET
+VANTA.NET({
+    el: "#vanta-hero",
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 400.00,
+    minWidth: 400.00,
+    scale: 1.00,
+    scaleMobile: 1.00,
+    color: 0x38b000,
+    backgroundColor: 0x003049,
+    points: 12.0,
+    maxDistance: 20.0,
+    spacing: 15.0
+});
+
+// GSAP Animations
+gsap.from(".hero-title", { duration: 1.2, y: -50, opacity: 0, ease: "power2.out" });
+gsap.from(".btn", { duration: 1, delay: 0.5, y: 20, opacity: 0 });
