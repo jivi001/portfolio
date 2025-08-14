@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,6 +140,82 @@
     .dark-theme .project {
       background: #222;
     }
+
+    /* Theme switcher styles */
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .theme-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      border-radius: 50%;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .moon {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+    }
+
+    .sun {
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      display: none;
+    }
+
+    input:checked ~ .slider .moon {
+      display: none;
+    }
+
+    input:checked ~ .slider .sun {
+      display: block;
+    }
   </style>
 </head>
 
@@ -149,12 +224,20 @@
   <nav class="navbar">
     <div class="logo">Jivitesh</div>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
     </ul>
-    <button id="theme-toggle">🌙</button>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round">
+                <span class="moon">🌙</span>
+                <span class="sun">☀️</span>
+            </div>
+        </label>
+    </div>
   </nav>
 
   <!-- Hero Section with Vanta -->
@@ -190,9 +273,9 @@
   </section>
 
   <!-- Modal -->
-  <div id="project-modal" class="modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;">
-    <div class="modal-content" style="background:#fff;padding:2rem;border-radius:1rem;max-width:400px;text-align:center;">
-      <span class="close-btn" onclick="closeModal()" style="cursor:pointer;float:right;">&times;</span>
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
       <h3 id="modal-title"></h3>
       <p id="modal-tech"></p>
     </div>
@@ -227,66 +310,6 @@
   </footer>
 
   <!-- JavaScript -->
-  <script>
-    new Typed('#typed-title', {
-      strings: ["Aspiring Student", "Innovator", "Visionary", "Lifelong Learner", "Problem Solver", "Tech Visionary", "Startup Mindset"],
-      typeSpeed: 80,
-      backSpeed: 50,
-      loop: true
-    });
-
-    gsap.from(".hero-title", { duration: 1.2, y: -50, opacity: 0, ease: "power2.out" });
-    gsap.from(".btn", { duration: 1, delay: 0.5, y: 20, opacity: 0 });
-
-    VANTA.NET({
-      el: "#vanta-hero",
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 400.00,
-      minWidth: 400.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0x38b000,
-      backgroundColor: 0x003049,
-      points: 12.0,
-      maxDistance: 20.0,
-      spacing: 15.0
-    });
-
-    function openModal(title, tech) {
-      document.getElementById("modal-title").textContent = title;
-      document.getElementById("modal-tech").textContent = tech;
-      document.getElementById("project-modal").style.display = "flex";
-    }
-
-    function closeModal() {
-      document.getElementById("project-modal").style.display = "none";
-    }
-
-    const themeToggle = document.getElementById("theme-toggle");
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-theme");
-      themeToggle.textContent = document.body.classList.contains("dark-theme") ? "☀️" : "🌙";
-    });
-
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.to("#skillWheel", {
-      scrollTrigger: {
-        trigger: "#skills",
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      },
-      opacity: 1,
-      scale: 1,
-      duration: 1,
-      ease: "power2.out"
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
