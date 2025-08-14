@@ -178,34 +178,40 @@ h2 {
 
 /* ======= Modal ======= */
 .modal {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  align-items: center;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
   justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-  background: #003049;
+  background: #fff;
   padding: 2rem;
-  border-radius: 12px;
-  max-width: 480px;
+  border-radius: 1rem;
+  max-width: 400px;
   text-align: center;
-  color: white;
   position: relative;
 }
 
 .close-btn {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  font-size: 1.5rem;
   cursor: pointer;
+  float: right;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+}
+
+/* Dark theme modal styles */
+body.dark-theme .modal-content {
+  background: #222;
+  color: #fff;
 }
 
 /* ======= Skill Wheel ======= */
@@ -263,7 +269,13 @@ footer {
   text-align: center;
   padding: 2rem 0;
   font-size: 0.9rem;
-  color: #f1faee;
+  color: #000000;
+  background: #f0f0f0;  /* Light background for light theme */
+}
+
+body.dark-theme footer {
+  color: #ffffff;  /* White text for dark theme */
+  background: #1a1a2e;  /* Dark background for dark theme */
 }
 
 /* ======= Responsive Design ======= */
@@ -282,4 +294,74 @@ footer {
     height: 80px;
     font-size: 0.9rem;
   }
+}
+/* Theme Switch */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider .sun, 
+.slider .moon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+.slider .sun {
+    right: 5px;
+}
+
+.slider .moon {
+    left: 5px;
 }
