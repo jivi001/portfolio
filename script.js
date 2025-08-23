@@ -1,135 +1,308 @@
-// Theme Switch
-const toggleSwitch = document.querySelector('#checkbox');
-const currentTheme = localStorage.getItem('theme');
+// Constants
+const TYPING_CONFIG = {
+    texts: ["AI & Data Science Engineer", "Full-Stack Developer", "Tech Enthusiast 🚀"],
+    typeSpeed: 100,
+    eraseSpeed: 50,
+    delayBeforeErase: 2000,
+    delayBeforeType: 200,
+    initialDelay: 500
+};
 
-if (currentTheme) {
-    document.body.classList[currentTheme === 'dark' ? 'add' : 'remove']('dark-theme');
-    toggleSwitch.checked = currentTheme === 'dark';
-}
-
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.body.classList.add('dark-theme');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        document.body.classList.remove('dark-theme');
-        localStorage.setItem('theme', 'light');
-    }    
-}
-
-toggleSwitch.addEventListener('change', switchTheme);
-
-// Sticky Nav Shadow on Scroll
-window.addEventListener("scroll", () => {
-  const nav = document.getElementById("navbar");
-  nav.style.boxShadow = window.scrollY > 50 ? "0 2px 8px rgba(0, 0, 0, 0.15)" : "none";
-});
-
-// Smooth Scrolling for Anchor Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  });
-});
-
-// Project Filter Buttons
-document.querySelectorAll(".filter-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const filter = btn.dataset.filter;
-    document.querySelectorAll(".project").forEach(card => {
-      card.style.display = (filter === "all" || card.dataset.category.includes(filter)) ? "block" : "none";
-    });
-  });
-});
-
-// Modal Viewer
-function openModal(title, tech) {
-  document.getElementById("modal-title").textContent = title;
-  document.getElementById("modal-tech").textContent = tech;
-  document.getElementById("project-modal").style.display = "flex";
-  // Allow closing modal with Escape key
-  document.addEventListener("keydown", escCloseModal);
-}
-function closeModal() {
-  document.getElementById("project-modal").style.display = "none";
-  document.removeEventListener("keydown", escCloseModal);
-}
-function escCloseModal(e) {
-  if (e.key === "Escape") closeModal();
-}
-// Close modal when clicking outside content
-document.getElementById("project-modal").addEventListener("click", function(e) {
-  if (e.target === this) closeModal();
-});
-window.openModal = openModal;
-window.closeModal = closeModal;
-
-// Vanilla Tilt (3D Effect)
-if (window.VanillaTilt) {
-  VanillaTilt.init(document.querySelectorAll(".project"), {
-    max: 15,
-    speed: 400,
-    glare: true,
-    "max-glare": 0.2,
-  });
-}
-
-// Animate Skill Wheel on Scroll
-if (window.gsap && window.ScrollTrigger) {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.to("#skillWheel", {
-    scrollTrigger: {
-      trigger: "#skills",
-      start: "top 80%",
-      toggleActions: "play none none reverse"
+const PARTICLES_CONFIG = {
+    "particles": {
+        "number": {
+            "value": 60,
+            "density": {
+                "enable": true,
+                "value_area": 800
+            }
+        },
+        "color": {
+            "value": "#38bdf8"
+        },
+        "shape": {
+            "type": "circle"
+        },
+        "opacity": {
+            "value": 0.5,
+            "random": true
+        },
+        "size": {
+            "value": 3,
+            "random": true
+        },
+        "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#facc15",
+            "opacity": 0.4,
+            "width": 1
+        },
+        "move": {
+            "enable": true,
+            "speed": 2,
+            "out_mode": "out"
+        }
     },
-    opacity: 1,
-    scale: 1,
-    duration: 1,
-    ease: "power2.out"
-  });
+    "interactivity": {
+        "events": {
+            "onhover": {
+                "enable": true,
+                "mode": "grab"
+            },
+            "onclick": {
+                "enable": true,
+                "mode": "push"
+            }
+        },
+        "modes": {
+            "grab": {
+                "distance": 140,
+                "line_linked": {
+                    "opacity": 0.7
+                }
+            },
+            "push": {
+                "particles_nb": 4
+            }
+        }
+    },
+    "retina_detect": true
+};
+
+// Typing Effect Class
+class TypingEffect {
+    constructor(element, config) {
+        this.element = element;
+        this.config = config;
+        this.arrayIndex = 0;
+        this.charIndex = 0;
+    }
+
+    type() {
+        if (!this.element) return;
+
+        if (this.charIndex < this.config.texts[this.arrayIndex].length) {
+            this.element.textContent += this.config.texts[this.arrayIndex].charAt(this.charIndex);
+            this.charIndex++;
+            setTimeout(() => this.type(), this.config.typeSpeed);
+        } else {
+            setTimeout(() => this.erase(), this.config.delayBeforeErase);
+        }
+    }
+
+    erase() {
+        if (!this.element) return;
+
+        if (this.charIndex > 0) {
+            this.element.textContent = this.config.texts[this.arrayIndex].substring(0, this.charIndex - 1);
+            this.charIndex--;
+            setTimeout(() => this.erase(), this.config.eraseSpeed);
+        } else {
+            this.arrayIndex = (this.arrayIndex + 1) % this.config.texts.length;
+            setTimeout(() => this.type(), this.config.delayBeforeType);
+        }
+    }
+
+    start() {
+        if (this.config.texts.length) {
+            setTimeout(() => this.type(), this.config.initialDelay);
+        }
+    }
 }
 
-// Remove duplicate typed strings and consolidate them here
-const typedStrings = [
-    "Aspiring Student",
-    "Innovator",
-    "Visionary",
-    "Lifelong Learner",
-    "Problem Solver",
-    "Tech Visionary",
-    "Startup Mindset"
-];
+// Scroll Reveal Class
+class ScrollReveal {
+    constructor(selector, threshold = 100) {
+        this.elements = document.querySelectorAll(selector);
+        this.threshold = threshold;
+        this.windowHeight = window.innerHeight;
+    }
 
-// Initialize Typed.js
-new Typed('#typed-title', {
-    strings: typedStrings,
-    typeSpeed: 80,
-    backSpeed: 50,
-    loop: true
+    reveal() {
+        this.elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            if (elementTop < this.windowHeight - this.threshold) {
+                element.classList.add("active");
+            }
+        });
+    }
+
+    init() {
+        window.addEventListener("scroll", () => this.reveal(), { passive: true });
+        // Initial check
+        this.reveal();
+    }
+}
+
+// Add form validation and submission handling
+class FormHandler {
+    constructor(formId) {
+        this.form = document.getElementById(formId);
+        this.setupListeners();
+    }
+
+    setupListeners() {
+        if (!this.form) return;
+        
+        this.form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (this.validateForm()) {
+                await this.handleSubmit();
+            }
+        });
+    }
+
+    validateForm() {
+        const inputs = this.form.querySelectorAll('input, textarea');
+        let isValid = true;
+        
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                this.showError(input, 'This field is required');
+                isValid = false;
+            } else if (input.type === 'email' && !this.isValidEmail(input.value)) {
+                this.showError(input, 'Please enter a valid email');
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+
+    showError(input, message) {
+        const formGroup = input.closest('.form-group');
+        const error = formGroup.querySelector('.error-message') || 
+                     this.createErrorElement(message);
+        formGroup.appendChild(error);
+    }
+
+    createErrorElement(message) {
+        const error = document.createElement('span');
+        error.className = 'error-message';
+        error.textContent = message;
+        return error;
+    }
+
+    isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    async handleSubmit() {
+        try {
+            const formData = new FormData(this.form);
+            const response = await fetch(this.form.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                this.showSuccess();
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            this.showError(this.form, 'Failed to send message. Please try again.');
+        }
+    }
+
+    showSuccess() {
+        this.form.innerHTML = '<div class="success-message">Thank you! Your message has been sent.</div>';
+    }
+}
+
+// Add smooth scroll behavior
+class SmoothScroll {
+    constructor() {
+        this.setupListeners();
+    }
+
+    setupListeners() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    }
+}
+
+// Theme Manager Class
+class ThemeManager {
+    constructor() {
+        this.theme = localStorage.getItem('theme') || 'dark';
+        this.toggleBtn = document.querySelector('.theme-toggle');
+        this.toggleIcon = this.toggleBtn?.querySelector('i');
+        this.init();
+    }
+
+    init() {
+        if (!this.toggleBtn) return;
+        
+        // Set initial theme
+        this.setTheme(this.theme);
+        
+        // Add click handler
+        this.toggleBtn.addEventListener('click', () => {
+            this.theme = this.theme === 'dark' ? 'light' : 'dark';
+            this.setTheme(this.theme);
+            localStorage.setItem('theme', this.theme);
+        });
+    }
+
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (this.toggleIcon) {
+            this.toggleIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+    }
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+    try {
+        // Initialize typing effect
+        const typingElement = document.querySelector(".typing-text");
+        if (typingElement) {
+            const typing = new TypingEffect(typingElement, TYPING_CONFIG);
+            typing.start();
+        }
+
+        // Initialize scroll reveal
+        const scrollReveal = new ScrollReveal(".reveal");
+        scrollReveal.init();
+
+        // Initialize particles
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS("particles-js", PARTICLES_CONFIG);
+        } else {
+            console.warn("Particles.js is not loaded");
+        }
+
+        // Initialize new features
+        new FormHandler('contact-form');
+        new SmoothScroll();
+        new ThemeManager();
+
+        // Add mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenu && navLinks) {
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+        }
+
+    } catch (error) {
+        console.error("Error initializing portfolio scripts:", error);
+    }
 });
-
-// Initialize VANTA.NET
-VANTA.NET({
-    el: "#vanta-hero",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 400.00,
-    minWidth: 400.00,
-    scale: 1.00,
-    scaleMobile: 1.00,
-    color: 0x38b000,
-    backgroundColor: 0x003049,
-    points: 12.0,
-    maxDistance: 20.0,
-    spacing: 15.0
-});
-
-// GSAP Animations
-gsap.from(".hero-title", { duration: 1.2, y: -50, opacity: 0, ease: "power2.out" });
-gsap.from(".btn", { duration: 1, delay: 0.5, y: 20, opacity: 0 });
