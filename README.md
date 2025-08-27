@@ -36,6 +36,7 @@ Typed.js – Typing text animation.
 Particles.js – Interactive animated background.
 
 📁 Project Structure
+
 portfolio/
   ├── index.html        # Main HTML page
   ├── styles.css        # Styling and theme
