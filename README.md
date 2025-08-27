@@ -37,10 +37,10 @@ Particles.js – Interactive animated background.
 
 📁 Project Structure
 portfolio/
-├── index.html        # Main HTML page
-├── styles.css        # Styling and theme
-├── script.js         # Animations and interactivity
-└── assets/           # Images, icons, and other media
+  ├── index.html        # Main HTML page
+  ├── styles.css        # Styling and theme
+  ├── script.js         # Animations and interactivity
+  └── assets/           # Images, icons, and other media
          ├── Jivi_Resume.pdf   # Downloadable resume
 
 
