@@ -237,31 +237,32 @@ class SmoothScroll {
 // Theme Manager Class
 class ThemeManager {
     constructor() {
-        this.theme = localStorage.getItem('theme') || 'dark';
-        this.toggleBtn = document.querySelector('.theme-toggle');
-        this.toggleIcon = this.toggleBtn?.querySelector('i');
-        this.init();
+        this.themeToggle = document.querySelector('.theme-toggle');
+        this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        this.currentTheme = localStorage.getItem('theme') || 
+            (this.prefersDark.matches ? 'dark' : 'light');
     }
 
     init() {
-        if (!this.toggleBtn) return;
-        
-        // Set initial theme
-        this.setTheme(this.theme);
-        
-        // Add click handler
-        this.toggleBtn.addEventListener('click', () => {
-            this.theme = this.theme === 'dark' ? 'light' : 'dark';
-            this.setTheme(this.theme);
-            localStorage.setItem('theme', this.theme);
+        this.setTheme(this.currentTheme);
+        this.themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' 
+                ? 'light' 
+                : 'dark';
+            this.setTheme(newTheme);
+        });
+
+        // Listen for system theme changes
+        this.prefersDark.addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                this.setTheme(e.matches ? 'dark' : 'light');
+            }
         });
     }
 
     setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        if (this.toggleIcon) {
-            this.toggleIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-        }
+        localStorage.setItem('theme', theme);
     }
 }
 
