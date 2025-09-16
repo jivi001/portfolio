@@ -539,44 +539,70 @@ footer p { color:#94a3b8; }
 .theme-toggle {
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    border: 2px solid var(--glass-border);
+    border-radius: 30px;
+    width: 60px;
+    height: 30px;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    left: 2px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] .theme-toggle::before {
+    transform: translateX(30px);
 }
 
 .theme-toggle i {
+    font-size: 14px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     color: var(--text-primary);
-    transition: all 0.3s ease;
 }
 
 .theme-toggle .fa-sun {
-    opacity: 0;
-    transform: translate(-50%, -150%);
+    right: 7px;
 }
 
 .theme-toggle .fa-moon {
-    opacity: 1;
-    transform: translate(-50%, -50%);
+    left: 7px;
 }
 
-[data-theme="light"] .theme-toggle .fa-sun {
-    opacity: 1;
-    transform: translate(-50%, -50%);
+.theme-toggle:hover {
+    box-shadow: 0 0 15px var(--accent-primary);
+    transform: scale(1.05);
 }
 
-[data-theme="light"] .theme-toggle .fa-moon {
-    opacity: 0;
-    transform: translate(-50%, 150%);
+/* Add a pulsing animation on hover */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--accent-primary); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+}
+
+.theme-toggle:hover::before {
+    animation: pulse 1.5s infinite;
+}
+
+/* Position the toggle button */
+.nav-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
 }
 
 /* Smooth transition for all theme changes */

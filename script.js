@@ -263,6 +263,13 @@ class ThemeManager {
     setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
+        
+        // Update ARIA attributes
+        const toggle = this.themeToggle;
+        toggle.setAttribute('aria-checked', theme === 'dark');
+        toggle.setAttribute('aria-label', 
+            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+        );
     }
 }
 
