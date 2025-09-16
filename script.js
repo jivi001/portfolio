@@ -236,45 +236,59 @@ class SmoothScroll {
 
 // Theme Switcher Class
 class ThemeSwitcher {
-  constructor() {
-    this.theme = localStorage.getItem('theme') || 'dark';
-    this.toggleButton = document.querySelector('.theme-switch');
-    this.toggleIcon = this.toggleButton.querySelector('i');
-  }
+    constructor() {
+        this.theme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        this.toggleButton = document.querySelector('.theme-switch');
+    }
 
-  init() {
-    // Set initial theme
-    document.documentElement.setAttribute('data-theme', this.theme);
-    this.updateIcon();
-
-    // Add click event listener
-    this.toggleButton.addEventListener('click', () => this.toggleTheme());
-
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (!localStorage.getItem('theme')) {
-        this.theme = e.matches ? 'dark' : 'light';
+    init() {
         this.applyTheme();
-      }
-    });
-  }
+        this.addEventListeners();
+        this.addTransitionEndListener();
+    }
 
-  toggleTheme() {
-    this.theme = this.theme === 'dark' ? 'light' : 'dark';
-    this.applyTheme();
-    localStorage.setItem('theme', this.theme);
-  }
+    addEventListeners() {
+        this.toggleButton.addEventListener('click', () => {
+            this.theme = this.theme === 'dark' ? 'light' : 'dark';
+            this.applyTheme();
+            this.animateToggle();
+        });
 
-  updateIcon() {
-    this.toggleIcon.className = this.theme === 'dark' 
-      ? 'fas fa-moon' 
-      : 'fas fa-sun';
-  }
+        // System theme change detection
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    this.theme = e.matches ? 'dark' : 'light';
+                    this.applyTheme();
+                }
+            });
+    }
 
-  applyTheme() {
-    document.documentElement.setAttribute('data-theme', this.theme);
-    this.updateIcon();
-  }
+    applyTheme() {
+        document.documentElement.setAttribute('data-theme', this.theme);
+        localStorage.setItem('theme', this.theme);
+        this.toggleButton.setAttribute('aria-label', 
+            `Switch to ${this.theme === 'dark' ? 'light' : 'dark'} mode`);
+    }
+
+    animateToggle() {
+        this.toggleButton.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.toggleButton.style.transform = 'scale(1)';
+        }, 200);
+    }
+
+    addTransitionEndListener() {
+        document.documentElement.addEventListener('transitionend', (e) => {
+            if (e.propertyName === 'background-color') {
+                document.body.style.transition = 'none';
+                requestAnimationFrame(() => {
+                    document.body.style.transition = '';
+                });
+            }
+        });
+    }
 }
 
 // Initialize everything when DOM is loaded

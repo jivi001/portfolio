@@ -20,6 +20,122 @@ body {
 
 /* Theme Colors */
 :root {
+    /* Dark theme variables */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-primary: #38bdf8;
+    --accent-hover: #0ea5e9;
+    --toggle-bg: #1e293b;
+    --toggle-border: #38bdf8;
+    --toggle-shadow: rgba(56, 189, 248, 0.2);
+}
+
+[data-theme="light"] {
+    /* Light theme variables */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --accent-primary: #0284c7;
+    --accent-hover: #0369a1;
+    --toggle-bg: #e2e8f0;
+    --toggle-border: #0284c7;
+    --toggle-shadow: rgba(2, 132, 199, 0.2);
+}
+
+/* Modern Toggle Button */
+.theme-switch {
+    width: 80px;
+    height: 40px;
+    background: var(--toggle-bg);
+    border: 2px solid var(--toggle-border);
+    border-radius: 30px;
+    padding: 4px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.theme-switch::before {
+    content: '';
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    left: 4px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] .theme-switch::before {
+    transform: translateX(40px);
+}
+
+.theme-switch i {
+    font-size: 16px;
+    position: absolute;
+    transition: all 0.4s ease;
+}
+
+.theme-switch .fa-sun {
+    right: 10px;
+    color: var(--text-primary);
+    opacity: 0;
+}
+
+.theme-switch .fa-moon {
+    left: 10px;
+    color: var(--text-primary);
+    opacity: 1;
+}
+
+[data-theme="light"] .theme-switch .fa-sun {
+    opacity: 1;
+}
+
+[data-theme="light"] .theme-switch .fa-moon {
+    opacity: 0;
+}
+
+/* Hover Effects */
+.theme-switch:hover {
+    box-shadow: 0 0 20px var(--toggle-shadow);
+    transform: scale(1.05);
+}
+
+.theme-switch:hover::before {
+    background: var(--accent-hover);
+}
+
+/* Reset + Font */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Poppins', sans-serif; 
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px; /* Account for fixed navbar */
+}
+
+body { 
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Theme Colors */
+:root {
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
   --text-primary: #f8fafc;
@@ -609,21 +725,30 @@ footer p { color:#94a3b8; }
     );
 }
 
-/* Theme Switch Button */
-.theme-switch {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-  background: var(--glass-bg);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 8px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* Enhanced Text Styles */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.025em;
 }
 
-.theme-switch:hover {
-  transform: scale(1.1);
+p, li, span {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+a {
+    color: var(--accent-primary);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* Text Selection */
+::selection {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
 }
