@@ -234,43 +234,47 @@ class SmoothScroll {
     }
 }
 
-// Theme Manager Class
-class ThemeManager {
-    constructor() {
-        this.themeToggle = document.querySelector('.theme-toggle');
-        this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        this.currentTheme = localStorage.getItem('theme') || 
-            (this.prefersDark.matches ? 'dark' : 'light');
-    }
+// Theme Switcher Class
+class ThemeSwitcher {
+  constructor() {
+    this.theme = localStorage.getItem('theme') || 'dark';
+    this.toggleButton = document.querySelector('.theme-switch');
+    this.toggleIcon = this.toggleButton.querySelector('i');
+  }
 
-    init() {
-        this.setTheme(this.currentTheme);
-        this.themeToggle.addEventListener('click', () => {
-            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' 
-                ? 'light' 
-                : 'dark';
-            this.setTheme(newTheme);
-        });
+  init() {
+    // Set initial theme
+    document.documentElement.setAttribute('data-theme', this.theme);
+    this.updateIcon();
 
-        // Listen for system theme changes
-        this.prefersDark.addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme')) {
-                this.setTheme(e.matches ? 'dark' : 'light');
-            }
-        });
-    }
+    // Add click event listener
+    this.toggleButton.addEventListener('click', () => this.toggleTheme());
 
-    setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        
-        // Update ARIA attributes
-        const toggle = this.themeToggle;
-        toggle.setAttribute('aria-checked', theme === 'dark');
-        toggle.setAttribute('aria-label', 
-            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-        );
-    }
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        this.theme = e.matches ? 'dark' : 'light';
+        this.applyTheme();
+      }
+    });
+  }
+
+  toggleTheme() {
+    this.theme = this.theme === 'dark' ? 'light' : 'dark';
+    this.applyTheme();
+    localStorage.setItem('theme', this.theme);
+  }
+
+  updateIcon() {
+    this.toggleIcon.className = this.theme === 'dark' 
+      ? 'fas fa-moon' 
+      : 'fas fa-sun';
+  }
+
+  applyTheme() {
+    document.documentElement.setAttribute('data-theme', this.theme);
+    this.updateIcon();
+  }
 }
 
 // Initialize everything when DOM is loaded
@@ -297,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Initialize new features
         new FormHandler('contact-form');
         new SmoothScroll();
-        new ThemeManager();
+        new ThemeSwitcher().init();
 
         // Add mobile menu functionality
         const mobileMenu = document.querySelector('.mobile-menu');

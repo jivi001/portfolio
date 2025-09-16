@@ -12,42 +12,29 @@ html {
 }
 
 body { 
-    background: #0f172a; 
-    color: #f8fafc;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Theme Colors */
 :root {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent-primary: #38bdf8;
-    --accent-secondary: #facc15;
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.18);
-    --glass-shadow: rgba(0, 0, 0, 0.3);
-    --gradient-1: rgba(15, 23, 42, 0.9);
-    --gradient-2: rgba(30, 41, 59, 0.9);
-    --gradient-3: rgba(10, 25, 47, 0.9);
-    --gradient-4: rgba(30, 58, 138, 0.9);
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-primary: #38bdf8;
+  --glass-bg: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="light"] {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #e2e8f0;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --accent-primary: #0284c7;
-    --accent-secondary: #ca8a04;
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.3);
-    --glass-shadow: rgba(31, 38, 135, 0.2);
-    --gradient-1: rgba(248, 250, 252, 0.9);
-    --gradient-2: rgba(226, 232, 240, 0.9);
-    --gradient-3: rgba(241, 245, 249, 0.9);
-    --gradient-4: rgba(226, 232, 240, 0.9);
+  --bg-primary: #ffffff;
+  --bg-secondary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-primary: #0284c7;
+  --glass-bg: rgba(255, 255, 255, 0.7);
 }
 
 body {
@@ -620,4 +607,23 @@ footer p { color:#94a3b8; }
         var(--gradient-3),
         var(--gradient-4)
     );
+}
+
+/* Theme Switch Button */
+.theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-switch:hover {
+  transform: scale(1.1);
 }
