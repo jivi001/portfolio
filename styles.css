@@ -181,23 +181,20 @@ body {
 
 /* Hero */
 .hero { 
-    height:100vh; 
-    display:flex; 
-    align-items:center; 
-    justify-content:center; 
-    text-align:center; 
-    position:relative; 
-    overflow:hidden; 
-    background: linear-gradient(-45deg, #0f172a, #1e293b, #0a192f, #1e3a8a); 
-    background-size:400% 400%; 
-    animation:gradientBG 15s ease infinite; 
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-primary);
 }
 @keyframes gradientBG { 
     0% { background-position:0% 50%; } 
     50% { background-position:100% 50%; } 
     100% { background-position:0% 50%; }
 }
-.hero-content { position:relative; z-index:1; }
+.hero-content { position:relative; z-index: 2; text-align: center; padding: 2rem; }
 .hero h1 { font-size:3rem; }
 .hero h1 span { color:#38bdf8; }
 .typing-text { font-size:1.2rem; margin:1rem 0; color:#facc15; }
@@ -488,9 +485,8 @@ footer p { color:#94a3b8; }
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
-    opacity: 0.3;
-    pointer-events: none;
+    z-index: 1;
+    opacity: 0.15;
 }
 
 .squares-canvas {

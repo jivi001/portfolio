@@ -293,45 +293,26 @@ class ThemeSwitcher {
 
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    try {
-        // Initialize typing effect
-        const typingElement = document.querySelector(".typing-text");
-        if (typingElement) {
-            const typing = new TypingEffect(typingElement, TYPING_CONFIG);
-            typing.start();
-        }
-
-        // Initialize scroll reveal
-        const scrollReveal = new ScrollReveal(".reveal");
-        scrollReveal.init();
-
-        // Initialize squares animation
-        const squaresContainer = document.querySelector('.squares-background');
-        if (squaresContainer) {
-            const squares = new SquaresAnimation();
-            squares.init(squaresContainer);
-        }
-
-        // Remove or comment out particles.js initialization
-        // particlesJS("particles-js", PARTICLES_CONFIG);
-
-        // Initialize new features
-        new FormHandler('contact-form');
-        new SmoothScroll();
-        new ThemeSwitcher().init();
-
-        // Add mobile menu functionality
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if (mobileMenu && navLinks) {
-            mobileMenu.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-            });
-        }
-    } catch (error) {
-        console.error('Initialization error:', error);
+    // Initialize squares animation
+    const squaresContainer = document.querySelector('.squares-background');
+    if (squaresContainer) {
+        const squares = new SquaresAnimation();
+        squares.init(squaresContainer);
     }
+
+    // Initialize typing effect
+    const typingElement = document.querySelector('.typing-text');
+    if (typingElement) {
+        new TypingEffect(typingElement, TYPING_CONFIG).start();
+    }
+
+    // Initialize scroll reveal
+    new ScrollReveal('.reveal').init();
+
+    // Initialize form handler
+    new FormHandler('contact-form').setupListeners();
+
+    // Initialize smooth scroll
+    new SmoothScroll();
 });
 

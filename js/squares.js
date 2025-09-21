@@ -1,20 +1,14 @@
 class SquaresAnimation {
-    constructor(container, options = {}) {
-        this.container = container;
-        this.options = {
-            direction: options.direction || 'right',
-            speed: options.speed || 1,
-            borderColor: options.borderColor || '#999',
-            squareSize: options.squareSize || 40,
-            hoverFillColor: options.hoverFillColor || '#222',
-        };
-        
+    constructor() {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
-        this.gridOffset = { x: 0, y: 0 };
+        this.squareSize = 40;
+        this.borderColor = '#38bdf8';
+        this.hoverColor = 'rgba(56, 189, 248, 0.2)';
+        this.speed = 0.5;
+        this.offset = { x: 0, y: 0 };
         this.hoveredSquare = null;
-        
-        this.init();
+        this.isRunning = false;
     }
 
     init(container) {
@@ -23,16 +17,29 @@ class SquaresAnimation {
         this.container.appendChild(this.canvas);
         this.resize();
         this.addEventListeners();
-        this.animate();
+        this.start();
     }
 
     resize() {
-        this.canvas.width = this.container.offsetWidth;
-        this.canvas.height = this.container.offsetHeight;
+        const rect = this.container.getBoundingClientRect();
+        this.canvas.width = rect.width;
+        this.canvas.height = rect.height;
+    }
+
+    start() {
+        if (!this.isRunning) {
+            this.isRunning = true;
+            this.animate();
+        }
+    }
+
+    stop() {
+        this.isRunning = false;
     }
 
     addEventListeners() {
         window.addEventListener('resize', () => this.resize());
+        
         this.canvas.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -42,20 +49,24 @@ class SquaresAnimation {
                 y: Math.floor(y / this.squareSize)
             };
         });
+
         this.canvas.addEventListener('mouseleave', () => {
             this.hoveredSquare = null;
         });
     }
 
     animate() {
+        if (!this.isRunning) return;
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         this.offset.x = (this.offset.x + this.speed) % this.squareSize;
+        this.offset.y = (this.offset.y + this.speed) % this.squareSize;
         
         for (let x = -1; x <= this.canvas.width / this.squareSize; x++) {
             for (let y = -1; y <= this.canvas.height / this.squareSize; y++) {
                 const posX = x * this.squareSize + this.offset.x;
-                const posY = y * this.squareSize;
+                const posY = y * this.squareSize + this.offset.y;
 
                 if (this.hoveredSquare && 
                     x === this.hoveredSquare.x && 
