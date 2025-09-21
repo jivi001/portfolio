@@ -5,12 +5,10 @@
     box-sizing: border-box; 
     font-family: 'Poppins', sans-serif; 
 }
-
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 70px; /* Account for fixed navbar */
 }
-
 body { 
     background-color: var(--bg-primary);
     color: var(--text-primary);
@@ -180,63 +178,6 @@ body {
 .nav-links { list-style:none; display:flex; gap:1.5rem; }
 .nav-links a { color:#f8fafc; text-decoration:none; transition:color 0.3s; }
 .nav-links a:hover { color:#facc15; }
-
-/* Mobile Menu */
-.mobile-menu {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-.mobile-menu {
-    width: 30px;
-    height: 20px;
-    position: relative;
-    transform: rotate(0deg);
-    transition: .5s ease-in-out;
-    cursor: pointer;
-}
-
-.mobile-menu span {
-    display: block;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background: #f8fafc;
-    border-radius: 3px;
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: .25s ease-in-out;
-}
-
-.mobile-menu span:nth-child(1) {
-    top: 0px;
-}
-
-.mobile-menu span:nth-child(2) {
-    top: 8px;
-}
-
-.mobile-menu span:nth-child(3) {
-    top: 16px;
-}
-
-.mobile-menu.active span:nth-child(1) {
-    top: 8px;
-    transform: rotate(45deg);
-}
-
-.mobile-menu.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu.active span:nth-child(3) {
-    top: 8px;
-    transform: rotate(-45deg);
-}
 
 /* Hero */
 .hero { 
@@ -461,10 +402,6 @@ h2 { text-align:center; margin-bottom:2rem; color:#38bdf8; }
     color: #38bdf8;
 }
 
-/* Skills */
-.skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:1rem; text-align:center; }
-.skills-grid div { background:#1e293b; padding:1rem; border-radius:8px; }
-
 /* Contact Form */
 .form-group {
     margin-bottom: 1.5rem;
@@ -543,6 +480,24 @@ h2 { text-align:center; margin-bottom:2rem; color:#38bdf8; }
 /* Footer */
 footer { text-align:center; padding:2rem; }
 footer p { color:#94a3b8; }
+
+/* Squares Background */
+.squares-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.squares-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 
 /* Media Queries */
 @media (max-width: 768px) {

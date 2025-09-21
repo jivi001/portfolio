@@ -305,6 +305,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const scrollReveal = new ScrollReveal(".reveal");
         scrollReveal.init();
 
+        // Initialize squares animation
+        const squaresContainer = document.querySelector('.squares-background');
+        if (squaresContainer) {
+            new SquaresAnimation(squaresContainer, {
+                direction: 'right',
+                speed: 0.5,
+                borderColor: '#38bdf8',
+                squareSize: 50,
+                hoverFillColor: 'rgba(56, 189, 248, 0.2)'
+            });
+        }
+        
         // Initialize particles
         if (typeof particlesJS !== 'undefined') {
             particlesJS("particles-js", PARTICLES_CONFIG);
@@ -327,8 +339,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 mobileMenu.classList.toggle('active');
             });
         }
-
     } catch (error) {
-        console.error("Error initializing portfolio scripts:", error);
+        console.error('Initialization error:', error);
     }
 });
+
+// Particles.js
+particlesJS("particles-js",{
+  "particles":{
+    "number":{"value":60,"density":{"enable":true,"value_area":800}},
+    "color":{"value":"#38bdf8"},
+    "shape":{"type":"circle"},
+    "opacity":{"value":0.5,"random":true},
+    "size":{"value":3,"random":true},
+    "line_linked":{"enable":true,"distance":150,"color":"#facc15","opacity":0.4,"width":1},
+    "move":{"enable":true,"speed":2,"out_mode":"out"}
+  },
+  "interactivity":{
+    "events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":true,"mode":"push"}},
+    "modes":{"grab":{"distance":140,"line_linked":{"opacity":0.7}},"push":{"particles_nb":4}}
+  },
+  "retina_detect":true
+});
+
