@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/contact.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/contact",
+      "dest": "/api/contact.py"
+    }
+  ],
+  "env": {
+    "EMAIL_ADDRESS": "@email_address",
+    "EMAIL_PASSWORD": "@email_password",
+    "RECIPIENT_EMAIL": "@recipient_email"
+  }
+}

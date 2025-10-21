@@ -189,26 +189,85 @@ class FormHandler {
     }
 
     async handleSubmit() {
+        const submitButton = this.form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        
         try {
-            const formData = new FormData(this.form);
-            const response = await fetch(this.form.action, {
+            // Show loading state
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            submitButton.classList.add('loading');
+
+            // Prepare form data
+            const formData = {
+                name: this.form.querySelector('#name').value.trim(),
+                email: this.form.querySelector('#email').value.trim(),
+                message: this.form.querySelector('#message').value.trim()
+            };
+
+            const response = await fetch('https://jivitesh-portfolio.vercel.app/api/contact', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
             });
 
-            if (response.ok) {
+            const result = await response.json();
+
+            if (response.ok && result.success) {
                 this.showSuccess();
             } else {
-                throw new Error('Submission failed');
+                // Handle validation errors
+                if (result.errors && result.errors.length > 0) {
+                    this.showValidationErrors(result.errors);
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
             }
         } catch (error) {
             console.error('Form submission error:', error);
             this.showError(this.form, 'Failed to send message. Please try again.');
+        } finally {
+            // Reset button state
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+            submitButton.classList.remove('loading');
         }
     }
 
     showSuccess() {
-        this.form.innerHTML = '<div class="success-message">Thank you! Your message has been sent.</div>';
+        this.form.innerHTML = '<div class="success-message">Thank you! Your message has been sent successfully.</div>';
+    }
+
+    showValidationErrors(errors) {
+        // Clear previous errors
+        this.clearErrors();
+        
+        // Show each validation error
+        errors.forEach(error => {
+            if (error.includes('Name')) {
+                this.showError(this.form.querySelector('#name'), error);
+            } else if (error.includes('Email')) {
+                this.showError(this.form.querySelector('#email'), error);
+            } else if (error.includes('Message')) {
+                this.showError(this.form.querySelector('#message'), error);
+            } else {
+                this.showError(this.form, error);
+            }
+        });
+    }
+
+    clearErrors() {
+        // Remove all existing error messages
+        this.form.querySelectorAll('.error-message').forEach(error => {
+            error.remove();
+        });
+        
+        // Remove error styling from inputs
+        this.form.querySelectorAll('input, textarea').forEach(input => {
+            input.style.borderColor = '';
+        });
     }
 }
 
