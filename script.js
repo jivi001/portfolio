@@ -205,7 +205,15 @@ class FormHandler {
                 message: this.form.querySelector('#message').value.trim()
             };
 
-            const response = await fetch('https://jivitesh-portfolio.vercel.app/api/contact', {
+            // Try Vercel API first, fallback to local if needed
+            let apiUrl = 'https://jivitesh-portfolio.vercel.app/api/contact';
+            
+            // Check if we're on localhost for development
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                apiUrl = '/api/contact'; // Fallback to local if available
+            }
+
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -213,7 +221,13 @@ class FormHandler {
                 body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+            } catch (e) {
+                console.error('Failed to parse response:', e);
+                throw new Error('Invalid response from server');
+            }
 
             if (response.ok && result.success) {
                 this.showSuccess();

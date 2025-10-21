@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+"""
+Local development server for testing the contact form
+Run this when testing locally before deploying to Vercel
+"""
+
+from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 import smtplib
 import os
 from email.mime.text import MIMEText
@@ -5,11 +13,14 @@ from email.mime.multipart import MIMEMultipart
 import logging
 from datetime import datetime
 import re
-import json
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Initialize Flask app
+app = Flask(__name__)
+CORS(app)
 
 # Email configuration
 SMTP_SERVER = "smtp.gmail.com"
@@ -92,67 +103,37 @@ def send_email(name, email, message):
         logger.error(f"Failed to send email: {str(e)}")
         return False
 
-def handler(request):
-    """Main handler function for Vercel"""
-    # Set CORS headers
-    headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Content-Type': 'application/json'
-    }
-    
-    # Handle CORS preflight
-    if request.method == 'OPTIONS':
-        return {
-            'statusCode': 200,
-            'headers': headers,
-            'body': json.dumps({})
-        }
-    
-    # Only allow POST requests
-    if request.method != 'POST':
-        return {
-            'statusCode': 405,
-            'headers': headers,
-            'body': json.dumps({
-                'success': False,
-                'message': 'Method not allowed'
-            })
-        }
-    
+@app.route('/')
+def serve_index():
+    """Serve the main portfolio page"""
+    return send_from_directory('.', 'index.html')
+
+@app.route('/<path:filename>')
+def serve_static(filename):
+    """Serve static files"""
+    return send_from_directory('.', filename)
+
+@app.route('/api/contact', methods=['POST'])
+def contact():
+    """Handle contact form submission"""
     try:
         # Get form data
-        if hasattr(request, 'get_json'):
-            data = request.get_json()
-        else:
-            # Handle Vercel request format
-            data = request.get('body')
-            if isinstance(data, str):
-                data = json.loads(data)
+        data = request.get_json()
         
         if not data:
-            return {
-                'statusCode': 400,
-                'headers': headers,
-                'body': json.dumps({
-                    'success': False,
-                    'message': 'No data received'
-                })
-            }
+            return jsonify({
+                'success': False,
+                'message': 'No data received'
+            }), 400
         
         # Validate input
         errors = validate_input(data)
         if errors:
-            return {
-                'statusCode': 400,
-                'headers': headers,
-                'body': json.dumps({
-                    'success': False,
-                    'message': 'Validation failed',
-                    'errors': errors
-                })
-            }
+            return jsonify({
+                'success': False,
+                'message': 'Validation failed',
+                'errors': errors
+            }), 400
         
         # Extract form data
         name = data['name'].strip()
@@ -161,31 +142,35 @@ def handler(request):
         
         # Send email
         if send_email(name, email, message):
-            return {
-                'statusCode': 200,
-                'headers': headers,
-                'body': json.dumps({
-                    'success': True,
-                    'message': 'Message sent successfully!'
-                })
-            }
+            return jsonify({
+                'success': True,
+                'message': 'Message sent successfully!'
+            })
         else:
-            return {
-                'statusCode': 500,
-                'headers': headers,
-                'body': json.dumps({
-                    'success': False,
-                    'message': 'Failed to send message. Please try again later.'
-                })
-            }
+            return jsonify({
+                'success': False,
+                'message': 'Failed to send message. Please try again later.'
+            }), 500
             
     except Exception as e:
         logger.error(f"Contact form error: {str(e)}")
-        return {
-            'statusCode': 500,
-            'headers': headers,
-            'body': json.dumps({
-                'success': False,
-                'message': 'An error occurred. Please try again later.'
-            })
-        }
+        return jsonify({
+            'success': False,
+            'message': 'An error occurred. Please try again later.'
+        }), 500
+
+if __name__ == '__main__':
+    # Check if required environment variables are set
+    email_address = os.getenv('EMAIL_ADDRESS')
+    email_password = os.getenv('EMAIL_PASSWORD')
+    
+    if not email_address or not email_password:
+        logger.warning("EMAIL_ADDRESS and EMAIL_PASSWORD environment variables not set")
+        logger.warning("Contact form will not work without Gmail credentials")
+        logger.warning("Create a .env file with your Gmail credentials")
+    
+    # Run the app
+    print("🚀 Starting local development server...")
+    print("📧 Contact form will work if Gmail credentials are configured")
+    print("🌐 Open http://localhost:5000 to view your portfolio")
+    app.run(debug=True, host='0.0.0.0', port=5000)
