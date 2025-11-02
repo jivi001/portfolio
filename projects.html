@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Jivitesh - AI Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-strong {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-premium:hover::before {
+            left: 100%;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.4);
+        }
+
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
+            border-radius: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: -1;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(6, 182, 212, 0.3);
+        }
+
+        .project-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover .project-image::after {
+            opacity: 1;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            color: white;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-100px, 100px) scale(0.9); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="grid-bg">
+    <!-- Animated Orbs -->
+    <div class="orb w-96 h-96 bg-cyan-500/20 -top-48 -left-48"></div>
+    <div class="orb w-96 h-96 bg-blue-500/20 top-1/2 right-0" style="animation-delay: 5s;"></div>
+    <div class="orb w-96 h-96 bg-purple-500/20 bottom-0 left-1/4" style="animation-delay: 10s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 py-6 px-8" id="mainNav">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold">
+                <span class="gradient-text">JIVI</span>
+            </a>
+            
+            <ul class="hidden md:flex gap-12 items-center">
+                <li><a href="index.html" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">HOME</a></li>
+                <li><a href="projects.html" class="text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">PROJECTS</a></li>
+                <li><a href="index.html#about" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">ABOUT</a></li>
+                <li><a href="index.html#contact" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">CONTACT</a></li>
+                <li><a href="index.html#contact" class="px-6 py-2.5 btn-premium rounded-full text-sm font-semibold text-white">HIRE ME</a></li>
+            </ul>
+
+            <button class="md:hidden text-cyan-400" id="mobileMenuBtn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="reveal">
+                <p class="text-cyan-400 text-sm font-semibold tracking-widest mb-4 uppercase">Portfolio</p>
+                <h1 class="text-6xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">
+                    Featured <span class="gradient-text">Projects</span>
+                </h1>
+                <p class="text-xl text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    A curated collection of AI/ML projects, full-stack applications, and innovative solutions 
+                    that demonstrate my technical expertise and problem-solving approach.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-4 justify-center mb-16 reveal" style="transition-delay: 0.2s;">
+                <button class="filter-btn active px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="ai-ml">
+                    AI & ML
+                </button>
+                <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="fullstack">
+                    Full-Stack
+                </button>
+                <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="data">
+                    Data Science
+                </button>
+                <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="research">
+                    Research
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="pb-32 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+                <!-- Project 1 -->
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml" style="transition-delay: 0.1s;">
+                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center">
+                        <div class="text-7xl">🛡️</div>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Cybersecurity Platform</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            Advanced ML/DL-based anomaly detection system with automated response playbooks 
+                            and real-time behavioral analytics for enterprise security.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Python</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">TensorFlow</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Flask API</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Security</span>
+                        </div>
+                        <div class="pt-4 flex gap-4">
+                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="cybersecurity">
+                                View Details
+                            </button>
+                            <button class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack" style="transition-delay: 0.2s;">
+                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                        <div class="text-7xl">🎬</div>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Movie Recommendation System</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            IMDb-inspired interface with AI-powered collaborative filtering for personalized 
+                            movie recommendations using advanced ML algorithms.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">React</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Python</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Pandas</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Tailwind</span>
+                        </div>
+                        <div class="pt-4 flex gap-4">
+                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="movie-rec">
+                                View Details
+                            </button>
+                            <button class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml" style="transition-delay: 0.3s;">
+                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                        <div class="text-7xl">🧠</div>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Mental Wellness Mirror</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            AI-powered emotional intelligence platform providing early intervention support 
+                            for college students and remote workers through NLP analysis.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">AI</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">NLP</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">React</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Healthcare</span>
+                        </div>
+                        <div class="pt-4 flex gap-4">
+                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="wellness">
+                                View Details
+                            </button>
+                            <button class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack" style="transition-delay: 0.4s;">
+                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-cyan-500/20 to-teal-500/20 flex items-center justify-center">
+                        <div class="text-7xl">🎯</div>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Smart Allocation Engine</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            AI-based matching system for PM internship allocation using scikit-learn 
+                            with Next.js frontend for optimal candidate-role pairing.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Next.js</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">ML</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Flask</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Optimization</span>
+                        </div>
+                        <div class="pt-4 flex gap-4">
+                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="allocation">
+                                View Details
+                            </button>
+                            <button class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="fullstack" style="transition-delay: 0.5s;">
+                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center">
+                        <div class="text-7xl">💻</div>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Progressive Web Applications</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            Modern PWAs with fluid UI transitions, responsive design principles, 
+                            and seamless API integration for enhanced user experiences.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">React</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Tailwind</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">PWA</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">UI/UX</span>
+                        </div>
+                        <div class="pt-4 flex gap-4">
+                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="pwa">
+                                View Details
+                            </button>
+                            <button class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="research data" style="transition-delay: 0.6s;">
+                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center">
+                        <div class="text-7xl">🔬</div>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Research & Innovation</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            Analyzing cutting-edge research papers and implementing state-of-the-art 
+                            ML algorithms for real-world problem-solving applications.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Research</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Deep Learning</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">PyTorch</span>
+                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Papers</span>
+                        </div>
+                        <div class="pt-4 flex gap-4">
+                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="research">
+                                View Details
+                            </button>
+                            <button class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content glass-strong rounded-3xl p-8 md:p-12 relative">
+            <button class="absolute top-6 right-6 w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-slate-700/50 transition-all" id="closeModal">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-700/30 py-12 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 text-sm">© 2025 Jivitesh | AI Engineer & Data Scientist</p>
+            <p class="text-slate-500 text-xs mt-2">Crafting intelligent solutions with passion</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Navigation Effect
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal Animation
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(reveal => revealObserver.observe(reveal));
+
+        // Filter Projects
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                projects.forEach(project => {
+                    if (filter === 'all') {
+                        project.style.display = 'block';
+                    } else {
+                        const categories = project.dataset.category.split(' ');
+                        if (categories.includes(filter)) {
+                            project.style.display = 'block';
+                        } else {
+                            project.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Project Modal System
+        const modal = document.getElementById('projectModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.getElementById('closeModal');
+        const viewDetailsBtns = document.querySelectorAll('.view-details');
+
+        const projectDetails = {
+            'cybersecurity': {
+                title: 'Cybersecurity Platform',
+                icon: '🛡️',
+                description: 'Advanced ML/DL-based anomaly detection system with automated response playbooks',
+                fullDescription: 'A comprehensive enterprise-grade cybersecurity platform that leverages machine learning and deep learning algorithms to detect anomalies in real-time. The system includes automated response playbooks, behavioral analytics, and threat intelligence integration.',
+                technologies: ['Python', 'TensorFlow', 'Keras', 'Flask API', 'Redis', 'PostgreSQL', 'Docker'],
+                features: [
+                    'Real-time anomaly detection using LSTM networks',
+                    'Automated incident response playbooks',
+                    'Behavioral analytics dashboard',
+                    'Integration with SIEM systems',
+                    'Machine learning model versioning',
+                    'API-first architecture for easy integration'
+                ],
+                challenges: 'Handling high-throughput data streams while maintaining low latency for real-time detection. Implemented distributed processing and model optimization techniques.',
+                impact: 'Reduced security incident response time by 70% and improved threat detection accuracy to 95%.'
+            },
+            'movie-rec': {
+                title: 'Movie Recommendation System',
+                icon: '🎬',
+                description: 'IMDb-inspired interface with AI-powered collaborative filtering',
+                fullDescription: 'An intelligent movie recommendation system that combines collaborative filtering, content-based filtering, and hybrid approaches to provide personalized movie suggestions. Features a modern IMDb-like interface built with React.',
+                technologies: ['React', 'Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Flask', 'Tailwind CSS'],
+                features: [
+                    'Collaborative filtering using matrix factorization',
+                    'Content-based recommendations using movie metadata',
+                    'Hybrid recommendation engine',
+                    'User preference learning',
+                    'Real-time recommendations',
+                    'Responsive and intuitive UI'
+                ],
+                challenges: 'Cold start problem for new users and movies. Implemented hybrid approach combining multiple recommendation strategies.',
+                impact: 'Achieved 85% user satisfaction rate with recommendation accuracy improving by 40% over baseline models.'
+            },
+            'wellness': {
+                title: 'Mental Wellness Mirror',
+                icon: '🧠',
+                description: 'AI-powered emotional intelligence support platform',
+                fullDescription: 'A compassionate AI platform designed to support mental wellness for college students and remote workers. Uses natural language processing to analyze emotional states and provide early intervention support.',
+                technologies: ['NLP', 'Transformers', 'React', 'Python', 'FastAPI', 'PostgreSQL', 'AWS'],
+                features: [
+                    'Sentiment analysis using BERT models',
+                    'Emotion detection from text',
+                    'Personalized wellness recommendations',
+                    'Progress tracking and insights',
+                    'Anonymous and secure communication',
+                    'Crisis detection and escalation'
+                ],
+                challenges: 'Ensuring privacy and security while providing meaningful support. Implemented end-to-end encryption and anonymous data handling.',
+                impact: 'Helped 1000+ users track their mental wellness journey with 90% reporting improved self-awareness.'
+            },
+            'allocation': {
+                title: 'Smart Allocation Engine',
+                icon: '🎯',
+                description: 'AI-based matching system for PM internship allocation',
+                fullDescription: 'An intelligent allocation system that matches candidates to internship positions using machine learning algorithms. Considers multiple factors including skills, preferences, and organizational needs.',
+                technologies: ['Next.js', 'Python', 'Scikit-learn', 'Flask', 'MongoDB', 'Redis', 'TypeScript'],
+                features: [
+                    'Multi-criteria decision analysis',
+                    'Skill-role matching using ML',
+                    'Preference optimization algorithm',
+                    'Automated matching pipeline',
+                    'Real-time allocation dashboard',
+                    'Feedback loop for model improvement'
+                ],
+                challenges: 'Balancing multiple conflicting objectives while ensuring fairness. Implemented multi-objective optimization with constraint satisfaction.',
+                impact: 'Reduced allocation time from 2 weeks to 2 hours while improving satisfaction scores by 60%.'
+            },
+            'pwa': {
+                title: 'Progressive Web Applications',
+                icon: '💻',
+                description: 'Modern PWAs with fluid UI transitions and responsive design',
+                fullDescription: 'A collection of progressive web applications built with modern frameworks, focusing on performance, accessibility, and user experience. Features offline support, push notifications, and seamless API integration.',
+                technologies: ['React', 'Next.js', 'Tailwind CSS', 'Service Workers', 'IndexedDB', 'Web APIs'],
+                features: [
+                    'Offline-first architecture',
+                    'Push notification system',
+                    'Responsive and adaptive design',
+                    'Performance optimized (90+ Lighthouse score)',
+                    'Smooth animations and transitions',
+                    'Cross-platform compatibility'
+                ],
+                challenges: 'Maintaining consistent experience across devices while optimizing for performance. Implemented progressive enhancement strategy.',
+                impact: 'Achieved 90+ Lighthouse scores across all metrics with 3x improvement in load times.'
+            },
+            'research': {
+                title: 'Research & Innovation',
+                icon: '🔬',
+                description: 'Implementing state-of-the-art ML algorithms',
+                fullDescription: 'Active research in cutting-edge machine learning and artificial intelligence. Focus on implementing and improving state-of-the-art algorithms from recent papers and applying them to real-world problems.',
+                technologies: ['PyTorch', 'TensorFlow', 'Python', 'CUDA', 'NumPy', 'Jupyter', 'MLflow'],
+                features: [
+                    'Implementation of latest research papers',
+                    'Custom model architectures',
+                    'Ablation studies and experiments',
+                    'Benchmark comparisons',
+                    'Open-source contributions',
+                    'Technical documentation and tutorials'
+                ],
+                challenges: 'Reproducing results from papers with limited implementation details. Developed systematic approach to paper reproduction.',
+                impact: 'Published 5+ open-source implementations with 500+ GitHub stars. Contributed to understanding of novel architectures.'
+            }
+        };
+
+        viewDetailsBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const projectId = btn.dataset.project;
+                const project = projectDetails[projectId];
+                
+                modalContent.innerHTML = `
+                    <div class="text-center mb-8">
+                        <div class="text-7xl mb-4">${project.icon}</div>
+                        <h2 class="text-4xl font-bold mb-4">${project.title}</h2>
+                        <p class="text-xl text-slate-400">${project.description}</p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 gradient-text">Overview</h3>
+                            <p class="text-slate-300 leading-relaxed">${project.fullDescription}</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 gradient-text">Technologies Used</h3>
+                            <div class="flex flex-wrap gap-3">
+                                ${project.technologies.map(tech => `
+                                    <span class="px-4 py-2 glass rounded-full text-sm font-medium border border-cyan-400/30">${tech}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 gradient-text">Key Features</h3>
+                            <ul class="space-y-3">
+                                ${project.features.map(feature => `
+                                    <li class="flex items-start gap-3 text-slate-300">
+                                        <svg class="w-6 h-6 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>${feature}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 gradient-text">Challenges & Solutions</h3>
+                            <p class="text-slate-300 leading-relaxed">${project.challenges}</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 gradient-text">Impact</h3>
+                            <p class="text-slate-300 leading-relaxed">${project.impact}</p>
+                        </div>
+
+                        <div class="flex gap-4 pt-4">
+                            <button class="flex-1 py-3 btn-premium rounded-xl text-base font-semibold text-white">
+                                View Live Demo
+                            </button>
+                            <button class="flex-1 py-3 glass rounded-xl text-base font-semibold hover:bg-slate-700/50 transition-all">
+                                View Source Code
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.querySelector('nav ul');
+        
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        console.log('✨ Projects Page Loaded');
+    </script>
+</body>
+</html>
