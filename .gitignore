@@ -1,9 +1,14 @@
-.venv
+# Ignore virtual environment folder
+.venv/
+
+# Ignore environment variables file
+.env
+
+# Ignore contact messages
+contact_messages.json
+
+# Ignore Python cache files
 __pycache__/
 *.pyc
-instance/
-.env
-migrations/
-.DS_Store
-node_modules/
-dist/
+*.pyo
+*.pyd
