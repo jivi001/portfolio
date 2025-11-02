@@ -1,0 +1,221 @@
+:root {
+  --primary: #06b6d4;
+  --secondary: #0ea5e9;
+  --dark: #0f172a;
+  --darker: #020617;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes textGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility Classes */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.fade-in-left {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.fade-in-right {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 6s linear infinite;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105 cursor-pointer;
+}
+
+.btn-secondary {
+  @apply px-8 py-3 border-2 border-cyan-400 text-cyan-400 rounded-lg font-semibold transition-all duration-300 hover:bg-cyan-400/10 hover:scale-105 cursor-pointer;
+}
+
+.learn-more {
+  @apply text-cyan-400 font-semibold transition-all duration-300 hover:gap-2 inline-flex items-center gap-1;
+}
+
+.learn-more:hover {
+  transform: translateX(5px);
+}
+
+/* Cards */
+.project-card {
+  @apply bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl p-6 border border-slate-700/30 transition-all duration-500 hover:border-cyan-400/30 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-2;
+}
+
+.stat-card {
+  @apply p-4 bg-slate-800/30 rounded-lg border border-slate-700/30 backdrop-blur-sm transition-all duration-300 hover:bg-slate-800/50;
+}
+
+.about-card {
+  @apply p-6 bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-slate-700/30 text-center transition-all duration-300 hover:border-cyan-400/30 hover:shadow-lg hover:shadow-cyan-500/10;
+}
+
+.glass-card {
+  @apply bg-slate-800/20 backdrop-blur-xl rounded-2xl border border-slate-700/30 shadow-2xl;
+}
+
+.badge {
+  @apply px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm font-medium border border-cyan-500/30;
+}
+
+/* Form Elements */
+.form-input {
+  @apply w-full bg-slate-800/50 border border-slate-700/30 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300;
+}
+
+.form-input::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+/* Navigation Links */
+.nav-link {
+  @apply transition-all duration-300 hover:text-cyan-400 relative;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Social Links */
+.social-link {
+  @apply px-6 py-2 border border-slate-700/30 rounded-lg text-slate-300 transition-all duration-300 hover:bg-cyan-500/10 hover:border-cyan-400/50 hover:text-cyan-400;
+}
+
+/* Skill Bar */
+.skill-item {
+  @apply space-y-2;
+}
+
+.skill-bar {
+  @apply w-full h-2 bg-slate-700/50 rounded-full overflow-hidden;
+}
+
+.skill-fill {
+  @apply h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transition-all duration-1000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-secondary {
+    @apply px-6 py-2 text-sm;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .project-card {
+    @apply p-4;
+  }
+}
+
+/* Scroll Animation Trigger */
+.slide-in {
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Blob Animation */
+.blob {
+  animation: blobAnimation 8s infinite;
+}
+
+@keyframes blobAnimation {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(20px, -50px);
+  }
+  50% {
+    transform: translate(-20px, 20px);
+  }
+  75% {
+    transform: translate(50px, 50px);
+  }
+}
