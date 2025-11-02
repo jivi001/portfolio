@@ -8,6 +8,10 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from pathlib import Path
 import re
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Initialize Flask App
 app = Flask(__name__)
@@ -17,15 +21,19 @@ CORS(app)
 
 CONTACT_DATA_FILE = 'contact_messages.json'
 
-# Gmail Configuration
-GMAIL_USER = 'your_email@gmail.com'  # Replace with your Gmail
-GMAIL_APP_PASSWORD = 'your_app_password'  # Replace with your Gmail App Password
+# Gmail Configuration - Load from environment variables
+GMAIL_USER = os.getenv('GMAIL_USER')
+GMAIL_APP_PASSWORD = os.getenv('GMAIL_APP_PASSWORD')
 
-# To get Gmail App Password:
-# 1. Go to Google Account Settings
-# 2. Security > 2-Step Verification (enable if not already)
-# 3. App Passwords > Select app: Mail, Select device: Other
-# 4. Generate and copy the 16-character password
+# Validate environment variables
+if not GMAIL_USER or not GMAIL_APP_PASSWORD:
+    print("\n" + "="*70)
+    print("⚠️  WARNING: Gmail credentials not found in .env file!")
+    print("="*70)
+    print("Please create a .env file with:")
+    print("  GMAIL_USER=your_email@gmail.com")
+    print("  GMAIL_APP_PASSWORD=your_16_char_app_password")
+    print("="*70 + "\n")
 
 # ==================== Helper Functions ====================
 
