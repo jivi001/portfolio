@@ -276,7 +276,7 @@ function validateForm(data) {
     }
     
     // Validate email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^S@]+@[^S@]+\.[^S@]+$/;
     if (!emailRegex.test(data.email)) {
         return false;
     }
