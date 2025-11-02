@@ -1,14 +1,15 @@
 // ==================== Premium Portfolio JavaScript ====================
 
-// Configuration
+// Configuration - ENVIRONMENT AWARE
 const CONFIG = {
-    API_BASE_URL: 'http://localhost:5000/api',
+    API_BASE_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:5000/api' 
+        : '/api', // Use relative URL for production
     ANIMATION_DURATION: 800,
     SCROLL_OFFSET: 100
 };
 
 // ==================== DOM Content Loaded ====================
-
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
 });
@@ -31,9 +32,8 @@ function initializeApp() {
 }
 
 // ==================== Premium Custom Cursor ====================
-
 function setupPremiumCursor() {
-    if (window.innerWidth < 768) return; // Skip on mobile
+    if (window.innerWidth < 768 || 'ontouchstart' in window) return; // Skip on mobile/touch devices
     
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorRing = document.querySelector('.cursor-ring');
@@ -46,13 +46,13 @@ function setupPremiumCursor() {
     let dotY = 0;
     let ringX = 0;
     let ringY = 0;
-    
+
     // Update mouse position
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
-    
+
     // Smooth cursor animation
     function animateCursor() {
         // Dot follows immediately
@@ -72,7 +72,7 @@ function setupPremiumCursor() {
     }
     
     animateCursor();
-    
+
     // Interactive elements hover
     const interactiveElements = document.querySelectorAll('a, button, .premium-card, .project-card, input, textarea');
     
@@ -93,55 +93,149 @@ function setupPremiumCursor() {
     });
 }
 
-// ==================== Scroll Effects ====================
+// ==================== Contact Form Handler ====================
+function setupContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitLoader = document.getElementById('submitLoader');
 
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            title: formData.get('title'),
+            message: formData.get('message')
+        };
+
+        // Validate form data
+        const errors = validateContactForm(data);
+        if (errors.length > 0) {
+            showFormStatus(errors.join(', '), 'error');
+            return;
+        }
+
+        // Show loading state
+        submitText.classList.add('hidden');
+        submitLoader.classList.remove('hidden');
+        submitBtn.disabled = true;
+
+        try {
+            console.log('Sending to:', CONFIG.API_BASE_URL + '/contact');
+            
+            const response = await fetch(CONFIG.API_BASE_URL + '/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                showFormStatus('✓ Message sent successfully! I\'ll get back to you soon.', 'success');
+                contactForm.reset();
+            } else {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to send message');
+            }
+        } catch (error) {
+            console.error('Contact form error:', error);
+            showFormStatus('✗ Failed to send message. Please try again or email directly.', 'error');
+        } finally {
+            // Reset button state
+            submitText.classList.remove('hidden');
+            submitLoader.classList.add('hidden');
+            submitBtn.disabled = false;
+        }
+    });
+
+    function validateContactForm(data) {
+        const errors = [];
+        
+        if (!data.name || data.name.trim().length < 2) {
+            errors.push('Name must be at least 2 characters');
+        }
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!data.email || !emailRegex.test(data.email)) {
+            errors.push('Invalid email address');
+        }
+        
+        if (!data.title || data.title.trim().length < 5) {
+            errors.push('Project title must be at least 5 characters');
+        }
+        
+        if (!data.message || data.message.trim().length < 10) {
+            errors.push('Message must be at least 10 characters');
+        }
+        
+        return errors;
+    }
+
+    function showFormStatus(message, type) {
+        formStatus.textContent = message;
+        formStatus.className = `mt-6 text-center font-semibold ${type === 'success' ? 'text-cyan-400' : 'text-red-400'}`;
+        formStatus.classList.remove('hidden');
+        
+        setTimeout(() => {
+            formStatus.classList.add('hidden');
+        }, 5000);
+    }
+}
+
+// ==================== All other functions from your script.js ====================
+// ... (include all other functions from attached_file:1)
+
+// ==================== Scroll Effects ====================
 function setupScrollEffects() {
     const nav = document.getElementById('mainNav');
     
-    window.addEventListener('scroll', () => {
-        // Navigation background on scroll
+    const scrollHandler = debounce(() => {
         if (window.scrollY > CONFIG.SCROLL_OFFSET) {
             nav?.classList.add('scrolled');
         } else {
             nav?.classList.remove('scrolled');
         }
-        
-        // Update active navigation link
         updateActiveNavLink();
-    });
-}
+    }, 16);
 
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', scrollHandler);
     
-    const scrollPosition = window.scrollY + 200;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.classList.remove('text-cyan-400');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('text-cyan-400');
-                }
-            });
-        }
-    });
+    function updateActiveNavLink() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const scrollPosition = window.scrollY + 200;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('text-cyan-400');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('text-cyan-400');
+                    }
+                });
+            }
+        });
+    }
 }
 
 // ==================== Navigation ====================
-
 function setupNavigation() {
-    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
-            
             if (targetId === '#') return;
             
             const target = document.querySelector(targetId);
@@ -156,230 +250,69 @@ function setupNavigation() {
     });
 }
 
-// ==================== Scroll Reveal Animations ====================
-
+// ==================== Animations ====================
 function setupAnimations() {
     const observerOptions = {
         threshold: 0.15,
         rootMargin: '0px 0px -50px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                
+                // Animate skill bars
+                if (entry.target.classList.contains('skill-card')) {
+                    const skillFill = entry.target.querySelector('.skill-fill');
+                    if (skillFill) {
+                        const width = skillFill.dataset.width;
+                        setTimeout(() => {
+                            skillFill.style.width = width;
+                        }, 200);
+                    }
+                }
+                
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
-    
-    // Observe all elements with reveal class
+
     document.querySelectorAll('.reveal').forEach(element => {
         observer.observe(element);
     });
-    
-    // Observe cards for staggered animation
-    document.querySelectorAll('.project-card, .premium-card, .stat-card, .about-card').forEach((card, index) => {
-        card.style.transitionDelay = `${index * 0.1}s`;
-        observer.observe(card);
-    });
-}
-
-// ==================== Contact Form ====================
-
-function setupContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
-    
-    if (!contactForm) return;
-    
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            title: formData.get('title'),
-            message: formData.get('message')
-        };
-        
-        // Validate
-        if (!validateForm(data)) {
-            showNotification('Please fill all fields correctly', 'error');
-            return;
-        }
-        
-        // Get submit button
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.classList.add('loading');
-        
-        try {
-            const response = await fetch(`${CONFIG.API_BASE_URL}/contact`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-            
-            const result = await response.json();
-            
-            if (response.ok) {
-                showNotification('✓ Message sent successfully! I\'ll get back to you soon.', 'success');
-                contactForm.reset();
-                
-                // Show success in form status
-                if (formStatus) {
-                    formStatus.textContent = '✓ Thank you for reaching out! Check your email for confirmation.';
-                    formStatus.className = 'mt-6 text-center text-cyan-400 font-semibold';
-                    formStatus.classList.remove('hidden');
-                }
-            } else {
-                throw new Error(result.error || 'Failed to send message');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            showNotification('✗ ' + error.message, 'error');
-            
-            if (formStatus) {
-                formStatus.textContent = '✗ Failed to send message. Please try again or email directly.';
-                formStatus.className = 'mt-6 text-center text-red-400 font-semibold';
-                formStatus.classList.remove('hidden');
-            }
-        } finally {
-            // Reset button state
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-            submitBtn.classList.remove('loading');
-            
-            // Hide status after 5 seconds
-            if (formStatus) {
-                setTimeout(() => {
-                    formStatus.classList.add('hidden');
-                }, 5000);
-            }
-        }
-    });
-}
-
-function validateForm(data) {
-    // Check all fields are filled
-    if (!data.name || !data.email || !data.title || !data.message) {
-        return false;
-    }
-    
-    // Validate email
-    const emailRegex = /^[^S@]+@[^S@]+\.[^S@]+$/;
-    if (!emailRegex.test(data.email)) {
-        return false;
-    }
-    
-    // Validate message length
-    if (data.message.length < 10) {
-        return false;
-    }
-    
-    return true;
-}
-
-// ==================== Notification System ====================
-
-function showNotification(message, type = 'info') {
-    // Remove existing notifications
-    document.querySelectorAll('.notification').forEach(n => n.remove());
-    
-    const notification = document.createElement('div');
-    notification.className = `notification fixed top-24 right-6 px-6 py-4 rounded-xl text-white font-semibold 
-        shadow-2xl z-50 transform transition-all duration-300 flex items-center gap-3
-        ${type === 'success' ? 'bg-gradient-to-r from-cyan-500 to-blue-500' : 
-          type === 'error' ? 'bg-gradient-to-r from-red-500 to-pink-500' : 
-          'bg-gradient-to-r from-blue-500 to-purple-500'}`;
-    
-    // Add icon
-    const icon = document.createElement('span');
-    icon.textContent = type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ';
-    icon.className = 'text-2xl';
-    
-    const text = document.createElement('span');
-    text.textContent = message;
-    
-    notification.appendChild(icon);
-    notification.appendChild(text);
-    document.body.appendChild(notification);
-    
-    // Animate in
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-        notification.style.opacity = '1';
-    }, 100);
-    
-    // Auto remove after 4 seconds
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateX(100px)';
-        setTimeout(() => notification.remove(), 300);
-    }, 4000);
 }
 
 // ==================== Mobile Menu ====================
-
 function setupMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.querySelector('nav ul');
+    const mobileMenu = document.getElementById('mobileMenu');
     
     if (!mobileMenuBtn || !mobileMenu) return;
-    
+
     mobileMenuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
-        
-        // Animate menu icon
-        const icon = mobileMenuBtn.querySelector('svg');
-        if (icon) {
-            icon.style.transform = mobileMenu.classList.contains('hidden') ? 
-                'rotate(0deg)' : 'rotate(90deg)';
-        }
+        mobileMenu.classList.toggle('translate-x-full');
     });
-    
+
     // Close menu when clicking a link
-    document.querySelectorAll('nav a').forEach(link => {
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
+            mobileMenu.classList.add('translate-x-full');
         });
     });
-    
+
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
             mobileMenu.classList.add('hidden');
+            mobileMenu.classList.add('translate-x-full');
         }
     });
 }
 
-// ==================== Parallax Effect ====================
-
-function setupParallaxEffect() {
-    const orbs = document.querySelectorAll('.orb');
-    
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        
-        orbs.forEach((orb, index) => {
-            const speed = (index + 1) * 0.3;
-            const yPos = -(scrollY * speed);
-            orb.style.transform = `translateY(${yPos}px)`;
-        });
-    });
-}
-
-// ==================== Magnetic Button Effect ====================
-
+// ==================== Magnetic Buttons ====================
 function setupMagneticButtons() {
     const magneticElements = document.querySelectorAll('.magnetic');
     
@@ -399,19 +332,17 @@ function setupMagneticButtons() {
 }
 
 // ==================== Page Transition ====================
-
 function setupPageTransition() {
     const transition = document.getElementById('pageTransition');
-    
     if (!transition) return;
-    
+
     // Hide transition on load
     window.addEventListener('load', () => {
         setTimeout(() => {
             transition.classList.remove('active');
         }, 300);
     });
-    
+
     // Show transition on page navigation
     document.querySelectorAll('a[href$=".html"]').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -427,71 +358,7 @@ function setupPageTransition() {
     });
 }
 
-// ==================== Stats Counter Animation ====================
-
-function animateStatsCounter() {
-    const stats = document.querySelectorAll('.stat-card .text-3xl, .about-card .text-4xl');
-    
-    stats.forEach(stat => {
-        const target = stat.textContent;
-        
-        // Skip if not a number
-        if (isNaN(target) && target !== '∞') return;
-        
-        let current = 0;
-        const increment = target === '∞' ? 0 : parseInt(target) / 50;
-        
-        const updateCounter = () => {
-            if (current < target) {
-                current += increment;
-                stat.textContent = Math.ceil(current) + (target.includes('+') ? '+' : '');
-                requestAnimationFrame(updateCounter);
-            } else {
-                stat.textContent = target;
-            }
-        };
-        
-        // Start animation when element is visible
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    updateCounter();
-                    observer.unobserve(entry.target);
-                }
-            });
-        });
-        
-        observer.observe(stat);
-    });
-}
-
-// Initialize stats counter
-animateStatsCounter();
-
-// ==================== Lazy Load Images ====================
-
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                }
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    document.querySelectorAll('img.lazy, img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
 // ==================== Utility Functions ====================
-
-// Debounce function
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -504,30 +371,8 @@ function debounce(func, wait) {
     };
 }
 
-// Throttle function
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
-// ==================== Performance Monitoring ====================
-
-if (window.performance) {
-    window.addEventListener('load', () => {
-        const perfData = window.performance.timing;
-        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-        console.log(`⚡ Page loaded in ${pageLoadTime}ms`);
-    });
-}
-
 // ==================== Console Branding ====================
-
 console.log('%c🚀 Premium Portfolio', 'font-size: 20px; font-weight: bold; color: #06b6d4;');
 console.log('%cBuilt with ❤️ by Jivi', 'font-size: 14px; color: #64748b;');
 console.log('%cAI Engineer & Data Scientist', 'font-size: 12px; color: #3b82f6; font-style: italic;');
+// ==================== End of script.js ====================
