@@ -203,6 +203,22 @@ function setupContactForm() {
             user_agent: navigator.userAgent.substring(0, 200) // Truncated for privacy
         };
 
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/8ba53d06-e65d-4e71-9d01-4eb770290139', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sessionId: 'debug-session',
+                runId: 'pre-fix',
+                hypothesisId: 'H1',
+                location: 'script.js:contactForm:before-validation',
+                message: 'Contact form submit captured before validation',
+                data: { hasName: !!data.name, hasEmail: !!data.email, apiBaseUrl: CONFIG.API_BASE_URL },
+                timestamp: Date.now()
+            })
+        }).catch(() => {});
+        // #endregion
+
         // Enhanced validation
         const errors = validateContactForm(data);
         if (errors.length > 0) {
@@ -217,6 +233,22 @@ function setupContactForm() {
         try {
             console.log('📤 Sending contact form to:', CONFIG.API_BASE_URL + '/contact');
             
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/8ba53d06-e65d-4e71-9d01-4eb770290139', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    sessionId: 'debug-session',
+                    runId: 'pre-fix',
+                    hypothesisId: 'H2',
+                    location: 'script.js:contactForm:before-fetch',
+                    message: 'About to send contact form to backend',
+                    data: { url: CONFIG.API_BASE_URL + '/contact' },
+                    timestamp: Date.now()
+                })
+            }).catch(() => {});
+            // #endregion
+            
             const response = await fetch(CONFIG.API_BASE_URL + '/contact', {
                 method: 'POST',
                 headers: {
@@ -229,6 +261,22 @@ function setupContactForm() {
             const responseData = await response.json();
 
             if (response.ok) {
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/8ba53d06-e65d-4e71-9d01-4eb770290139', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sessionId: 'debug-session',
+                        runId: 'pre-fix',
+                        hypothesisId: 'H3',
+                        location: 'script.js:contactForm:success',
+                        message: 'Contact form submission succeeded',
+                        data: { status: response.status },
+                        timestamp: Date.now()
+                    })
+                }).catch(() => {});
+                // #endregion
+
                 showFormStatus('✅ Message sent successfully! I\'ll respond within 24 hours.', 'success');
                 contactForm.reset();
                 trackAnalytics('contact_form_success', { project_type: data.project_type });
@@ -243,6 +291,22 @@ function setupContactForm() {
             }
         } catch (error) {
             console.error('📧 Contact form error:', error);
+            
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/8ba53d06-e65d-4e71-9d01-4eb770290139', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    sessionId: 'debug-session',
+                    runId: 'pre-fix',
+                    hypothesisId: 'H4',
+                    location: 'script.js:contactForm:error',
+                    message: 'Contact form submission threw error',
+                    data: { errorMessage: error?.message || String(error) },
+                    timestamp: Date.now()
+                })
+            }).catch(() => {});
+            // #endregion
             
             let errorMessage = '❌ Message failed to send. ';
             

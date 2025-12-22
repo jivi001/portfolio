@@ -325,7 +325,7 @@ def send_confirmation_email(contact_data):
                 </div>
                 
                 <div class="footer">
-                    <p>Portfolio: jivitesh-portfolio.vercel.app</p>
+                    <p>Portfolio: jiviteshgd28@gmail.com</p>
                     <p style="margin-top: 10px; font-size: 12px; color: #94a3b8;">
                         This is an automated confirmation email
                     </p>
@@ -353,12 +353,14 @@ def send_confirmation_email(contact_data):
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
-    return jsonify({
+    payload = {
         'status': 'healthy',
         'timestamp': datetime.now().isoformat(),
         'message': 'Server is running',
         'email_configured': bool(GMAIL_USER and GMAIL_APP_PASSWORD)
-    }), 200
+    }
+
+    return jsonify(payload), 200
 
 @app.route('/api/contact', methods=['POST'])
 def handle_contact():
@@ -424,13 +426,15 @@ def handle_contact():
         print(f"📨 Confirmation:   {'✓ Sent' if confirmation_sent else '✗ Failed'}")
         print(f"{'='*60}\n")
 
-        return jsonify({
+        response = jsonify({
             'status': 'success',
             'message': 'Contact message received successfully',
             'data': contact_message,
             'email_notification': email_sent,
             'confirmation_sent': confirmation_sent
-        }), 200
+        })
+
+        return response, 200
 
     except Exception as e:
         print(f"❌ Error in contact handler: {str(e)}")

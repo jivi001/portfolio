@@ -1,0 +1,7 @@
+# Cloudflare Pages Redirects Configuration
+
+# Redirect /index.html to root
+/index.html / 301
+
+# Handle 404s - redirect to home
+/* /index.html 404
