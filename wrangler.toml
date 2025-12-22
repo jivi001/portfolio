@@ -1,0 +1,9 @@
+name = "portfolio"
+compatibility_date = "2025-12-22"
+
+# Deploy static assets from root directory
+[assets]
+directory = "."
+
+# CORS and custom headers will be read from _headers file
+# Redirects will be read from _redirects file
