@@ -1,5 +1,5 @@
 // Service Worker for Portfolio PWA
-const CACHE_NAME = 'portfolio-v3';
+const CACHE_NAME = 'portfolio-v4'; // Bumped version to force cache refresh
 const urlsToCache = [
     '/',
     '/index.html',
@@ -17,23 +17,54 @@ self.addEventListener('install', event => {
         caches.open(CACHE_NAME)
             .then(cache => {
                 console.log('💾 Opened cache');
-                return cache.addAll(urlsToCache);
+                return cache.addAll(urlsToCache).catch(err => {
+                    console.error('Failed to cache some resources:', err);
+                    // Continue even if some resources fail to cache
+                    return Promise.resolve();
+                });
             })
     );
+    // Force the new service worker to become active immediately
+    self.skipWaiting();
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - Network first, fallback to cache
 self.addEventListener('fetch', event => {
+    // Skip non-GET requests
+    if (event.request.method !== 'GET') {
+        return;
+    }
+
+    // Skip API calls and external requests
+    const url = new URL(event.request.url);
+    if (url.pathname.startsWith('/api/') || url.origin !== location.origin) {
+        return;
+    }
+
     event.respondWith(
-        caches.match(event.request)
+        fetch(event.request)
             .then(response => {
-                // Cache hit - return response
-                if (response) {
-                    return response;
+                // Clone the response to cache it
+                if (response.ok) {
+                    const responseToCache = response.clone();
+                    caches.open(CACHE_NAME).then(cache => {
+                        cache.put(event.request, responseToCache);
+                    });
                 }
-                return fetch(event.request);
-            }
-            )
+                return response;
+            })
+            .catch(error => {
+                // Network fetch failed, try cache
+                return caches.match(event.request)
+                    .then(cachedResponse => {
+                        if (cachedResponse) {
+                            return cachedResponse;
+                        }
+                        // If not in cache, return a generic error response
+                        console.error('Fetch failed and no cache available:', error);
+                        throw error;
+                    });
+            })
     );
 });
 
@@ -45,10 +76,13 @@ self.addEventListener('activate', event => {
             return Promise.all(
                 cacheNames.map(cacheName => {
                     if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        console.log('🗑️ Deleting old cache:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
             );
         })
     );
+    // Claim all clients immediately
+    return self.clients.claim();
 });

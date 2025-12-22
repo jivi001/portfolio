@@ -218,11 +218,11 @@ function setupContactForm() {
         setSubmitButtonState('loading');
 
         try {
-            console.log('📤 Sending contact form to:', CONFIG.API_BASE_URL + '/contact');
+            console.log('📤 Sending contact form to:', CONFIG.API_BASE_URL + '/api/contact');
 
 
 
-            const response = await fetch(CONFIG.API_BASE_URL + '/contact', {
+            const response = await fetch(CONFIG.API_BASE_URL + '/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -839,7 +839,8 @@ function trackAnalytics(event, properties = {}) {
             }
         });
 
-        navigator.sendBeacon(CONFIG.API_BASE_URL + '/analytics', data);
+        // Fixed: Changed from /analytics to /api/analytics
+        navigator.sendBeacon(CONFIG.API_BASE_URL + '/api/analytics', data);
     }
 }
 

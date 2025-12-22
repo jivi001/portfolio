@@ -495,6 +495,42 @@ export default {
         );
       }
 
+      // Analytics tracking
+      if (path === '/api/analytics' && request.method === 'POST') {
+        try {
+          const data = await request.json() as { event: string; properties: Record<string, any> };
+
+          // Store analytics in KV with daily aggregation
+          const today = new Date().toISOString().split('T')[0];
+          const analyticsKey = `analytics_${today}`;
+
+          const existingAnalytics = await env.MESSAGES.get(analyticsKey, 'json') as { events: any[] } | null;
+          const analytics = existingAnalytics?.events || [];
+
+          analytics.push({
+            timestamp: new Date().toISOString(),
+            event: data.event,
+            properties: data.properties
+          });
+
+          await env.MESSAGES.put(analyticsKey, JSON.stringify({ events: analytics }), {
+            expirationTtl: 60 * 60 * 24 * 90 // Keep for 90 days
+          });
+
+          return new Response(
+            JSON.stringify({ status: 'success', message: 'Analytics tracked' }),
+            { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        } catch (error) {
+          console.error('Analytics error:', error);
+          // Don't fail the request, just log
+          return new Response(
+            JSON.stringify({ status: 'success', message: 'Analytics received' }),
+            { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+      }
+
       // 404
       return new Response(
         JSON.stringify({ error: 'Endpoint not found' }),
