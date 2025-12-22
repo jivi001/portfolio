@@ -2,94 +2,131 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Changelog | Jivitesh - AI Engineer</title>
-    <meta name="description" content="Development history and updates of Jivitesh's Portfolio.">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Changelog | Jivitesh – AI Engineer</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Development history and version updates of Jivitesh’s portfolio." />
+    <meta name="author" content="Jivitesh" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
 </head>
 
-<body class="grid-bg">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 py-6 px-8" id="mainNav">
+<body class="grid-bg text-white">
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 py-6 px-8 bg-slate-950/80 backdrop-blur border-b border-slate-800">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold flex items-center gap-3">
-                <span class="gradient-text">Jivitesh</span>
+            <a href="index.html" class="text-2xl font-bold gradient-text">
+                Jivitesh
             </a>
-            <ul class="hidden md:flex gap-12 items-center">
-                <li><a href="index.html" class="text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors">HOME</a></li>
-                <li><a href="projects.html" class="text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors">PROJECTS</a></li>
+
+            <ul class="hidden md:flex gap-10 items-center text-sm">
+                <li><a href="index.html" class="text-slate-300 hover:text-cyan-400 transition">HOME</a></li>
+                <li><a href="projects.html" class="text-slate-300 hover:text-cyan-400 transition">PROJECTS</a></li>
+                <li><a href="insights.html" class="text-slate-300 hover:text-cyan-400 transition">INSIGHTS</a></li>
             </ul>
-             <!-- Mobile Menu Button -->
-             <button class="md:hidden text-cyan-400 w-10 h-10 flex items-center justify-center" id="mobileMenuBtn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
+
+            <button id="mobileMenuBtn" class="md:hidden w-10 h-10 text-cyan-400" aria-label="Open menu">
+                ☰
             </button>
         </div>
     </nav>
-    
-            <!-- Enhanced Mobile Menu -->
-            <div class="fixed inset-0 bg-slate-900/75 backdrop-blur-lg z-40 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out"
-                id="mobileMenu" role="dialog" aria-labelledby="mobile-menu-title" aria-hidden="true">
-                <div class="flex flex-col h-full">
-                    <div class="flex justify-between items-center p-6 border-b border-slate-700/30">
-                        <h2 id="mobile-menu-title" class="text-xl font-bold gradient-text">Navigation</h2>
-                        <button class="text-slate-400 hover:text-white w-10 h-10 flex items-center justify-center"
-                            id="closeMobileMenu" aria-label="Close mobile menu">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <nav class="flex-1 flex flex-col items-center justify-center space-y-8">
-                        <a href="index.html"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">HOME</a>
-                        <a href="projects.html"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">PROJECTS</a>
-                         <a href="case-studies.html"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CASE STUDIES</a>
-                        <a href="insights.html"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">INSIGHTS</a>
-                    </nav>
-                </div>
-            </div>
 
-    <main class="pt-32 pb-20 px-6">
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu"
+        class="fixed inset-0 bg-slate-900/80 backdrop-blur z-40 md:hidden translate-x-full transition-transform duration-300">
+        <div class="h-full flex flex-col">
+            <div class="flex justify-between items-center p-6 border-b border-slate-700">
+                <span class="text-xl font-bold gradient-text">Navigation</span>
+                <button id="closeMobileMenu" class="text-slate-400 text-2xl">&times;</button>
+            </div>
+            <nav class="flex-1 flex flex-col items-center justify-center gap-8 text-2xl">
+                <a href="index.html">HOME</a>
+                <a href="projects.html">PROJECTS</a>
+                <a href="case-studies.html">CASE STUDIES</a>
+                <a href="insights.html">INSIGHTS</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <main class="pt-32 pb-24 px-6">
         <div class="max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-bold mb-8">Changelog</h1>
-            
-            <div class="space-y-12">
-                <div class="relative pl-8 border-l border-cyan-400/30">
-                    <div class="absolute -left-1.5 top-2 w-3 h-3 bg-cyan-400 rounded-full"></div>
-                    <span class="text-cyan-400 font-mono text-sm">v3.0.0 - Nov 2025</span>
-                    <h3 class="text-xl font-bold mt-2 mb-4">Portfolio Redesign</h3>
-                    <ul class="space-y-2 text-slate-300">
-                        <li>✨ Complete UI overhaul with glassmorphism design</li>
-                        <li>🚀 Performance optimization with 95+ Lifecycle score</li>
-                        <li>📱 Enhanced mobile responsiveness</li>
-                        <li>♿ Improved accessibility support</li>
-                    </ul>
-                </div>
 
-                <div class="relative pl-8 border-l border-slate-700">
-                    <div class="absolute -left-1.5 top-2 w-3 h-3 bg-slate-700 rounded-full"></div>
-                    <span class="text-slate-500 font-mono text-sm">v2.1.0 - Aug 2025</span>
-                    <h3 class="text-xl font-bold mt-2 mb-4">Project Showcase Update</h3>
-                    <ul class="space-y-2 text-slate-400">
-                        <li>Added Smart Allocation Engine case study</li>
-                        <li>Implemented filtering system for projects</li>
-                        <li>Integrated contact form with Cloudflare Worker</li>
+            <!-- HEADER -->
+            <header class="mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Changelog</h1>
+                <p class="text-slate-400 max-w-2xl">
+                    A transparent log of improvements, feature updates, and architectural changes to this portfolio.
+                </p>
+            </header>
+
+            <!-- TIMELINE -->
+            <section class="space-y-14">
+
+                <!-- v3 -->
+                <article class="relative pl-10 border-l border-cyan-400/40">
+                    <span class="absolute -left-1.5 top-1.5 w-3 h-3 bg-cyan-400 rounded-full"></span>
+
+                    <p class="text-cyan-400 font-mono text-sm mb-2">
+                        v3.0.0 • Nov 2025
+                    </p>
+                    <h2 class="text-2xl font-bold mb-4">
+                        Portfolio Redesign & Architecture Upgrade
+                    </h2>
+
+                    <ul class="space-y-2 text-slate-300">
+                        <li>✨ Complete UI redesign using glassmorphism and motion principles</li>
+                        <li>🚀 Performance tuning (95+ Lighthouse scores)</li>
+                        <li>📱 Mobile-first responsiveness overhaul</li>
+                        <li>♿ Improved accessibility and semantic HTML structure</li>
+                        <li>🧠 Stronger AI engineer positioning & content clarity</li>
                     </ul>
-                </div>
-            </div>
+                </article>
+
+                <!-- v2 -->
+                <article class="relative pl-10 border-l border-slate-700">
+                    <span class="absolute -left-1.5 top-1.5 w-3 h-3 bg-slate-600 rounded-full"></span>
+
+                    <p class="text-slate-500 font-mono text-sm mb-2">
+                        v2.1.0 • Aug 2025
+                    </p>
+                    <h2 class="text-2xl font-bold mb-4 text-slate-200">
+                        Project & Case Study Expansion
+                    </h2>
+
+                    <ul class="space-y-2 text-slate-400">
+                        <li>➕ Added Smart Allocation Engine case study</li>
+                        <li>🧩 Implemented project filtering and categorization</li>
+                        <li>📨 Integrated contact form via Cloudflare Workers</li>
+                    </ul>
+                </article>
+
+            </section>
         </div>
     </main>
-    <script src="script.js"></script>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 py-10 text-center text-sm text-slate-500">
+        © 2025 Jivitesh • AI Engineer & Data Scientist
+    </footer>
+
+    <!-- JS -->
+    <script type="module" src="js/core.js"></script>
 </body>
+
 </html>

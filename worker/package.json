@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "wrangler dev",
         "deploy": "wrangler deploy",
-        "tail": "wrangler tail"
+        "tail": "wrangler tail",
+        "build": "tsc"
     },
     "keywords": [
         "cloudflare",

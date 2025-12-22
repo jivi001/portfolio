@@ -1,0 +1,91 @@
+/* ==================== Responsive & Layout Adjustments ==================== */
+
+@media (max-width: 1024px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-lg: 1.5rem;
+        --space-xl: 3rem;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+    .nav-links {
+        display: none;
+        /* Mobile menu implementation can be added here */
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .project-content,
+    .case-study-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .section {
+        padding: 3rem 0;
+    }
+}
+
+/* ==================== Print Styles ==================== */
+
+@media print {
+
+    .no-print,
+    .cursor-dot,
+    .cursor-ring,
+    .orb,
+    nav,
+    .page-transition {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .glass,
+    .glass-strong {
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+}

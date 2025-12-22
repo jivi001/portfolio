@@ -2,659 +2,193 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO & Meta -->
-    <title>Jivitesh | AI Engineer & Data Scientist - Transforming Data Into Intelligence</title>
+    <title>Jivitesh | AI Engineer & Data Scientist</title>
+
+    <!-- SEO -->
     <meta name="description"
-        content="AI Engineer & Data Scientist specializing in machine learning, cybersecurity systems, and scalable data solutions. 5+ projects, 100% performance improvements.">
-    <meta name="keywords"
-        content="AI Engineer, Data Scientist, Machine Learning, Python, TensorFlow, Full Stack Developer, Cybersecurity, Data Analysis">
-    <meta name="author" content="Jivitesh">
-    <meta name="robots" content="index, follow">
+        content="AI Engineer focused on applied machine learning, data-driven systems, and scalable full-stack solutions." />
+    <meta name="keywords" content="AI Engineer, Machine Learning, Data Science, Python, Full Stack, Cybersecurity" />
+    <meta name="author" content="Jivitesh" />
+    <meta name="robots" content="index, follow" />
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="/">
-    <meta property="og:title" content="Jivitesh | AI Engineer & Data Scientist">
-    <meta property="og:description"
-        content="Transforming complex data into actionable intelligence. Specialized in AI/ML, cybersecurity, and scalable solutions.">
-    <meta property="og:image" content="/logo.jpg">
+    <!-- Social -->
+    <meta property="og:title" content="Jivitesh | AI Engineer & Data Scientist" />
+    <meta property="og:description" content="Turning data into scalable intelligence." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/logo.jpg" />
 
-    <!-- Twitter Card -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/">
-    <meta property="twitter:title" content="Jivitesh | AI Engineer & Data Scientist">
-    <meta property="twitter:description"
-        content="Building intelligent solutions with 100% performance improvements. 5+ AI/ML projects.">
-    <meta property="twitter:image" content="/logo.jpg">
+    <!-- Theme -->
+    <meta name="theme-color" content="#06b6d4" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="manifest" href="manifest.json">
 
-    <!-- Theme & PWA -->
-    <meta name="theme-color" content="#06b6d4">
-    <meta name="color-scheme" content="dark">
-    <link rel="manifest" href="/manifest.json">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet" />
 
-    <!-- Fonts with display swap for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- CSS with proper loading -->
+    <!-- Tailwind (OK for now, replace with build later) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
 
-    <!-- Favicon System -->
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-    <link rel="icon" type="image/png" href="/assets/favicon.png">
-    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Custom -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/logo.jpg" />
 
-    <!-- Structured Data for SEO -->
+    <!-- Schema -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Jivitesh",
-        "url": "/",
-        "jobTitle": "AI Engineer & Data Scientist",
-        "description": "AI Engineer specializing in machine learning, cybersecurity systems, and scalable data solutions",
-        "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Data Science", "Python", "JAVA", "C"],
-        "alumniOf": {
-            "@type": "Organization",
-            "name": "Smart India Hackathon"
-        }
-    }
-    </script>
-
-    <!-- Performance Hints -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jivitesh",
+    "jobTitle": "AI Engineer & Data Scientist",
+    "url": "/",
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Data Science",
+      "Python",
+      "Full Stack Development"
+    ],
+    "award": "Smart India Hackathon 2025"
+  }
+  </script>
 </head>
 
-<body class="grid-bg">
-    <!-- Skip Link for Accessibility -->
-    <a href="#main-content"
-        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-cyan-500 text-white px-4 py-2 rounded z-50">
-        Skip to main content
-    </a>
+<body class="bg-slate-950 text-white font-[Inter]">
 
-    <!-- Performance-Optimized Cursor (only on capable devices) -->
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-ring" aria-hidden="true"></div>
-
-    <!-- Page Transition with Better UX -->
-    <div class="page-transition" id="pageTransition" role="dialog" aria-label="Loading">
-        <div class="text-center">
-            <div class="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"
-                aria-hidden="true"></div>
-            <p class="text-slate-300 text-sm font-medium" id="loadingText">Initializing Experience...</p>
-            <div class="mt-2 text-xs text-slate-500">
-                <span id="loadingProgress">Loading assets...</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Optimized Background Orbs -->
-    <div class="orb w-96 h-96 bg-cyan-500/15 -top-48 -left-48" aria-hidden="true"></div>
-    <div class="orb w-96 h-96 bg-blue-500/15 top-1/2 right-0" style="animation-delay: 5s;" aria-hidden="true"></div>
-    <div class="orb w-96 h-96 bg-purple-500/15 bottom-0 left-1/4" style="animation-delay: 10s;" aria-hidden="true">
-    </div>
-
-    <!-- Enhanced Navigation with ARIA -->
-    <nav class="fixed top-0 w-full z-50 py-6 px-8" id="mainNav" role="navigation" aria-label="Main navigation">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <!-- Brand with enhanced logo -->
-            <a href="index.html" class="text-2xl font-bold flex items-center gap-3" aria-label="Jivitesh - Home">
-                <div
-                    class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                    JV
-                </div>
-                <span class="gradient-text">Jivitesh</span>
-            </a>
-
-            <!-- Desktop Navigation -->
-            <ul class="hidden md:flex gap-12 items-center">
-                <li><a href="#home"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300"
-                        aria-current="page">HOME</a></li>
-                <li><a href="projects.html"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">PROJECTS</a>
-                </li>
-                <li><a href="case-studies.html"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">CASE
-                        STUDIES</a></li>
-                <li><a href="insights.html"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">INSIGHTS</a>
-                </li>
-                <li><a href="#about"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">ABOUT</a>
-                </li>
-                <li><a href="#contact"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">CONTACT</a>
-                </li>
-                <li><a href="#contact"
-                        class="px-6 py-2.5 btn-premium rounded-full text-sm font-semibold text-white magnetic focus:ring-4 focus:ring-cyan-400/50">HIRE
-                        ME</a></li>
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold text-cyan-400">Jivitesh</a>
+            <ul class="hidden md:flex gap-8 text-sm text-slate-300">
+                <li><a href="#home" class="hover:text-cyan-400">Home</a></li>
+                <li><a href="#about" class="hover:text-cyan-400">About</a></li>
+                <li><a href="projects.html" class="hover:text-cyan-400">Projects</a></li>
+                <li><a href="#contact" class="hover:text-cyan-400">Contact</a></li>
             </ul>
-
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-cyan-400 w-10 h-10 flex items-center justify-center" id="mobileMenuBtn"
-                aria-label="Toggle mobile menu" aria-expanded="false">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                    </path>
-                </svg>
-            </button>
-
-            <!-- Enhanced Mobile Menu -->
-            <div class="fixed inset-0 bg-slate-900/75 backdrop-blur-lg z-40 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out"
-                id="mobileMenu" role="dialog" aria-labelledby="mobile-menu-title" aria-hidden="true">
-                <div class="flex flex-col h-full">
-                    <div class="flex justify-between items-center p-6 border-b border-slate-700/30">
-                        <h2 id="mobile-menu-title" class="text-xl font-bold gradient-text">Navigation</h2>
-                        <button class="text-slate-400 hover:text-white w-10 h-10 flex items-center justify-center"
-                            id="closeMobileMenu" aria-label="Close mobile menu">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <nav class="flex-1 flex flex-col items-center justify-center space-y-8">
-                        <a href="#home"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">HOME</a>
-                        <a href="projects.html"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">PROJECTS</a>
-                        <a href="case-studies.html"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CASE
-                            STUDIES</a>
-                        <a href="insights.html"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">INSIGHTS</a>
-                        <a href="#about"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">ABOUT</a>
-                        <a href="#contact"
-                            class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CONTACT</a>
-                        <a href="#contact"
-                            class="mt-8 px-8 py-4 btn-premium rounded-full text-lg font-semibold text-white">HIRE ME</a>
-                    </nav>
-                </div>
-            </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Hero Section with Enhanced Storytelling -->
-        <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-24 relative overflow-hidden"
-            role="banner">
-            <div class="max-w-7xl mx-auto text-center relative z-10">
-                <!-- Professional Avatar with Brand Identity -->
-                <div class="mb-12 reveal">
-                    <div class="w-32 h-32 mx-auto relative float-animation">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full animate-spin-slow">
-                        </div>
-                        <div class="absolute inset-1 bg-slate-900 rounded-full"></div>
-                        <img src="logo.jpg" alt="Jivitesh - AI Engineer and Data Scientist professional headshot"
-                            class="absolute inset-2 rounded-full object-cover" loading="eager"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="absolute inset-2 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold text-2xl"
-                            style="display: none;" role="img" aria-label="Jivitesh initials">
-                            JIVI
-                        </div>
-                    </div>
-                </div>
+    <!-- HERO -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-24">
+        <div class="max-w-4xl text-center">
+            <p class="text-cyan-400 text-sm tracking-widest uppercase mb-4">
+                AI Engineer • Data Scientist
+            </p>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                Turning <span class="text-cyan-400">Data</span><br />
+                Into Scalable Intelligence
+            </h1>
+            <p class="text-slate-300 max-w-2xl mx-auto mb-10">
+                I build applied AI systems and data-driven products that connect
+                engineering execution with real-world impact.
+            </p>
 
-                <!-- Enhanced Value Proposition -->
-                <div class="reveal" style="transition-delay: 0.1s;">
-                    <p class="text-cyan-400 text-sm font-semibold tracking-widest mb-4 uppercase">AI Engineer & Data
-                        Scientist</p>
-                    <h1 class="text-4xl md:text-6xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">
-                        Transforming<br />
-                        <span class="gradient-text">Complex Data</span><br />
-                        Into Intelligence
-                    </h1>
-                    <p class="text-lg md:text-xl text-slate-300 mb-4 max-w-4xl mx-auto font-medium">
-                        Building <strong>scalable AI solutions</strong> that bridge technical innovation with strategic
-                        business impact
-                    </p>
-                </div>
-
-                <!-- Impact-Driven Subtitle -->
-                <div class="reveal mb-12" style="transition-delay: 0.2s;">
-                    <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-sm md:text-base font-semibold">
-                        <span class="flex items-center gap-2 text-cyan-400">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                            60% Performance Boost
-                        </span>
-                        <span class="flex items-center gap-2 text-blue-400">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                                </path>
-                            </svg>
-                            Faster Response Times
-                        </span>
-                        <span class="flex items-center gap-2 text-purple-400">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
-                                </path>
-                            </svg>
-                            Real World Impact
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Strategic CTA Buttons -->
-                <div class="flex gap-6 justify-center flex-wrap mb-20 reveal" style="transition-delay: 0.3s;">
-                    <a href="case-studies.html"
-                        class="px-8 md:px-10 py-4 md:py-5 btn-premium rounded-full text-sm md:text-base font-semibold text-white inline-flex items-center gap-2 magnetic focus:ring-4 focus:ring-cyan-400/50"
-                        aria-describedby="cta-primary-desc">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                            </path>
-                        </svg>
-                        View Impact Stories
-                    </a>
-                    <span id="cta-primary-desc" class="sr-only">Explore detailed case studies showing measurable
-                        business impact</span>
-
-                    <a href="projects.html"
-                        class="px-8 md:px-10 py-4 md:py-5 glass rounded-full text-sm md:text-base font-semibold text-white border border-blue-400/30 hover:bg-blue-900/10 transition-all duration-300 magnetic focus:ring-4 focus:ring-blue-400/50 inline-flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
-                            </path>
-                        </svg>
-                        Technical Portfolio
-                    </a>
-
-                    <a href="#contact"
-                        class="px-8 md:px-10 py-4 md:py-5 glass rounded-full text-sm md:text-base font-semibold text-white border border-blue-600/50 hover:border-blue-900/50 transition-all duration-300 magnetic focus:ring-4 focus:ring-blue-400/50">
-                        Let's Collaborate
-                    </a>
-                </div>
-
-                <!-- Enhanced Stats with Context -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-5xl mx-auto reveal"
-                    style="transition-delay: 0.4s;">
-                    <div class="glass-strong rounded-xl md:rounded-2xl p-4 md:p-6 premium-card group">
-                        <div class="text-3xl md:text-5xl font-bold gradient-text mb-2 transition-all duration-300 group-hover:scale-110"
-                            data-count="5" aria-label="5 AI and ML projects completed">0</div>
-                        <p class="text-slate-400 text-xs md:text-sm font-medium">AI/ML Projects</p>
-                        <p class="text-slate-500 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">MVP
-                        </p>
-                    </div>
-                    <div class="glass-strong rounded-xl md:rounded-2xl p-4 md:p-6 premium-card group">
-                        <div class="text-3xl md:text-5xl font-bold gradient-text mb-2 transition-all duration-300 group-hover:scale-110"
-                            data-count="80" aria-label="80 percent performance improvement achieved">0<span
-                                class="text-xl">%</span></div>
-                        <p class="text-slate-400 text-xs md:text-sm font-medium">Improvement</p>
-                        <p class="text-slate-500 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Response time</p>
-                    </div>
-                    <div class="glass-strong rounded-xl md:rounded-2xl p-4 md:p-6 premium-card group">
-                        <div class="text-3xl md:text-5xl font-bold gradient-text mb-2 transition-all duration-300 group-hover:scale-110"
-                            data-count="10" aria-label="10 plus research papers analyzed">0<span
-                                class="text-xl">+</span></div>
-                        <p class="text-slate-400 text-xs md:text-sm font-medium">Research Papers</p>
-                        <p class="text-slate-500 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Implemented</p>
-                    </div>
-                    <div class="glass-strong rounded-xl md:rounded-2xl p-4 md:p-6 premium-card group">
-                        <div
-                            class="text-3xl md:text-5xl font-bold gradient-text mb-2 transition-all duration-300 group-hover:scale-110">
-                            ∞</div>
-                        <p class="text-slate-400 text-xs md:text-sm font-medium">Learning</p>
-                        <p class="text-slate-500 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Continuous</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Enhanced Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-                <button
-                    class="w-6 h-12 border-2 border-cyan-400/40 rounded-full flex justify-center items-start pt-2 hover:border-cyan-400/70 transition-colors group focus:ring-2 focus:ring-cyan-400/50"
-                    onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})"
-                    aria-label="Scroll to about section">
-                    <div class="w-1.5 h-3 bg-cyan-400 rounded-full animate-bounce group-hover:bg-cyan-300"></div>
-                </button>
-            </div>
-        </section>
-
-
-        <!-- About Section with Enhanced Professional Focus -->
-        <section id="about" class="py-20 md:py-32 px-6 relative" role="region" aria-labelledby="about-heading">
-
-
-            <!-- Right Column - Enhanced Skills with Interactive Elements -->
-            <aside class="space-y-6 reveal" style="transition-delay: 0.2s;" role="complementary"
-                aria-label="Technical skills">
-                <div class="glass-strong rounded-2xl p-6 md:p-8 skill-card hover:glow-cyan transition-all duration-300">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-base md:text-lg font-semibold text-cyan-400">AI & Machine Learning</span>
-                        <span class="text-xl md:text-2xl font-bold gradient-text">5%</span>
-                    </div>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-fill" data-width="5%" style="--skill-width: 5%"></div>
-                    </div>
-                    <div class="text-xs text-slate-400 flex justify-between">
-                        <span>TensorFlow • PyTorch • Scikit-learn</span>
-                        <span>Growing</span>
-                    </div>
-                </div>
-
-                <div class="glass-strong rounded-2xl p-6 md:p-8 skill-card hover:glow-blue transition-all duration-300">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-base md:text-lg font-semibold text-blue-400">Full-Stack Development</span>
-                        <span class="text-xl md:text-2xl font-bold gradient-text">90%</span>
-                    </div>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-fill" data-width="30%" style="--skill-width: 30%"></div>
-                    </div>
-                    <div class="text-xs text-slate-400 flex justify-between">
-                        <span>Flask • FastAPI</span>
-                        <span>Learning</span>
-                    </div>
-                </div>
-
-                <div
-                    class="glass-strong rounded-2xl p-6 md:p-8 skill-card hover:glow-purple transition-all duration-300">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-base md:text-lg font-semibold text-purple-400">Data Engineering</span>
-                        <span class="text-xl md:text-2xl font-bold gradient-text">50%</span>
-                    </div>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-fill" data-width="50%" style="--skill-width: 50%"></div>
-                    </div>
-                    <div class="text-xs text-slate-400 flex justify-between">
-                        <span>Pandas • NumPy </span>
-                        <span>Learning</span>
-                    </div>
-                </div>
-
-                <div class="glass-strong rounded-2xl p-6 md:p-8 skill-card hover:shadow-lg transition-all duration-300">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-base md:text-lg font-semibold text-rose-400">Cloud & DevOps</span>
-                        <span class="text-xl md:text-2xl font-bold gradient-text">80%</span>
-                    </div>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-fill" data-width="80%" style="--skill-width: 80%"></div>
-                    </div>
-                    <div class="text-xs text-slate-400 flex justify-between">
-                        <span>Python,C</span>
-                        <span>2+ years</span>
-                    </div>
-                </div>
-
-                <!-- Certifications & Recognition -->
-                <div class="glass-strong rounded-2xl p-6 md:p-8 border-l-4 border-cyan-400">
-                    <h4 class="text-lg font-bold text-cyan-400 mb-3">Latest Achievement</h4>
-                    <p class="text-sm text-slate-300 leading-relaxed">
-                        <strong>Smart India Hackathon 2025</strong> - AI-Based Smart Allocation Engine
-                        <br><span class="text-slate-400">Led team to develop ML-powered internship matching
-                            system</span>
-                    </p>
-                </div>
-            </aside>
-            </div>
-            </div>
-        </section>
-
-        <!-- Contact Section with Enhanced Professional Focus -->
-        <section id="contact" class="py-20 md:py-32 px-6 relative" role="region" aria-labelledby="contact-heading">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12 md:mb-20 reveal">
-                    <p class="text-cyan-400 text-sm font-semibold tracking-widest mb-4 uppercase">Get In Touch</p>
-                    <h2 id="contact-heading" class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                        Let's Build <span class="gradient-text">The Future</span>
-                    </h2>
-                    <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                        Ready to transform your challenges into competitive advantages? Let's connect and explore the
-                        possibilities.
-                    </p>
-                </div>
-
-                <div class="glass-strong rounded-3xl p-8 md:p-12 reveal" style="transition-delay: 0.2s;">
-                    <form id="contactForm" class="space-y-6" novalidate aria-label="Contact form">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-slate-300 mb-2">
-                                    Full Name <span class="text-red-400" aria-label="required">*</span>
-                                </label>
-                                <input type="text" id="name" name="name" required class="form-input"
-                                    placeholder="Your full name" aria-describedby="name-error" autocomplete="name">
-                                <div id="name-error" class="text-red-400 text-sm mt-1 hidden" role="alert"></div>
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-slate-300 mb-2">
-                                    Business Email <span class="text-red-400" aria-label="required">*</span>
-                                </label>
-                                <input type="email" id="email" name="email" required class="form-input"
-                                    placeholder="your@company.com" aria-describedby="email-error" autocomplete="email">
-                                <div id="email-error" class="text-red-400 text-sm mt-1 hidden" role="alert"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="company" class="block text-sm font-medium text-slate-300 mb-2">Company /
-                                Organization</label>
-                            <input type="text" id="company" name="company" class="form-input"
-                                placeholder="Your company name" autocomplete="organization">
-                        </div>
-
-                        <div>
-                            <label for="project-type" class="block text-sm font-medium text-slate-300 mb-2">Project
-                                Type</label>
-                            <select id="project-type" name="project_type" class="form-input">
-                                <option value="">Select project type</option>
-                                <option value="ai-ml">AI & Machine Learning</option>
-                                <option value="data-analysis">Data Analysis & Insights</option>
-                                <option value="cybersecurity">Cybersecurity Solutions</option>
-                                <option value="full-stack">Full-Stack Development</option>
-                                <option value="consulting">Technical Consulting</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="title" class="block text-sm font-medium text-slate-300 mb-2">
-                                Project Title <span class="text-red-400" aria-label="required">*</span>
-                            </label>
-                            <input type="text" id="title" name="title" required class="form-input"
-                                placeholder="Brief project title" aria-describedby="title-error">
-                            <div id="title-error" class="text-red-400 text-sm mt-1 hidden" role="alert"></div>
-                        </div>
-
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-slate-300 mb-2">
-                                Project Details <span class="text-red-400" aria-label="required">*</span>
-                            </label>
-                            <textarea id="message" name="message" required rows="6" class="form-input resize-none"
-                                placeholder="Tell me about your project goals, timeline, and how My solutions can help solve your challenges..."
-                                aria-describedby="message-error message-help"></textarea>
-                            <div id="message-help" class="text-xs text-slate-500 mt-1">Include project scope, timeline,
-                                and expected outcomes</div>
-                            <div id="message-error" class="text-red-400 text-sm mt-1 hidden" role="alert"></div>
-                        </div>
-
-                        <button type="submit"
-                            class="w-full py-4 md:py-5 btn-premium rounded-xl text-base font-semibold text-white relative focus:ring-4 focus:ring-cyan-400/50"
-                            id="submitBtn" aria-describedby="submit-status">
-                            <span id="submitText" class="inline-flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                                </svg>
-                                Start the Conversation
-                            </span>
-                            <div id="submitLoader" class="hidden">
-                                <div
-                                    class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2">
-                                </div>
-                                Sending...
-                            </div>
-                        </button>
-                        <p class="text-xs text-slate-500 text-center">
-                            Response within 24 hours
-                        </p>
-                    </form>
-
-                    <div id="formStatus" class="mt-6 text-center hidden" role="alert" aria-live="polite"></div>
-                </div>
-
-                <!-- Enhanced Professional Links -->
-                <div class="text-center mt-12 md:mt-16 reveal" style="transition-delay: 0.3s;">
-                    <h3 class="text-lg font-semibold text-slate-300 mb-6">Connect & Collaborate</h3>
-                    <div class="flex justify-center gap-6">
-                        <a href="https://linkedin.com/in/jivi001" target="_blank" rel="noopener noreferrer"
-                            class="w-12 h-12 md:w-14 md:h-14 glass rounded-full flex items-center justify-center hover:bg-cyan-400/20 transition-all duration-300 group focus:ring-4 focus:ring-cyan-400/50"
-                            aria-label="Connect on LinkedIn">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-slate-400 group-hover:text-cyan-400 transition-colors"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                            </svg>
-                        </a>
-                        <a href="https://github.com/jivi001" target="_blank" rel="noopener noreferrer"
-                            class="w-12 h-12 md:w-14 md:h-14 glass rounded-full flex items-center justify-center hover:bg-cyan-400/20 transition-all duration-300 group focus:ring-4 focus:ring-cyan-400/50"
-                            aria-label="View GitHub repositories">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-slate-400 group-hover:text-cyan-400 transition-colors"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                        </a>
-                        <a href="https://twitter.com/jivi001" target="_blank" rel="noopener noreferrer"
-                            class="w-12 h-12 md:w-14 md:h-14 glass rounded-full flex items-center justify-center hover:bg-cyan-400/20 transition-all duration-300 group focus:ring-4 focus:ring-cyan-400/50"
-                            aria-label="Follow on Twitter">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-slate-400 group-hover:text-cyan-400 transition-colors"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                            </svg>
-                        </a>
-                        <a href="mailto:jiviteshgd28@gmail.com"
-                            class="w-12 h-12 md:w-14 md:h-14 glass rounded-full flex items-center justify-center hover:bg-cyan-400/20 transition-all duration-300 group focus:ring-4 focus:ring-cyan-400/50"
-                            aria-label="Send email">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-slate-400 group-hover:text-cyan-400 transition-colors"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
-
-                    <!-- Professional Contact Info -->
-                    <div class="mt-8 pt-8 border-t border-slate-700/30 text-center space-y-2">
-                        <p class="text-slate-400 text-sm">
-                            <strong class="text-slate-300">Direct:</strong> jiviteshgd28@gmail.com
-                        </p>
-                        <p class="text-slate-400 text-sm">
-                            <strong class="text-slate-300">Location:</strong> India • Available for remote collaboration
-                        </p>
-                        <p class="text-slate-400 text-sm">
-                            <strong class="text-slate-300">Response:</strong> Within 24 hours • All inquiries
-                            confidential
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Enhanced Footer with Version Info -->
-    <footer class="border-t border-slate-700/30 py-8 md:py-12 px-6" role="contentinfo">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-6">
-                <p class="text-slate-400 text-sm font-medium">© 2025 Jivitesh | AI Engineer & Data Scientist</p>
-                <p class="text-slate-500 text-xs mt-1">Crafting intelligent solutions with passion</p>
-            </div>
-
-            <!-- Version & Status Info -->
-            <div class="flex justify-center items-center gap-6 text-xs text-slate-500">
-                <span class="flex items-center gap-1">
-                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-                    Portfolio v3.0
-                </span>
-                <span>•</span>
-                <span>Last updated: Nov 2025</span>
-                <span>•</span>
-                <a href="changelog.html" class="hover:text-cyan-400 transition-colors">Changelog</a>
+            <div class="flex justify-center gap-6 flex-wrap">
+                <a href="projects.html"
+                    class="px-8 py-4 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold">
+                    View Projects
+                </a>
+                <a href="#contact"
+                    class="px-8 py-4 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400/10">
+                    Let’s Collaborate
+                </a>
             </div>
         </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+
+            <!-- LEFT -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6">
+                    About <span class="text-cyan-400">Me</span>
+                </h2>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    I’m an AI-focused engineer with hands-on experience building
+                    machine-learning powered systems, backend APIs, and full-stack
+                    applications.
+                </p>
+                <p class="text-slate-400 leading-relaxed">
+                    My work emphasizes applied intelligence — models that deploy,
+                    scale, and actually solve problems.
+                </p>
+            </div>
+
+            <!-- RIGHT / SKILLS -->
+            <aside class="space-y-6">
+
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold text-cyan-400">AI & Machine Learning</span>
+                        <span class="text-sm text-slate-400">Foundational / Applied</span>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        TensorFlow · PyTorch · Scikit-learn
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold text-blue-400">Full-Stack Development</span>
+                        <span class="text-sm text-slate-400">Production-Ready</span>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        FastAPI · Flask · HTML · Tailwind
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold text-purple-400">Data Engineering</span>
+                        <span class="text-sm text-slate-400">Intermediate</span>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        Pandas · NumPy · Data Pipelines
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 border-l-4 border-cyan-400">
+                    <h4 class="font-semibold mb-1 text-cyan-400">
+                        Achievement
+                    </h4>
+                    <p class="text-sm text-slate-300">
+                        Smart India Hackathon 2025 — AI-Based Allocation Engine
+                    </p>
+                </div>
+
+            </aside>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">
+                Let’s Build <span class="text-cyan-400">Something Real</span>
+            </h2>
+            <p class="text-slate-300 mb-10">
+                Have a project, idea, or opportunity? Let’s talk.
+            </p>
+
+            <a href="mailto:jiviteshgd28@gmail.com"
+                class="inline-block px-10 py-4 rounded-full bg-cyan-500 text-slate-900 font-semibold hover:bg-cyan-400">
+                Contact Me
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 py-8 text-center text-sm text-slate-500">
+        © 2025 Jivitesh • AI Engineer & Data Scientist
     </footer>
 
-    <!-- JavaScript with Proper Loading Strategy -->
-    <script>
-        // Critical path loading with performance monitoring
-        const PERFORMANCE_START = performance.now();
-
-        // Show loading progress
-        let loadingSteps = [
-            'Loading assets...',
-            'Initializing components...',
-            'Setting up interactions...',
-            'Ready!'
-        ];
-
-        let currentStep = 0;
-        const progressElement = document.getElementById('loadingText');
-
-        function updateLoadingProgress() {
-            if (progressElement && currentStep < loadingSteps.length) {
-                progressElement.textContent = loadingSteps[currentStep];
-                currentStep++;
-            }
-        }
-
-        // Update loading every 200ms
-        const loadingInterval = setInterval(() => {
-            updateLoadingProgress();
-            if (currentStep >= loadingSteps.length) {
-                clearInterval(loadingInterval);
-            }
-        }, 200);
-
-        // Performance measurement
-        window.addEventListener('load', () => {
-            const loadTime = performance.now() - PERFORMANCE_START;
-            console.log(`⚡ Portfolio loaded in ${Math.round(loadTime)}ms`);
-
-            // Send performance data
-            if ('sendBeacon' in navigator) {
-                navigator.sendBeacon('/api/analytics', JSON.stringify({
-                    event: 'performance',
-                    loadTime: Math.round(loadTime)
-                }));
-            }
-        });
-    </script>
-
-    <!-- Main Application JavaScript -->
-    <script src="script.js" defer></script>
-
-    <!-- Service Worker for PWA -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(() => console.log('💾 Service Worker registered'))
-                    .catch(() => console.log('Service Worker registration failed'));
-            });
-        }
-    </script>
 </body>
 
 </html>

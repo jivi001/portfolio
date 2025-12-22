@@ -2,845 +2,193 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Jivitesh - AI Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects | Jivitesh – AI Engineer</title>
+
+    <!-- SEO -->
+    <meta name="description"
+        content="Selected AI, ML, and full-stack projects demonstrating applied intelligence and system design." />
+    <meta name="author" content="Jivitesh" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        rel="stylesheet" />
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0f;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
 
-        .grid-bg {
-            background-image:
-                linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% {
-                background-position: 0 0;
-            }
-
-            100% {
-                background-position: 50px 50px;
-            }
-        }
-
-        .glass {
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(148, 163, 184, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .glass-strong {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(40px);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease infinite;
-            background-size: 200% 200%;
-        }
-
-        @keyframes gradient-shift {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        .btn-premium {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #06b6d4, #3b82f6);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-premium::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s;
-        }
-
-        .btn-premium:hover::before {
-            left: 100%;
-        }
-
-        .btn-premium:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.4);
-        }
-
-        .project-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
-            border-radius: 1.5rem;
-            opacity: 0;
-            transition: opacity 0.5s;
-            z-index: -1;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(6, 182, 212, 0.3);
-        }
-
-        .project-image {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1rem;
-        }
-
-        .project-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .project-card:hover .project-image::after {
-            opacity: 1;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        nav.scrolled {
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-        }
-
-        .filter-btn {
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active {
-            background: linear-gradient(135deg, #06b6d4, #3b82f6);
-            color: white;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: orbFloat 20s ease-in-out infinite;
-        }
-
-        @keyframes orbFloat {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            33% {
-                transform: translate(100px, -100px) scale(1.1);
-            }
-
-            66% {
-                transform: translate(-100px, 100px) scale(0.9);
-            }
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: modalSlideIn 0.4s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body class="grid-bg">
-    <!-- Animated Orbs -->
+<body class="grid-bg text-white overflow-x-hidden">
+
+    <!-- ORBS -->
     <div class="orb w-96 h-96 bg-cyan-500/20 -top-48 -left-48"></div>
-    <div class="orb w-96 h-96 bg-blue-500/20 top-1/2 right-0" style="animation-delay: 5s;"></div>
-    <div class="orb w-96 h-96 bg-purple-500/20 bottom-0 left-1/4" style="animation-delay: 10s;"></div>
+    <div class="orb w-96 h-96 bg-blue-500/20 top-1/2 right-0" style="animation-delay:5s"></div>
+    <div class="orb w-96 h-96 bg-purple-500/20 bottom-0 left-1/4" style="animation-delay:10s"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 py-6 px-8" id="mainNav">
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 py-6 px-8 bg-slate-950/80 backdrop-blur border-b border-slate-800" id="mainNav">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold">
-                <span class="gradient-text">JIVI</span>
-            </a>
+            <a href="index.html" class="text-2xl font-bold gradient-text">JIVI</a>
 
-            <ul class="hidden md:flex gap-12 items-center">
-                <li><a href="index.html"
-                        class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">HOME</a>
+            <ul class="hidden md:flex gap-10 items-center text-sm">
+                <li><a href="index.html" class="text-slate-300 hover:text-cyan-400">HOME</a></li>
+                <li><a href="projects.html" class="text-cyan-400">PROJECTS</a></li>
+                <li><a href="case-studies.html" class="text-slate-300 hover:text-cyan-400">CASE STUDIES</a></li>
+                <li><a href="insights.html" class="text-slate-300 hover:text-cyan-400">INSIGHTS</a></li>
+                <li>
+                    <a href="index.html#contact" class="px-6 py-2.5 btn-premium rounded-full font-semibold">
+                        HIRE ME
+                    </a>
                 </li>
-                <li><a href="projects.html"
-                        class="text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">PROJECTS</a>
-                </li>
-                <li><a href="index.html#about"
-                        class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">ABOUT</a>
-                </li>
-                <li><a href="index.html#contact"
-                        class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">CONTACT</a>
-                </li>
-                <li><a href="index.html#contact"
-                        class="px-6 py-2.5 btn-premium rounded-full text-sm font-semibold text-white">HIRE ME</a></li>
             </ul>
 
-            <button class="md:hidden text-cyan-400" id="mobileMenuBtn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                    </path>
-                </svg>
-            </button>
+            <button id="mobileMenuBtn" class="md:hidden w-10 h-10 text-cyan-400">☰</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto text-center relative z-10">
-            <div class="reveal">
-                <p class="text-cyan-400 text-sm font-semibold tracking-widest mb-4 uppercase">Portfolio</p>
-                <h1 class="text-6xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">
-                    Featured <span class="gradient-text">Projects</span>
-                </h1>
-                <p class="text-xl text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-                    A curated collection of AI/ML projects, full-stack applications, and innovative solutions
-                    that demonstrate my technical expertise and problem-solving approach.
-                </p>
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu"
+        class="fixed inset-0 bg-slate-900/80 backdrop-blur z-40 md:hidden translate-x-full transition-transform duration-300">
+        <div class="h-full flex flex-col">
+            <div class="flex justify-between items-center p-6 border-b border-slate-700">
+                <span class="text-xl font-bold gradient-text">Navigation</span>
+                <button id="closeMobileMenu" class="text-2xl text-slate-400">&times;</button>
             </div>
-
-            <!-- Filter Buttons -->
-            <div class="flex flex-wrap gap-4 justify-center mb-16 reveal" style="transition-delay: 0.2s;">
-                <button
-                    class="filter-btn active px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
-                    data-filter="all">
-                    All Projects
-                </button>
-                <button
-                    class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
-                    data-filter="ai-ml">
-                    AI & ML
-                </button>
-                <button
-                    class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
-                    data-filter="fullstack">
-                    Full-Stack
-                </button>
-                <button
-                    class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
-                    data-filter="data">
-                    Data Science
-                </button>
-                <button
-                    class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
-                    data-filter="research">
-                    Research
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Grid -->
-    <section class="pb-32 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
-                <!-- Project 1: Movie Recommendation System -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack data"
-                    style="transition-delay: 0.2s;">
-                    <div
-                        class="project-image mb-6 h-56 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
-                        <div class="text-7xl">🎬</div>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Movie Recommendation System</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm">
-                            IMDb-inspired interface with AI-powered collaborative filtering and content-based
-                            recommendations.
-                            Features personalized movie suggestions using matrix factorization and similarity analysis.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">HTML/CSS</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Python</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Pandas</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Scikit-learn</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-green-400 border border-green-400/30">JavaScript</span>
-                        </div>
-                        <div class="pt-4 flex gap-4">
-                            <button
-                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
-                                data-project="movie-rec">
-                                View Details
-                            </button>
-                            <a href="https://github.com/jivi001/Movie-Recommendation-System" target="_blank"
-                                rel="noopener noreferrer"
-                                class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all"
-                                title="GitHub Repository">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: Mental Wellness Mirror -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack"
-                    style="transition-delay: 0.3s;">
-                    <div
-                        class="project-image mb-6 h-56 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                        <div class="text-7xl">🧠</div>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Mental Wellness Mirror</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm">
-                            AI-powered emotional intelligence platform using NLP for sentiment analysis and pattern
-                            recognition.
-                            Provides early intervention support for college students and remote workers with
-                            personalized wellness recommendations.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">NLP</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Transformers</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">React</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">FastAPI</span>
-                        </div>
-                        <div class="pt-4 flex gap-4">
-                            <button
-                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
-                                data-project="wellness">
-                                View Details
-                            </button>
-                            <a href="https://github.com/jivi001/kokoro" target="_blank" rel="noopener noreferrer"
-                                class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all"
-                                title="GitHub Repository">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3: Smart Allocation Engine -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack"
-                    style="transition-delay: 0.4s;">
-                    <div
-                        class="project-image mb-6 h-56 bg-gradient-to-br from-cyan-500/20 to-teal-500/20 flex items-center justify-center">
-                        <div class="text-7xl">🎯</div>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Smart Allocation Engine</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm">
-                            Intelligent ML-based matching system for optimal PM internship allocation. Uses
-                            multi-criteria optimization to match candidates to positions
-                            based on skills, preferences, and organizational needs with 96% accuracy.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Next.js</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Scikit-learn</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Flask</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Optimization</span>
-                        </div>
-                        <div class="pt-4 flex gap-4">
-                            <button
-                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
-                                data-project="allocation">
-                                View Details
-                            </button>
-                            <a href="https://github.com/jivi001/PM-internship-AI-engine-prototype" target="_blank"
-                                rel="noopener noreferrer"
-                                class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all"
-                                title="GitHub Repository">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4: Logistics Route Optimization PWA -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="fullstack"
-                    style="transition-delay: 0.5s;">
-                    <div
-                        class="project-image mb-6 h-56 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center">
-                        <div class="text-7xl">🗺️</div>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Route Optimization PWA</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm">
-                            Progressive Web App leveraging Dijkstra's algorithm and Google Gemini AI for intelligent
-                            logistics route optimization
-                            across Indian cities. Improves delivery efficiency by 30% and reduces fuel costs by 20%.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">React</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">PWA</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Algorithms</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Google
-                                Gemini</span>
-                        </div>
-                        <div class="pt-4 flex gap-4">
-                            <button
-                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
-                                data-project="pwa">
-                                View Details
-                            </button>
-                            <a href="https://github.com/jivi001/logistics_optimizer_desktop" target="_blank"
-                                rel="noopener noreferrer"
-                                class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all"
-                                title="GitHub Repository">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5: Research & Innovation -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="research data"
-                    style="transition-delay: 0.6s;">
-                    <div
-                        class="project-image mb-6 h-56 bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center">
-                        <div class="text-7xl">🔬</div>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Research & Innovation</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm">
-                            Analyzing cutting-edge research papers and implementing state-of-the-art ML algorithms for
-                            real-world applications.
-                            Active contributions to open-source projects with 500+ GitHub stars and published
-                            implementations.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Research</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Deep
-                                Learning</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">PyTorch</span>
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Papers</span>
-                        </div>
-                        <div class="pt-4 flex gap-4">
-                            <button
-                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
-                                data-project="research">
-                                View Details
-                            </button>
-                            <button class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Enhanced Mobile Menu -->
-    <div class="fixed inset-0 bg-slate-900/75 backdrop-blur-lg z-40 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out"
-        id="mobileMenu" role="dialog" aria-labelledby="mobile-menu-title" aria-hidden="true">
-        <div class="flex flex-col h-full">
-            <div class="flex justify-between items-center p-6 border-b border-slate-700/30">
-                <h2 id="mobile-menu-title" class="text-xl font-bold gradient-text">Navigation</h2>
-                <button class="text-slate-400 hover:text-white w-10 h-10 flex items-center justify-center"
-                    id="closeMobileMenu" aria-label="Close mobile menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-            <nav class="flex-1 flex flex-col items-center justify-center space-y-8">
-                <a href="index.html"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">HOME</a>
-                <a href="projects.html"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">PROJECTS</a>
-                <a href="case-studies.html"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CASE
-                    STUDIES</a>
-                <a href="insights.html"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">INSIGHTS</a>
-                <a href="index.html#about"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">ABOUT</a>
-                <a href="index.html#contact"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CONTACT</a>
-                <a href="index.html#contact"
-                    class="mt-8 px-8 py-4 btn-premium rounded-full text-lg font-semibold text-white">HIRE ME</a>
+            <nav class="flex-1 flex flex-col items-center justify-center gap-8 text-2xl">
+                <a href="index.html">HOME</a>
+                <a href="projects.html" class="text-cyan-400">PROJECTS</a>
+                <a href="case-studies.html">CASE STUDIES</a>
+                <a href="insights.html">INSIGHTS</a>
+                <a href="index.html#contact" class="mt-6 px-8 py-4 btn-premium rounded-full">HIRE ME</a>
             </nav>
         </div>
     </div>
 
-    <!-- Project Modal -->
-    <div class="modal" id="projectModal">
-        <div class="modal-content glass-strong rounded-3xl p-8 md:p-12 relative">
-            <button
-                class="absolute top-6 right-6 w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-slate-700/50 transition-all"
-                id="closeModal">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                    </path>
-                </svg>
-            </button>
+    <!-- HERO -->
+    <section class="pt-32 pb-20 px-6 text-center">
+        <p class="text-cyan-400 text-sm tracking-widest uppercase mb-4">Portfolio</p>
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+            Featured <span class="gradient-text">Projects</span>
+        </h1>
+        <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+            Applied AI systems, data-driven products, and full-stack implementations.
+        </p>
+    </section>
 
+    <!-- FILTERS -->
+    <div class="flex flex-wrap gap-4 justify-center mb-16 px-6">
+        <button class="filter-btn active px-6 py-3 glass rounded-full text-sm font-semibold"
+            data-filter="all">All</button>
+        <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold" data-filter="ai-ml">AI /
+            ML</button>
+        <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold"
+            data-filter="fullstack">Full-Stack</button>
+        <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold" data-filter="data">Data</button>
+    </div>
+
+    <!-- PROJECT GRID -->
+    <section class="pb-32 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+
+            <!-- CARD -->
+            <article class="project-card glass-strong rounded-2xl p-6" data-category="ai-ml data">
+                <div class="project-image h-56 mb-6 flex items-center justify-center">
+                    <span class="text-7xl">🎬</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Movie Recommendation System</h3>
+                <p class="text-slate-400 text-sm mb-4">
+                    Hybrid recommendation engine using collaborative and content-based filtering.
+                </p>
+                <div class="flex gap-3 pt-4">
+                    <button class="flex-1 btn-premium py-2.5 rounded-lg text-sm view-details" data-project="movie-rec">
+                        View Details
+                    </button>
+                    <a href="https://github.com/jivi001/Movie-Recommendation-System" target="_blank"
+                        class="px-4 py-2.5 glass rounded-lg">GitHub</a>
+                </div>
+            </article>
+
+            <!-- CARD -->
+            <article class="project-card glass-strong rounded-2xl p-6" data-category="ai-ml fullstack">
+                <div class="project-image h-56 mb-6 flex items-center justify-center">
+                    <span class="text-7xl">🎯</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Smart Allocation Engine</h3>
+                <p class="text-slate-400 text-sm mb-4">
+                    ML-driven internship matching system using multi-criteria optimization.
+                </p>
+                <div class="flex gap-3 pt-4">
+                    <button class="flex-1 btn-premium py-2.5 rounded-lg text-sm view-details" data-project="allocation">
+                        View Details
+                    </button>
+                    <a href="https://github.com/jivi001/PM-internship-AI-engine-prototype" target="_blank"
+                        class="px-4 py-2.5 glass rounded-lg">GitHub</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content glass-strong rounded-3xl p-8 relative">
+            <button id="closeModal" class="absolute top-6 right-6 text-2xl">&times;</button>
             <div id="modalContent"></div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-700/30 py-12 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <p class="text-slate-400 text-sm">© 2025 Jivitesh | AI Engineer & Data Scientist</p>
-            <p class="text-slate-500 text-xs mt-2">Crafting intelligent solutions with passion</p>
-        </div>
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 py-12 text-center text-sm text-slate-500">
+        © 2025 Jivitesh • AI Engineer & Data Scientist
     </footer>
 
-    <!-- Main Script -->
-    <script src="script.js"></script>
-
+    <!-- JS -->
+    <script type="module" src="js/core.js"></script>
     <script>
-        // Page-Specific Logic for Projects
+        /* FILTER */
+        const filters = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.project-card');
 
-        // Filter Projects
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const projects = document.querySelectorAll('.project-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
+        filters.forEach(btn => {
+            btn.onclick = () => {
+                filters.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                const f = btn.dataset.filter;
 
-                const filter = btn.dataset.filter;
-
-                projects.forEach(project => {
-                    if (filter === 'all') {
-                        project.style.display = 'block';
-                        // Re-trigger animation
-                        project.style.animation = 'none';
-                        project.offsetHeight; /* trigger reflow */
-                        project.style.animation = null;
-                    } else {
-                        const categories = project.dataset.category.split(' ');
-                        if (categories.includes(filter)) {
-                            project.style.display = 'block';
-                            project.style.animation = 'none';
-                            project.offsetHeight; /* trigger reflow */
-                            project.style.animation = null;
-                        } else {
-                            project.style.display = 'none';
-                        }
-                    }
+                cards.forEach(c => {
+                    c.style.display = (f === 'all' || c.dataset.category.includes(f)) ? 'block' : 'none';
                 });
-            });
+            };
         });
 
-        // Project Modal System
+        /* MODAL */
         const modal = document.getElementById('projectModal');
         const modalContent = document.getElementById('modalContent');
-        const closeModal = document.getElementById('closeModal');
-        const viewDetailsBtns = document.querySelectorAll('.view-details');
-
-        const projectDetails = {
-            'movie-rec': {
-                title: 'Movie Recommendation System',
-                icon: '🎬',
-                description: 'AI-powered collaborative filtering engine with user preference learning',
-                fullDescription: 'An intelligent movie recommendation system that combines collaborative filtering, content-based filtering, and hybrid approaches to provide personalized movie suggestions. Features a modern IMDb-like interface built with HTML, CSS, and JavaScript, powered by a Python backend using Pandas and Scikit-learn for data processing and ML algorithms.',
-                technologies: ['HTML/CSS', 'JavaScript', 'Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Flask'],
-                features: [
-                    'Collaborative filtering using matrix factorization',
-                    'Content-based recommendations using movie metadata',
-                    'Hybrid recommendation engine combining multiple strategies',
-                    'User preference learning and personalization',
-                    'Real-time recommendations with low latency',
-                    'Responsive IMDb-inspired user interface',
-                    'Rating and review system integration'
-                ],
-                challenges: 'Overcame cold start problem for new users and movies through hybrid approach combining user-based and item-based filtering with content similarity analysis.',
-                impact: 'Achieved 85% user satisfaction rate with recommendation accuracy improving by 40% over baseline collaborative filtering models. Users report discovering movies they would not have found otherwise.',
-                github: 'https://github.com/jivi001/Movie-Recommendation-System'
-            },
-            'wellness': {
-                title: 'Mental Wellness Mirror (Kokoro)',
-                icon: '🧠',
-                description: 'Emotional intelligence support platform using advanced NLP',
-                fullDescription: 'A compassionate AI platform designed to support mental wellness for college students and remote workers. Uses cutting-edge natural language processing (Transformers, BERT) to analyze emotional states and provide early intervention support. Features secure, anonymous communication with personalized wellness recommendations.',
-                technologies: ['NLP', 'Transformers', 'BERT', 'React', 'Python', 'FastAPI', 'PostgreSQL', 'AWS'],
-                features: [
-                    'Sentiment analysis using pre-trained BERT models',
-                    'Multi-label emotion detection from conversational text',
-                    'Personalized wellness recommendations based on patterns',
-                    'Progress tracking with visual wellness insights',
-                    'Anonymous and secure encrypted communication',
-                    'Crisis detection with automatic escalation protocols',
-                    'Weekly mood tracking and trend analysis',
-                    'Resource recommendations (meditation, counseling, etc.)'
-                ],
-                challenges: 'Ensuring privacy, security, and ethical AI while providing meaningful mental health support. Implemented end-to-end encryption, data minimization, and HIPAA compliance considerations.',
-                impact: 'Helped 1000+ users actively track and improve their mental wellness journey. 90% of users report improved self-awareness of emotional patterns. Early intervention features identified at-risk individuals for timely support.',
-                github: 'https://github.com/jivi001/kokoro'
-            },
-            'allocation': {
-                title: 'Smart Allocation Engine',
-                icon: '🎯',
-                description: 'ML-powered intelligent matching for PM internship allocation',
-                fullDescription: 'An advanced intelligent allocation system that matches candidates to internship positions using machine learning and optimization algorithms. Considers multiple factors including technical skills, soft skills, preferences, learning goals, and organizational needs. Developed for Smart India Hackathon, reducing allocation time from 2 weeks to 2 hours.',
-                technologies: ['Next.js', 'TypeScript', 'Python', 'Scikit-learn', 'Flask', 'MongoDB', 'Redis'],
-                features: [
-                    'Multi-criteria decision analysis with weighted scoring',
-                    'Skill-role matching using cosine similarity',
-                    'Preference optimization with constraint satisfaction',
-                    'Automated matching pipeline with audit trails',
-                    'Real-time allocation dashboard with live updates',
-                    'Feedback mechanism for continuous model improvement',
-                    'Fair allocation ensuring diverse team compositions',
-                    'Conflict resolution for competing preferences'
-                ],
-                challenges: 'Balanced multiple conflicting objectives (candidate preferences, organizational needs, fair distribution) while maintaining allocation fairness. Implemented multi-objective optimization with Pareto efficiency.',
-                impact: 'Reduced allocation time from 2 weeks to 2 hours while improving satisfaction scores by 60%. Smart India Hackathon recognized project. 96% matching accuracy based on defined criteria. Participants report better role-skill alignment.',
-                github: 'https://github.com/jivi001/PM-internship-AI-engine-prototype'
-            },
-            'pwa': {
-                title: 'Route Optimization PWA',
-                icon: '🗺️',
-                description: 'AI-driven logistics optimization using Dijkstra algorithm',
-                fullDescription: 'A progressive web application that leverages AI and advanced algorithms to optimize delivery routes for logistics companies operating across Indian cities. Combines Dijkstra algorithm for pathfinding with Google Gemini AI for intelligent decision-making. Features offline capabilities for seamless operation in low-connectivity areas.',
-                technologies: ['React', 'PWA', 'JavaScript', 'Python', 'Dijkstra Algorithm', 'Google Gemini API', 'Tailwind CSS'],
-                features: [
-                    'Progressive Web App with full offline functionality',
-                    'Route optimization using Dijkstra shortest path algorithm',
-                    'AI-driven delivery planning with Google Gemini integration',
-                    'Real-time traffic flow and weather data integration',
-                    'Multi-stop route consolidation and sequencing',
-                    'User-friendly interface for logistics managers and drivers',
-                    'Mobile-optimized for on-the-go route management',
-                    'Performance analytics and optimization suggestions'
-                ],
-                challenges: 'Integrated real-time data for dynamic route adjustments in varying traffic conditions. Built robust API connections for live traffic, weather, and location services.',
-                impact: 'Improved delivery efficiency by 30% through optimized routing. Reduced fuel costs by 20% for pilot users in major Indian cities. Handles 500+ deliveries per day with 99.2% on-time performance.',
-                github: 'https://github.com/jivi001/logistics_optimizer_desktop'
-            },
-            'research': {
-                title: 'Research & Innovation',
-                icon: '🔬',
-                description: 'Implementation of state-of-the-art ML algorithms from research papers',
-                fullDescription: 'Active engagement in machine learning research and innovation. Focus on implementing and improving state-of-the-art algorithms from recent papers and applying them to real-world problems. Published open-source implementations with significant community adoption and contributions to ML research.',
-                technologies: ['PyTorch', 'TensorFlow', 'Python', 'CUDA', 'NumPy', 'Jupyter', 'MLflow', 'Weights & Biases'],
-                features: [
-                    'Implementation of latest arXiv research papers',
-                    'Custom model architectures and extensions',
-                    'Reproducible ablation studies and experiments',
-                    'Benchmark comparisons across datasets',
-                    'Open-source contributions to ML communities',
-                    'Technical documentation and tutorials',
-                    'Performance optimization for production deployment',
-                    'Continuous evaluation and improvement'
-                ],
-                challenges: 'Tackled challenge of reproducing results from papers with limited implementation details. Developed systematic approach to paper reproduction with detailed documentation.',
-                impact: 'Published 5+ open-source implementations with 500+ GitHub stars. Contributed to understanding of novel architectures. Research implementations adopted by 100+ researchers globally. Active contributor to ML community.',
-                github: '#'
-            }
-        };
-
-        viewDetailsBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const projectId = btn.dataset.project;
-                const project = projectDetails[projectId];
-
-                modalContent.innerHTML = `
-                    <div class="text-center mb-8">
-                        <div class="text-7xl mb-4">${project.icon}</div>
-                        <h2 class="text-4xl font-bold mb-4">${project.title}</h2>
-                        <p class="text-xl text-slate-400">${project.description}</p>
-                    </div>
-
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">Overview</h3>
-                            <p class="text-slate-300 leading-relaxed">${project.fullDescription}</p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">Technologies Used</h3>
-                            <div class="flex flex-wrap gap-3">
-                                ${project.technologies.map(tech => `
-                                    <span class="px-4 py-2 glass rounded-full text-sm font-medium border border-cyan-400/30">${tech}</span>
-                                `).join('')}
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">Key Features</h3>
-                            <ul class="space-y-3">
-                                ${project.features.map(feature => `
-                                    <li class="flex items-start gap-3 text-slate-300">
-                                        <svg class="w-6 h-6 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span>${feature}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">Challenges & Solutions</h3>
-                            <p class="text-slate-300 leading-relaxed">${project.challenges}</p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">Impact & Results</h3>
-                            <p class="text-slate-300 leading-relaxed">${project.impact}</p>
-                        </div>
-
-                        <div class="flex gap-4 pt-4">
-                            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 btn-premium rounded-xl text-base font-semibold text-white text-center">
-                                View Source Code
-                            </a>
-                        </div>
-                    </div>
-                `;
-
+        document.querySelectorAll('.view-details').forEach(btn => {
+            btn.onclick = () => {
+                modalContent.innerHTML = `<h2 class="text-3xl font-bold mb-4">Project Details</h2>
+      <p class="text-slate-300">Detailed breakdown available in case studies.</p>`;
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-            });
+            };
         });
-
-        closeModal.addEventListener('click', () => {
+        document.getElementById('closeModal').onclick = () => {
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        console.log('✨ Projects Page Loaded');
+        };
     </script>
+
 </body>
 
 </html>

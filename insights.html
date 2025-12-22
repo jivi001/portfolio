@@ -2,343 +2,172 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insights & Blog | Jivitesh - AI Engineer</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insights & Blog | Jivitesh – AI Engineer</title>
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Technical insights, AI/ML tutorials, and data science articles by Jivitesh.">
-    <meta name="keywords" content="AI blog, machine learning insights, data science tutorials, technical articles">
+    <!-- SEO -->
+    <meta name="description" content="Technical insights, AI/ML tutorials, and data science articles by Jivitesh." />
+    <meta name="keywords" content="AI blog, machine learning insights, data science tutorials, technical articles" />
+    <meta name="author" content="Jivitesh" />
+    <meta name="robots" content="index, follow" />
 
-    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind (CDN for now) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+
+    <!-- Custom -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/logo.jpg" />
 </head>
 
-<body class="grid-bg">
-    <!-- Animated Orbs -->
+<body class="grid-bg text-white">
+
+    <!-- BACKGROUND ORBS -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 py-6 px-8 transition-all duration-300" id="mainNav">
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 py-6 px-8 bg-slate-950/80 backdrop-blur border-b border-slate-800">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold flex items-center gap-3">
+            <a href="index.html" class="flex items-center gap-3 text-2xl font-bold">
                 <div
-                    class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                    class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center text-white text-sm">
                     JV
                 </div>
                 <span class="gradient-text">Jivitesh</span>
             </a>
 
-            <ul class="hidden md:flex gap-12 items-center">
-                <li><a href="index.html"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">HOME</a>
+            <ul class="hidden md:flex gap-12 items-center text-sm">
+                <li><a href="index.html" class="nav-link text-slate-300 hover:text-cyan-400">HOME</a></li>
+                <li><a href="projects.html" class="nav-link text-slate-300 hover:text-cyan-400">PROJECTS</a></li>
+                <li><a href="case-studies.html" class="nav-link text-slate-300 hover:text-cyan-400">CASE STUDIES</a>
                 </li>
-                <li><a href="projects.html"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">PROJECTS</a>
+                <li><a href="insights.html" class="nav-link text-cyan-400">INSIGHTS</a></li>
+                <li><a href="index.html#about" class="nav-link text-slate-300 hover:text-cyan-400">ABOUT</a></li>
+                <li>
+                    <a href="index.html#contact"
+                        class="px-6 py-2.5 btn-premium rounded-full text-sm font-semibold text-white">
+                        HIRE ME
+                    </a>
                 </li>
-                <li><a href="case-studies.html"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">CASE
-                        STUDIES</a></li>
-                <li><a href="insights.html"
-                        class="nav-link text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">INSIGHTS</a>
-                </li>
-                <li><a href="index.html#about"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">ABOUT</a>
-                </li>
-                <li><a href="index.html#contact"
-                        class="nav-link text-slate-300 hover:text-cyan-400 text-sm font-medium tracking-wide transition-colors duration-300">CONTACT</a>
-                </li>
-                <li><a href="index.html#contact"
-                        class="px-6 py-2.5 btn-premium rounded-full text-sm font-semibold text-white magnetic focus:ring-4 focus:ring-cyan-400/50">HIRE
-                        ME</a></li>
             </ul>
 
-            <button class="md:hidden text-cyan-400 w-10 h-10 flex items-center justify-center" id="mobileMenuBtn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                    </path>
-                </svg>
+            <button id="mobileMenuBtn" class="md:hidden w-10 h-10 text-cyan-400" aria-label="Open menu">
+                ☰
             </button>
         </div>
     </nav>
 
-    <!-- Enhanced Mobile Menu -->
-    <div class="fixed inset-0 bg-slate-900/75 backdrop-blur-lg z-40 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out"
-        id="mobileMenu" role="dialog" aria-labelledby="mobile-menu-title" aria-hidden="true">
-        <div class="flex flex-col h-full">
-            <div class="flex justify-between items-center p-6 border-b border-slate-700/30">
-                <h2 id="mobile-menu-title" class="text-xl font-bold gradient-text">Navigation</h2>
-                <button class="text-slate-400 hover:text-white w-10 h-10 flex items-center justify-center"
-                    id="closeMobileMenu" aria-label="Close mobile menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu"
+        class="fixed inset-0 bg-slate-900/80 backdrop-blur z-40 md:hidden translate-x-full transition-transform duration-300">
+        <div class="h-full flex flex-col">
+            <div class="flex justify-between items-center p-6 border-b border-slate-700">
+                <span class="text-xl font-bold gradient-text">Navigation</span>
+                <button id="closeMobileMenu" class="text-slate-400 text-2xl">&times;</button>
             </div>
-            <nav class="flex-1 flex flex-col items-center justify-center space-y-8">
-                <a href="index.html"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">HOME</a>
-                <a href="projects.html"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">PROJECTS</a>
-                <a href="case-studies.html"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CASE
-                    STUDIES</a>
-                <a href="insights.html"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">INSIGHTS</a>
-                <a href="index.html#about"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">ABOUT</a>
-                <a href="index.html#contact"
-                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CONTACT</a>
-                <a href="index.html#contact"
-                    class="mt-8 px-8 py-4 btn-premium rounded-full text-lg font-semibold text-white">HIRE ME</a>
+            <nav class="flex-1 flex flex-col items-center justify-center gap-8 text-2xl">
+                <a href="index.html">HOME</a>
+                <a href="projects.html">PROJECTS</a>
+                <a href="case-studies.html">CASE STUDIES</a>
+                <a href="insights.html" class="text-cyan-400">INSIGHTS</a>
+                <a href="index.html#about">ABOUT</a>
+                <a href="index.html#contact" class="mt-6 px-8 py-4 btn-premium rounded-full">HIRE ME</a>
             </nav>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Hero Section -->
-        <section class="min-h-screen flex items-center justify-center px-6 pt-24 relative overflow-hidden">
-            <div class="max-w-7xl mx-auto text-center relative z-10">
-                <div class="reveal">
-                    <p class="text-cyan-400 text-sm font-semibold tracking-widest mb-4 uppercase">Knowledge Sharing</p>
-                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">
-                        Insights & <span class="gradient-text">Analysis</span>
-                    </h1>
-                    <p class="text-xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-                        Technical articles, AI/ML insights, and data-driven analysis exploring the intersection of
-                        technology and innovation.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <!-- MAIN -->
+    <main class="pt-32">
 
-        <!-- Insights Grid -->
-        <section class="py-20 px-6 relative">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Insight 1 -->
-                    <article
-                        class="glass-strong rounded-2xl p-6 reveal hover:transform hover:scale-105 transition-all duration-300">
-                        <div class="text-5xl mb-4">🤖</div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">AI/ML</span>
-                            <span class="text-slate-500 text-xs">5 min read</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3">The Future of AI in Business</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm mb-4">
-                            Exploring how artificial intelligence is transforming business operations and creating
-                            competitive advantages across industries.
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-700/30">
-                            <span class="text-slate-500 text-xs">Coming Soon</span>
-                            <button class="text-cyan-400 hover:text-cyan-300 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </article>
-
-                    <!-- Insight 2 -->
-                    <article
-                        class="glass-strong rounded-2xl p-6 reveal hover:transform hover:scale-105 transition-all duration-300"
-                        style="transition-delay: 0.1s;">
-                        <div class="text-5xl mb-4">📊</div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Data
-                                Science</span>
-                            <span class="text-slate-500 text-xs">7 min read</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3">Data-Driven Decision Making</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm mb-4">
-                            How to leverage data analytics and visualization to make informed business decisions and
-                            drive growth.
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-700/30">
-                            <span class="text-slate-500 text-xs">Coming Soon</span>
-                            <button class="text-cyan-400 hover:text-cyan-300 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </article>
-
-                    <!-- Insight 3 -->
-                    <article
-                        class="glass-strong rounded-2xl p-6 reveal hover:transform hover:scale-105 transition-all duration-300"
-                        style="transition-delay: 0.2s;">
-                        <div class="text-5xl mb-4">🔬</div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Research</span>
-                            <span class="text-slate-500 text-xs">10 min read</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3">Latest ML Research Trends</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm mb-4">
-                            Analysis of cutting-edge machine learning research papers and their practical applications
-                            in real-world scenarios.
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-700/30">
-                            <span class="text-slate-500 text-xs">Coming Soon</span>
-                            <button class="text-cyan-400 hover:text-cyan-300 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </article>
-
-                    <!-- Insight 4 -->
-                    <article
-                        class="glass-strong rounded-2xl p-6 reveal hover:transform hover:scale-105 transition-all duration-300"
-                        style="transition-delay: 0.3s;">
-                        <div class="text-5xl mb-4">💡</div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Tutorial</span>
-                            <span class="text-slate-500 text-xs">12 min read</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3">Building Scalable ML Pipelines</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm mb-4">
-                            Step-by-step guide to designing and implementing production-ready machine learning pipelines
-                            at scale.
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-700/30">
-                            <span class="text-slate-500 text-xs">Coming Soon</span>
-                            <button class="text-cyan-400 hover:text-cyan-300 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </article>
-
-                    <!-- Insight 5 -->
-                    <article
-                        class="glass-strong rounded-2xl p-6 reveal hover:transform hover:scale-105 transition-all duration-300"
-                        style="transition-delay: 0.4s;">
-                        <div class="text-5xl mb-4">🚀</div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-green-400 border border-green-400/30">Best
-                                Practices</span>
-                            <span class="text-slate-500 text-xs">8 min read</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3">Optimizing Model Performance</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm mb-4">
-                            Techniques and strategies for improving machine learning model accuracy, speed, and
-                            efficiency.
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-700/30">
-                            <span class="text-slate-500 text-xs">Coming Soon</span>
-                            <button class="text-cyan-400 hover:text-cyan-300 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </article>
-
-                    <!-- Insight 6 -->
-                    <article
-                        class="glass-strong rounded-2xl p-6 reveal hover:transform hover:scale-105 transition-all duration-300"
-                        style="transition-delay: 0.5s;">
-                        <div class="text-5xl mb-4">🎯</div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="px-3 py-1 glass rounded-full text-xs font-medium text-orange-400 border border-orange-400/30">Strategy</span>
-                            <span class="text-slate-500 text-xs">6 min read</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3">AI Strategy for Startups</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm mb-4">
-                            How startups can leverage AI and machine learning to gain competitive advantage without
-                            breaking the bank.
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-700/30">
-                            <span class="text-slate-500 text-xs">Coming Soon</span>
-                            <button class="text-cyan-400 hover:text-cyan-300 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section class="py-20 px-6 relative">
-            <div class="max-w-4xl mx-auto">
-                <div class="glass-strong rounded-3xl p-8 md:p-12 text-center reveal">
-                    <div class="text-6xl mb-6">📬</div>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        Stay <span class="gradient-text">Updated</span>
-                    </h2>
-                    <p class="text-slate-300 mb-8 max-w-2xl mx-auto">
-                        Get notified when new insights and articles are published. No spam, just quality content.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                        <input type="email" placeholder="your@email.com"
-                            class="flex-1 px-6 py-4 glass rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/50">
-                        <button
-                            class="px-8 py-4 btn-premium rounded-xl text-base font-semibold text-white whitespace-nowrap">
-                            Subscribe
-                        </button>
-                    </div>
-                    <p class="text-slate-500 text-xs mt-4">Coming soon! Building something amazing.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="py-20 px-6 relative">
-            <div class="max-w-4xl mx-auto text-center reveal">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                    Have a <span class="gradient-text">Project in Mind</span>?
-                </h2>
-                <p class="text-xl text-slate-300 mb-8">
-                    Let's collaborate and build something extraordinary together.
+        <!-- HERO -->
+        <section class="min-h-[70vh] flex items-center justify-center px-6 text-center">
+            <div class="max-w-4xl">
+                <p class="text-cyan-400 text-sm tracking-widest uppercase mb-4">Knowledge Sharing</p>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    Insights & <span class="gradient-text">Analysis</span>
+                </h1>
+                <p class="text-xl text-slate-300">
+                    Practical AI, data science, and engineering perspectives — no fluff.
                 </p>
-                <a href="index.html#contact"
-                    class="inline-flex items-center gap-2 px-10 py-5 btn-premium rounded-full text-base font-semibold text-white magnetic">
-                    Get in Touch
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
-                </a>
             </div>
         </section>
+
+        <!-- INSIGHTS GRID -->
+        <section class="py-20 px-6">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- CARD TEMPLATE -->
+                <article class="glass-strong rounded-2xl p-6 hover:scale-105 transition">
+                    <div class="text-5xl mb-4">🤖</div>
+                    <span class="text-xs text-cyan-400">AI / ML • 5 min read</span>
+                    <h3 class="text-2xl font-bold mt-3 mb-2">The Future of AI in Business</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        How AI is reshaping decision-making, automation, and competitive strategy.
+                    </p>
+                    <span class="text-xs text-slate-500">Coming soon</span>
+                </article>
+
+                <article class="glass-strong rounded-2xl p-6 hover:scale-105 transition">
+                    <div class="text-5xl mb-4">📊</div>
+                    <span class="text-xs text-blue-400">Data Science • 7 min read</span>
+                    <h3 class="text-2xl font-bold mt-3 mb-2">Data-Driven Decision Making</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        Turning analytics into business clarity.
+                    </p>
+                    <span class="text-xs text-slate-500">Coming soon</span>
+                </article>
+
+                <article class="glass-strong rounded-2xl p-6 hover:scale-105 transition">
+                    <div class="text-5xl mb-4">🔬</div>
+                    <span class="text-xs text-purple-400">Research • 10 min read</span>
+                    <h3 class="text-2xl font-bold mt-3 mb-2">Latest ML Research Trends</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        What actually matters from current ML papers.
+                    </p>
+                    <span class="text-xs text-slate-500">Coming soon</span>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- NEWSLETTER -->
+        <section class="py-20 px-6 text-center">
+            <div class="max-w-3xl mx-auto glass-strong rounded-3xl p-10">
+                <div class="text-6xl mb-6">📬</div>
+                <h2 class="text-3xl font-bold mb-4">
+                    Stay <span class="gradient-text">Updated</span>
+                </h2>
+                <p class="text-slate-300 mb-8">
+                    New articles when they drop. Zero noise.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="your@email.com"
+                        class="flex-1 px-6 py-4 glass rounded-xl focus:outline-none">
+                    <button class="px-8 py-4 btn-premium rounded-xl font-semibold">
+                        Subscribe
+                    </button>
+                </div>
+                <p class="text-xs text-slate-500 mt-4">Launching soon.</p>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-700/30 py-12 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <p class="text-slate-400 text-sm">© 2025 Jivitesh | AI Engineer & Data Scientist</p>
-            <p class="text-slate-500 text-xs mt-2">Crafting intelligent solutions with passion</p>
-        </div>
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 py-10 text-center text-sm text-slate-500">
+        © 2025 Jivitesh • AI Engineer & Data Scientist
     </footer>
 
-    <script src="script.js"></script>
+    <!-- JS -->
+    <script type="module" src="js/core.js"></script>
 </body>
 
 </html>
