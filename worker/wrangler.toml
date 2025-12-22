@@ -5,7 +5,7 @@ compatibility_date = "2025-12-22"
 # KV Namespace for storing contact messages
 [[kv_namespaces]]
 binding = "MESSAGES"
-id = "YOUR_KV_NAMESPACE_ID"  # Replace with actual KV namespace ID after creation
+id = "11a6881d98fd428fae9bafb89e39b263"
 
 # Environment variables (non-sensitive)
 [vars]

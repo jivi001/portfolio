@@ -3,10 +3,9 @@
 // Performance & Configuration System
 const CONFIG = {
     // API URL: Use Worker in production, localhost for development
-    // UPDATE THIS after deploying your Worker!
     API_BASE_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:8787' // Wrangler dev server
-        : 'https://portfolio-api.YOUR-SUBDOMAIN.workers.dev', // UPDATE WITH YOUR WORKER URL
+        : 'https://portfolio-api.jiviteshgd28.workers.dev', // Production Worker URL
     ANIMATION_DURATION: 800,
     SCROLL_OFFSET: 100,
     PERFORMANCE_MODE: window.navigator.hardwareConcurrency < 4,
@@ -428,8 +427,8 @@ function setupContactForm() {
     function showFormStatus(message, type) {
         formStatus.textContent = message;
         formStatus.className = `mt-6 text-center font-semibold rounded-lg p-4 ${type === 'success'
-                ? 'status-success'
-                : 'status-error'
+            ? 'status-success'
+            : 'status-error'
             }`;
         formStatus.classList.remove('hidden');
 
