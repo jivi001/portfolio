@@ -514,6 +514,20 @@ function setupNavigation() {
             }
         }
     });
+
+    // Handle initial hash on page load
+    if (window.location.hash) {
+        setTimeout(() => {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                const offsetTop = target.offsetTop - 100;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100); // Small delay to ensure layout is ready
+    }
 }
 
 // ==================== Enhanced Animation System ====================

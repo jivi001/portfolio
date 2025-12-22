@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -18,12 +25,17 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Space Grotesk', sans-serif;
         }
 
         .grid-bg {
-            background-image: 
+            background-image:
                 linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
@@ -31,8 +43,13 @@
         }
 
         @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 50px 50px; }
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 50px 50px;
+            }
         }
 
         .glass {
@@ -58,8 +75,15 @@
         }
 
         @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .btn-premium {
@@ -76,7 +100,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.6s;
         }
 
@@ -172,9 +196,19 @@
         }
 
         @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(100px, -100px) scale(1.1); }
-            66% { transform: translate(-100px, 100px) scale(0.9); }
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(100px, -100px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-100px, 100px) scale(0.9);
+            }
         }
 
         .modal {
@@ -206,6 +240,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -213,6 +248,7 @@
         }
     </style>
 </head>
+
 <body class="grid-bg">
     <!-- Animated Orbs -->
     <div class="orb w-96 h-96 bg-cyan-500/20 -top-48 -left-48"></div>
@@ -227,16 +263,26 @@
             </a>
 
             <ul class="hidden md:flex gap-12 items-center">
-                <li><a href="index.html" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">HOME</a></li>
-                <li><a href="projects.html" class="text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">PROJECTS</a></li>
-                <li><a href="index.html#about" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">ABOUT</a></li>
-                <li><a href="index.html#contact" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">CONTACT</a></li>
-                <li><a href="index.html#contact" class="px-6 py-2.5 btn-premium rounded-full text-sm font-semibold text-white">HIRE ME</a></li>
+                <li><a href="index.html"
+                        class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">HOME</a>
+                </li>
+                <li><a href="projects.html"
+                        class="text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">PROJECTS</a>
+                </li>
+                <li><a href="index.html#about"
+                        class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">ABOUT</a>
+                </li>
+                <li><a href="index.html#contact"
+                        class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 text-sm font-medium tracking-wide">CONTACT</a>
+                </li>
+                <li><a href="index.html#contact"
+                        class="px-6 py-2.5 btn-premium rounded-full text-sm font-semibold text-white">HIRE ME</a></li>
             </ul>
 
             <button class="md:hidden text-cyan-400" id="mobileMenuBtn">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
                 </svg>
             </button>
         </div>
@@ -251,26 +297,36 @@
                     Featured <span class="gradient-text">Projects</span>
                 </h1>
                 <p class="text-xl text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-                    A curated collection of AI/ML projects, full-stack applications, and innovative solutions 
+                    A curated collection of AI/ML projects, full-stack applications, and innovative solutions
                     that demonstrate my technical expertise and problem-solving approach.
                 </p>
             </div>
 
             <!-- Filter Buttons -->
             <div class="flex flex-wrap gap-4 justify-center mb-16 reveal" style="transition-delay: 0.2s;">
-                <button class="filter-btn active px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="all">
+                <button
+                    class="filter-btn active px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
+                    data-filter="all">
                     All Projects
                 </button>
-                <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="ai-ml">
+                <button
+                    class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
+                    data-filter="ai-ml">
                     AI & ML
                 </button>
-                <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="fullstack">
+                <button
+                    class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
+                    data-filter="fullstack">
                     Full-Stack
                 </button>
-                <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="data">
+                <button
+                    class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
+                    data-filter="data">
                     Data Science
                 </button>
-                <button class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all" data-filter="research">
+                <button
+                    class="filter-btn px-6 py-3 glass rounded-full text-sm font-semibold hover:bg-slate-700/50 transition-all"
+                    data-filter="research">
                     Research
                 </button>
             </div>
@@ -282,30 +338,44 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
                 <!-- Project 1: Movie Recommendation System -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack data" style="transition-delay: 0.2s;">
-                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack data"
+                    style="transition-delay: 0.2s;">
+                    <div
+                        class="project-image mb-6 h-56 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
                         <div class="text-7xl">🎬</div>
                     </div>
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold">Movie Recommendation System</h3>
                         <p class="text-slate-400 leading-relaxed text-sm">
-                            IMDb-inspired interface with AI-powered collaborative filtering and content-based recommendations. 
+                            IMDb-inspired interface with AI-powered collaborative filtering and content-based
+                            recommendations.
                             Features personalized movie suggestions using matrix factorization and similarity analysis.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">HTML/CSS</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Python</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Pandas</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Scikit-learn</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-green-400 border border-green-400/30">JavaScript</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">HTML/CSS</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Python</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Pandas</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Scikit-learn</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-green-400 border border-green-400/30">JavaScript</span>
                         </div>
                         <div class="pt-4 flex gap-4">
-                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="movie-rec">
+                            <button
+                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
+                                data-project="movie-rec">
                                 View Details
                             </button>
-                            <a href="https://github.com/jivi001/Movie-Recommendation-System" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all" title="GitHub Repository">
+                            <a href="https://github.com/jivi001/Movie-Recommendation-System" target="_blank"
+                                rel="noopener noreferrer"
+                                class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all"
+                                title="GitHub Repository">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                 </svg>
                             </a>
                         </div>
@@ -313,29 +383,42 @@
                 </div>
 
                 <!-- Project 2: Mental Wellness Mirror -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack" style="transition-delay: 0.3s;">
-                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack"
+                    style="transition-delay: 0.3s;">
+                    <div
+                        class="project-image mb-6 h-56 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
                         <div class="text-7xl">🧠</div>
                     </div>
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold">Mental Wellness Mirror</h3>
                         <p class="text-slate-400 leading-relaxed text-sm">
-                            AI-powered emotional intelligence platform using NLP for sentiment analysis and pattern recognition. 
-                            Provides early intervention support for college students and remote workers with personalized wellness recommendations.
+                            AI-powered emotional intelligence platform using NLP for sentiment analysis and pattern
+                            recognition.
+                            Provides early intervention support for college students and remote workers with
+                            personalized wellness recommendations.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">NLP</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Transformers</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">React</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">FastAPI</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">NLP</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Transformers</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">React</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">FastAPI</span>
                         </div>
                         <div class="pt-4 flex gap-4">
-                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="wellness">
+                            <button
+                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
+                                data-project="wellness">
                                 View Details
                             </button>
-                            <a href="https://github.com/jivi001/kokoro" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all" title="GitHub Repository">
+                            <a href="https://github.com/jivi001/kokoro" target="_blank" rel="noopener noreferrer"
+                                class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all"
+                                title="GitHub Repository">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                 </svg>
                             </a>
                         </div>
@@ -343,29 +426,42 @@
                 </div>
 
                 <!-- Project 3: Smart Allocation Engine -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack" style="transition-delay: 0.4s;">
-                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-cyan-500/20 to-teal-500/20 flex items-center justify-center">
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="ai-ml fullstack"
+                    style="transition-delay: 0.4s;">
+                    <div
+                        class="project-image mb-6 h-56 bg-gradient-to-br from-cyan-500/20 to-teal-500/20 flex items-center justify-center">
                         <div class="text-7xl">🎯</div>
                     </div>
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold">Smart Allocation Engine</h3>
                         <p class="text-slate-400 leading-relaxed text-sm">
-                            Intelligent ML-based matching system for optimal PM internship allocation. Uses multi-criteria optimization to match candidates to positions 
+                            Intelligent ML-based matching system for optimal PM internship allocation. Uses
+                            multi-criteria optimization to match candidates to positions
                             based on skills, preferences, and organizational needs with 96% accuracy.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Next.js</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Scikit-learn</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Flask</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Optimization</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Next.js</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Scikit-learn</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Flask</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Optimization</span>
                         </div>
                         <div class="pt-4 flex gap-4">
-                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="allocation">
+                            <button
+                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
+                                data-project="allocation">
                                 View Details
                             </button>
-                            <a href="https://github.com/jivi001/PM-internship-AI-engine-prototype" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all" title="GitHub Repository">
+                            <a href="https://github.com/jivi001/PM-internship-AI-engine-prototype" target="_blank"
+                                rel="noopener noreferrer"
+                                class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all"
+                                title="GitHub Repository">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                 </svg>
                             </a>
                         </div>
@@ -373,29 +469,43 @@
                 </div>
 
                 <!-- Project 4: Logistics Route Optimization PWA -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="fullstack" style="transition-delay: 0.5s;">
-                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center">
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="fullstack"
+                    style="transition-delay: 0.5s;">
+                    <div
+                        class="project-image mb-6 h-56 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center">
                         <div class="text-7xl">🗺️</div>
                     </div>
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold">Route Optimization PWA</h3>
                         <p class="text-slate-400 leading-relaxed text-sm">
-                            Progressive Web App leveraging Dijkstra's algorithm and Google Gemini AI for intelligent logistics route optimization 
+                            Progressive Web App leveraging Dijkstra's algorithm and Google Gemini AI for intelligent
+                            logistics route optimization
                             across Indian cities. Improves delivery efficiency by 30% and reduces fuel costs by 20%.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">React</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">PWA</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Algorithms</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Google Gemini</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">React</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">PWA</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">Algorithms</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Google
+                                Gemini</span>
                         </div>
                         <div class="pt-4 flex gap-4">
-                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="pwa">
+                            <button
+                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
+                                data-project="pwa">
                                 View Details
                             </button>
-                            <a href="https://github.com/jivi001/logistics_optimizer_desktop" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all" title="GitHub Repository">
+                            <a href="https://github.com/jivi001/logistics_optimizer_desktop" target="_blank"
+                                rel="noopener noreferrer"
+                                class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all"
+                                title="GitHub Repository">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                 </svg>
                             </a>
                         </div>
@@ -403,29 +513,42 @@
                 </div>
 
                 <!-- Project 5: Research & Innovation -->
-                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="research data" style="transition-delay: 0.6s;">
-                    <div class="project-image mb-6 h-56 bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center">
+                <div class="project-card glass-strong rounded-2xl p-6 reveal" data-category="research data"
+                    style="transition-delay: 0.6s;">
+                    <div
+                        class="project-image mb-6 h-56 bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center">
                         <div class="text-7xl">🔬</div>
                     </div>
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold">Research & Innovation</h3>
                         <p class="text-slate-400 leading-relaxed text-sm">
-                            Analyzing cutting-edge research papers and implementing state-of-the-art ML algorithms for real-world applications. 
-                            Active contributions to open-source projects with 500+ GitHub stars and published implementations.
+                            Analyzing cutting-edge research papers and implementing state-of-the-art ML algorithms for
+                            real-world applications.
+                            Active contributions to open-source projects with 500+ GitHub stars and published
+                            implementations.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Research</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Deep Learning</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">PyTorch</span>
-                            <span class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Papers</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-cyan-400 border border-cyan-400/30">Research</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-blue-400 border border-blue-400/30">Deep
+                                Learning</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-purple-400 border border-purple-400/30">PyTorch</span>
+                            <span
+                                class="px-3 py-1 glass rounded-full text-xs font-medium text-pink-400 border border-pink-400/30">Papers</span>
                         </div>
                         <div class="pt-4 flex gap-4">
-                            <button class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details" data-project="research">
+                            <button
+                                class="flex-1 py-2.5 btn-premium rounded-lg text-sm font-semibold text-white view-details"
+                                data-project="research">
                                 View Details
                             </button>
                             <button class="px-4 py-2.5 glass rounded-lg hover:bg-slate-700/50 transition-all">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
                                 </svg>
                             </button>
                         </div>
@@ -435,12 +558,49 @@
         </div>
     </section>
 
+    <!-- Enhanced Mobile Menu -->
+    <div class="fixed inset-0 bg-slate-900/75 backdrop-blur-lg z-40 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out"
+        id="mobileMenu" role="dialog" aria-labelledby="mobile-menu-title" aria-hidden="true">
+        <div class="flex flex-col h-full">
+            <div class="flex justify-between items-center p-6 border-b border-slate-700/30">
+                <h2 id="mobile-menu-title" class="text-xl font-bold gradient-text">Navigation</h2>
+                <button class="text-slate-400 hover:text-white w-10 h-10 flex items-center justify-center"
+                    id="closeMobileMenu" aria-label="Close mobile menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex-1 flex flex-col items-center justify-center space-y-8">
+                <a href="index.html"
+                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">HOME</a>
+                <a href="projects.html"
+                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">PROJECTS</a>
+                <a href="case-studies.html"
+                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CASE
+                    STUDIES</a>
+                <a href="insights.html"
+                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">INSIGHTS</a>
+                <a href="index.html#about"
+                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">ABOUT</a>
+                <a href="index.html#contact"
+                    class="text-2xl font-semibold text-white hover:text-cyan-400 transition-colors focus:text-cyan-400">CONTACT</a>
+                <a href="index.html#contact"
+                    class="mt-8 px-8 py-4 btn-premium rounded-full text-lg font-semibold text-white">HIRE ME</a>
+            </nav>
+        </div>
+    </div>
+
     <!-- Project Modal -->
     <div class="modal" id="projectModal">
         <div class="modal-content glass-strong rounded-3xl p-8 md:p-12 relative">
-            <button class="absolute top-6 right-6 w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-slate-700/50 transition-all" id="closeModal">
+            <button
+                class="absolute top-6 right-6 w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-slate-700/50 transition-all"
+                id="closeModal">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
                 </svg>
             </button>
 
@@ -456,29 +616,11 @@
         </div>
     </footer>
 
+    <!-- Main Script -->
+    <script src="script.js"></script>
+
     <script>
-        // Scroll Navigation Effect
-        const nav = document.getElementById('mainNav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Scroll Reveal Animation
-        const reveals = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-
-        reveals.forEach(reveal => revealObserver.observe(reveal));
+        // Page-Specific Logic for Projects
 
         // Filter Projects
         const filterBtns = document.querySelectorAll('.filter-btn');
@@ -494,10 +636,17 @@
                 projects.forEach(project => {
                     if (filter === 'all') {
                         project.style.display = 'block';
+                        // Re-trigger animation
+                        project.style.animation = 'none';
+                        project.offsetHeight; /* trigger reflow */
+                        project.style.animation = null;
                     } else {
                         const categories = project.dataset.category.split(' ');
                         if (categories.includes(filter)) {
                             project.style.display = 'block';
+                            project.style.animation = 'none';
+                            project.offsetHeight; /* trigger reflow */
+                            project.style.animation = null;
                         } else {
                             project.style.display = 'none';
                         }
@@ -690,15 +839,8 @@
             }
         });
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navList = document.querySelector('nav ul');
-
-        mobileMenuBtn?.addEventListener('click', () => {
-            navList.classList.toggle('hidden');
-        });
-
         console.log('✨ Projects Page Loaded');
     </script>
 </body>
+
 </html>
