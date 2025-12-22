@@ -1,14 +1,86 @@
-# Ignore virtual environment folder
-.venv/
-
-# Ignore environment variables file
+# Environment variables and secrets
 .env
+.env.local
+.env.*.local
+*.env
 
-# Ignore contact messages
+# Cloudflare Wrangler
+.wrangler/
+.dev.vars
+wrangler.toml.backup
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+.output/
+.vercel/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Contact messages (sensitive data)
 contact_messages.json
 
-# Ignore Python cache files
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+env/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Secrets and keys
+*.pem
+*.key
+*.cert
+secrets/
+credentials/
+
+# Debug logs
+debug.log
+.cursor/debug.log
