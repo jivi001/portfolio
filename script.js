@@ -2,9 +2,11 @@
 
 // Performance & Configuration System
 const CONFIG = {
+    // API URL: Use Worker in production, localhost for development
+    // UPDATE THIS after deploying your Worker!
     API_BASE_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:5000/api' 
-        : '/api',
+        ? 'http://localhost:8787' // Wrangler dev server
+        : 'https://portfolio-api.YOUR-SUBDOMAIN.workers.dev', // UPDATE WITH YOUR WORKER URL
     ANIMATION_DURATION: 800,
     SCROLL_OFFSET: 100,
     PERFORMANCE_MODE: window.navigator.hardwareConcurrency < 4,
@@ -18,12 +20,12 @@ class PerformanceMonitor {
         this.startTime = performance.now();
         this.metrics = new Map();
     }
-    
+
     mark(name) {
         performance.mark(name);
         console.log(`📊 Performance Mark: ${name} at ${Math.round(performance.now())}ms`);
     }
-    
+
     measure(name, startMark, endMark) {
         performance.measure(name, startMark, endMark);
         const measure = performance.getEntriesByName(name)[0];
@@ -31,7 +33,7 @@ class PerformanceMonitor {
         console.log(`⚡ ${name}: ${Math.round(measure.duration)}ms`);
         return measure.duration;
     }
-    
+
     getLoadTime() {
         return Math.round(performance.now() - this.startTime);
     }
@@ -50,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeApp() {
     perf.mark('app-init-start');
     console.log('🚀 Initializing Premium Portfolio v2.0...');
-    
+
     try {
         // Core Features (Always Load)
         setupScrollEffects();
@@ -60,7 +62,7 @@ function initializeApp() {
         setupMobileMenu();
         setupAccessibility();
         setupStatsCounters();
-        
+
         // Progressive Enhancement
         if (!CONFIG.PERFORMANCE_MODE && !CONFIG.REDUCED_MOTION) {
             setupPremiumCursor();
@@ -68,16 +70,16 @@ function initializeApp() {
             setupParallaxEffect();
             setupPageTransition();
         }
-        
+
         // Initialize Analytics
         setupAnalytics();
-        
+
         perf.mark('app-init-end');
         perf.measure('app-initialization', 'app-init-start', 'app-init-end');
-        
+
         console.log('✨ Portfolio Initialized Successfully!');
         console.log(`⚡ Total load time: ${perf.getLoadTime()}ms`);
-        
+
     } catch (error) {
         console.error('❌ Initialization error:', error);
         // Graceful fallback
@@ -88,14 +90,14 @@ function initializeApp() {
 // ==================== Premium Custom Cursor ====================
 function setupPremiumCursor() {
     if (CONFIG.TOUCH_DEVICE || window.innerWidth < 768) return;
-    
+
     perf.mark('cursor-setup-start');
-    
+
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorRing = document.querySelector('.cursor-ring');
-    
+
     if (!cursorDot || !cursorRing) return;
-    
+
     let mouseX = 0, mouseY = 0;
     let dotX = 0, dotY = 0;
     let ringX = 0, ringY = 0;
@@ -112,24 +114,24 @@ function setupPremiumCursor() {
     // Smooth cursor animation with RAF
     function animateCursor() {
         const speed = isHovering ? 0.25 : 0.15;
-        
+
         dotX += (mouseX - dotX) * 1;
         dotY += (mouseY - dotY) * 1;
         ringX += (mouseX - ringX) * speed;
         ringY += (mouseY - ringY) * speed;
-        
+
         cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
         cursorRing.style.transform = `translate3d(${ringX - 20}px, ${ringY - 20}px, 0)`;
-        
+
         requestAnimationFrame(animateCursor);
     }
-    
+
     animateCursor();
 
     // Enhanced interactive elements
     const interactiveSelector = 'a, button, .premium-card, .project-card, .skill-card, input, textarea, select, [role="button"], [tabindex="0"]';
     const interactiveElements = document.querySelectorAll(interactiveSelector);
-    
+
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             isHovering = true;
@@ -138,7 +140,7 @@ function setupPremiumCursor() {
             cursorRing.style.height = '60px';
             cursorRing.style.borderColor = 'rgba(6, 182, 212, 0.8)';
         }, { passive: true });
-        
+
         el.addEventListener('mouseleave', () => {
             isHovering = false;
             cursorDot.style.transform = cursorDot.style.transform.replace(' scale(2)', '');
@@ -147,7 +149,7 @@ function setupPremiumCursor() {
             cursorRing.style.borderColor = 'rgba(6, 182, 212, 0.3)';
         }, { passive: true });
     });
-    
+
     perf.mark('cursor-setup-end');
     perf.measure('cursor-setup', 'cursor-setup-start', 'cursor-setup-end');
 }
@@ -155,7 +157,7 @@ function setupPremiumCursor() {
 // ==================== Enhanced Contact Form Handler ====================
 function setupContactForm() {
     perf.mark('contact-form-start');
-    
+
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
     const submitBtn = document.getElementById('submitBtn');
@@ -177,7 +179,7 @@ function setupContactForm() {
     // Real-time validation
     Object.entries(formFields).forEach(([key, field]) => {
         if (!field) return;
-        
+
         field.addEventListener('blur', () => validateField(key, field));
         field.addEventListener('input', debounce(() => {
             if (field.value.length > 0) {
@@ -188,9 +190,9 @@ function setupContactForm() {
 
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         perf.mark('form-submit-start');
-        
+
         const formData = new FormData(contactForm);
         const data = {
             name: formData.get('name')?.trim(),
@@ -216,7 +218,7 @@ function setupContactForm() {
                 data: { hasName: !!data.name, hasEmail: !!data.email, apiBaseUrl: CONFIG.API_BASE_URL },
                 timestamp: Date.now()
             })
-        }).catch(() => {});
+        }).catch(() => { });
         // #endregion
 
         // Enhanced validation
@@ -232,7 +234,7 @@ function setupContactForm() {
 
         try {
             console.log('📤 Sending contact form to:', CONFIG.API_BASE_URL + '/contact');
-            
+
             // #region agent log
             fetch('http://127.0.0.1:7242/ingest/8ba53d06-e65d-4e71-9d01-4eb770290139', {
                 method: 'POST',
@@ -246,9 +248,9 @@ function setupContactForm() {
                     data: { url: CONFIG.API_BASE_URL + '/contact' },
                     timestamp: Date.now()
                 })
-            }).catch(() => {});
+            }).catch(() => { });
             // #endregion
-            
+
             const response = await fetch(CONFIG.API_BASE_URL + '/contact', {
                 method: 'POST',
                 headers: {
@@ -274,24 +276,24 @@ function setupContactForm() {
                         data: { status: response.status },
                         timestamp: Date.now()
                     })
-                }).catch(() => {});
+                }).catch(() => { });
                 // #endregion
 
                 showFormStatus('✅ Message sent successfully! I\'ll respond within 24 hours.', 'success');
                 contactForm.reset();
                 trackAnalytics('contact_form_success', { project_type: data.project_type });
-                
+
                 // Show thank you message
                 setTimeout(() => {
                     showThankYouMessage(data.name);
                 }, 1000);
-                
+
             } else {
                 throw new Error(responseData.error || `Server error: ${response.status}`);
             }
         } catch (error) {
             console.error('📧 Contact form error:', error);
-            
+
             // #region agent log
             fetch('http://127.0.0.1:7242/ingest/8ba53d06-e65d-4e71-9d01-4eb770290139', {
                 method: 'POST',
@@ -305,11 +307,11 @@ function setupContactForm() {
                     data: { errorMessage: error?.message || String(error) },
                     timestamp: Date.now()
                 })
-            }).catch(() => {});
+            }).catch(() => { });
             // #endregion
-            
+
             let errorMessage = '❌ Message failed to send. ';
-            
+
             if (error.name === 'TypeError' && error.message.includes('fetch')) {
                 errorMessage += 'Please check your internet connection or try again later.';
             } else if (error.message.includes('500')) {
@@ -317,7 +319,7 @@ function setupContactForm() {
             } else {
                 errorMessage += 'Please try again or email me directly.';
             }
-            
+
             showFormStatus(errorMessage, 'error');
             trackAnalytics('contact_form_error', { error: error.message });
         } finally {
@@ -329,35 +331,35 @@ function setupContactForm() {
 
     function validateContactForm(data) {
         const errors = [];
-        
+
         if (!data.name || data.name.length < 2) {
             setFieldError(formFields.name, 'Name must be at least 2 characters');
             errors.push('Name is required');
         }
-        
+
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (!data.email || !emailRegex.test(data.email)) {
             setFieldError(formFields.email, 'Please enter a valid email address');
             errors.push('Valid email is required');
         }
-        
+
         if (!data.title || data.title.length < 5) {
             setFieldError(formFields.title, 'Project title must be at least 5 characters');
             errors.push('Project title is required');
         }
-        
+
         if (!data.message || data.message.length < 20) {
             setFieldError(formFields.message, 'Please provide more details (at least 20 characters)');
             errors.push('Message too short');
         }
-        
+
         return errors;
     }
 
     function validateField(fieldName, field) {
         const value = field.value.trim();
         clearFieldError(field);
-        
+
         switch (fieldName) {
             case 'name':
                 if (value.length > 0 && value.length < 2) {
@@ -425,13 +427,12 @@ function setupContactForm() {
 
     function showFormStatus(message, type) {
         formStatus.textContent = message;
-        formStatus.className = `mt-6 text-center font-semibold rounded-lg p-4 ${
-            type === 'success' 
-                ? 'status-success' 
+        formStatus.className = `mt-6 text-center font-semibold rounded-lg p-4 ${type === 'success'
+                ? 'status-success'
                 : 'status-error'
-        }`;
+            }`;
         formStatus.classList.remove('hidden');
-        
+
         // Auto-hide after 8 seconds for success, 12 for errors
         const hideDelay = type === 'success' ? 8000 : 12000;
         setTimeout(() => {
@@ -451,7 +452,7 @@ function setupContactForm() {
             firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
-    
+
     perf.mark('contact-form-end');
     perf.measure('contact-form-setup', 'contact-form-start', 'contact-form-end');
 }
@@ -460,32 +461,32 @@ function setupContactForm() {
 function setupScrollEffects() {
     const nav = document.getElementById('mainNav');
     const scrollIndicator = createScrollIndicator();
-    
+
     const scrollHandler = throttle(() => {
         const scrollY = window.scrollY;
-        
+
         // Navigation transparency effect
         if (scrollY > CONFIG.SCROLL_OFFSET) {
             nav?.classList.add('scrolled');
         } else {
             nav?.classList.remove('scrolled');
         }
-        
+
         // Update active navigation link
         updateActiveNavLink();
-        
+
         // Update scroll indicator
         updateScrollIndicator(scrollIndicator);
-        
+
         // Parallax effect for orbs (if enabled)
         if (!CONFIG.REDUCED_MOTION) {
             updateParallaxElements(scrollY);
         }
-        
+
     }, 16);
 
     window.addEventListener('scroll', scrollHandler, { passive: true });
-    
+
     function updateActiveNavLink() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
@@ -500,7 +501,7 @@ function setupScrollEffects() {
                 navLinks.forEach(link => {
                     link.removeAttribute('aria-current');
                     link.classList.remove('text-cyan-400');
-                    
+
                     if (link.getAttribute('href') === `#${sectionId}`) {
                         link.setAttribute('aria-current', 'page');
                         link.classList.add('text-cyan-400');
@@ -509,7 +510,7 @@ function setupScrollEffects() {
             }
         });
     }
-    
+
     function createScrollIndicator() {
         const indicator = document.createElement('div');
         indicator.className = 'fixed top-0 left-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 z-50 transition-all duration-300';
@@ -517,12 +518,12 @@ function setupScrollEffects() {
         document.body.appendChild(indicator);
         return indicator;
     }
-    
+
     function updateScrollIndicator(indicator) {
         const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
         indicator.style.width = Math.min(scrollPercent, 100) + '%';
     }
-    
+
     function updateParallaxElements(scrollY) {
         const orbs = document.querySelectorAll('.orb');
         orbs.forEach((orb, index) => {
@@ -541,25 +542,25 @@ function setupNavigation() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const target = document.querySelector(targetId);
             if (target) {
                 const offsetTop = target.offsetTop - 100;
-                
+
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
-                
+
                 // Update URL without triggering scroll
                 history.pushState(null, null, targetId);
-                
+
                 // Track navigation
                 trackAnalytics('navigation_click', { target: targetId });
             }
         });
     });
-    
+
     // Handle browser back/forward navigation
     window.addEventListener('popstate', () => {
         const hash = window.location.hash;
@@ -575,7 +576,7 @@ function setupNavigation() {
 // ==================== Enhanced Animation System ====================
 function setupAnimations() {
     perf.mark('animations-start');
-    
+
     if (CONFIG.REDUCED_MOTION) {
         // Skip animations for users who prefer reduced motion
         document.querySelectorAll('.reveal').forEach(el => {
@@ -583,7 +584,7 @@ function setupAnimations() {
         });
         return;
     }
-    
+
     const observerOptions = {
         threshold: CONFIG.PERFORMANCE_MODE ? 0.2 : 0.15,
         rootMargin: '0px 0px -50px 0px'
@@ -593,10 +594,10 @@ function setupAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                
+
                 // Special handling for different element types
                 handleSpecialAnimations(entry.target);
-                
+
                 // Unobserve after activation for performance
                 revealObserver.unobserve(entry.target);
             }
@@ -606,7 +607,7 @@ function setupAnimations() {
     document.querySelectorAll('.reveal').forEach(element => {
         revealObserver.observe(element);
     });
-    
+
     function handleSpecialAnimations(element) {
         // Skill bar animations
         if (element.classList.contains('skill-card')) {
@@ -617,18 +618,18 @@ function setupAnimations() {
                 }, 300);
             }
         }
-        
+
         // Stats counter animations
         if (element.querySelector('[data-count]')) {
             animateStatsCounters(element);
         }
-        
+
         // Track element activation
-        trackAnalytics('element_revealed', { 
-            element: element.id || element.className.split(' ')[0] 
+        trackAnalytics('element_revealed', {
+            element: element.id || element.className.split(' ')[0]
         });
     }
-    
+
     perf.mark('animations-end');
     perf.measure('animations-setup', 'animations-start', 'animations-end');
 }
@@ -641,24 +642,24 @@ function setupStatsCounters() {
 
 function animateStatsCounters(container) {
     const counters = container.querySelectorAll('[data-count]');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.dataset.count);
         const duration = 2000;
         const step = target / (duration / 16);
         let current = 0;
-        
+
         const updateCounter = () => {
             current += step;
             if (current >= target) {
                 counter.textContent = target === 700 ? '700%' : target === 50 ? '50+' : target;
                 return;
             }
-            
+
             counter.textContent = Math.floor(current);
             requestAnimationFrame(updateCounter);
         };
-        
+
         setTimeout(updateCounter, parseInt(counter.parentElement.style.transitionDelay || 0) * 1000);
     });
 }
@@ -668,7 +669,7 @@ function setupMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const closeMobileMenu = document.getElementById('closeMobileMenu');
     const mobileMenu = document.getElementById('mobileMenu');
-    
+
     if (!mobileMenuBtn || !mobileMenu) return;
 
     function openMobileMenu() {
@@ -676,11 +677,11 @@ function setupMobileMenu() {
         mobileMenu.setAttribute('aria-hidden', 'false');
         mobileMenuBtn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
-        
+
         // Focus management
         const firstLink = mobileMenu.querySelector('a');
         if (firstLink) firstLink.focus();
-        
+
         trackAnalytics('mobile_menu_opened');
     }
 
@@ -715,7 +716,7 @@ function setupMobileMenu() {
     document.addEventListener('click', (e) => {
         const isClickInsideMenu = mobileMenu.contains(e.target) || mobileMenuBtn.contains(e.target);
         const isMenuOpen = mobileMenu.getAttribute('aria-hidden') === 'false';
-        
+
         if (!isClickInsideMenu && isMenuOpen) {
             closeMobileMenuFunc();
         }
@@ -725,31 +726,31 @@ function setupMobileMenu() {
 // ==================== Enhanced Magnetic Buttons ====================
 function setupMagneticButtons() {
     if (CONFIG.TOUCH_DEVICE) return;
-    
+
     const magneticElements = document.querySelectorAll('.magnetic');
-    
+
     magneticElements.forEach(button => {
         let isHovering = false;
-        
+
         button.addEventListener('mouseenter', () => {
             isHovering = true;
         });
-        
+
         button.addEventListener('mouseleave', () => {
             isHovering = false;
             button.style.transform = 'translate(0, 0)';
         });
-        
+
         button.addEventListener('mousemove', throttle((e) => {
             if (!isHovering) return;
-            
+
             const rect = button.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            
+
             const deltaX = (e.clientX - centerX) * 0.15;
             const deltaY = (e.clientY - centerY) * 0.15;
-            
+
             button.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
         }, 16), { passive: true });
     });
@@ -768,17 +769,17 @@ function setupPageTransition() {
         'Almost ready...',
         'Welcome!'
     ];
-    
+
     let currentStep = 0;
     const loadingText = document.getElementById('loadingText');
-    
+
     const updateLoadingText = () => {
         if (loadingText && currentStep < loadingSteps.length) {
             loadingText.textContent = loadingSteps[currentStep];
             currentStep++;
         }
     };
-    
+
     // Update loading text every 150ms
     const loadingInterval = setInterval(updateLoadingText, 150);
 
@@ -787,9 +788,9 @@ function setupPageTransition() {
         clearInterval(loadingInterval);
         setTimeout(() => {
             transition.classList.remove('active');
-            trackAnalytics('page_loaded', { 
+            trackAnalytics('page_loaded', {
                 loadTime: perf.getLoadTime(),
-                page: window.location.pathname 
+                page: window.location.pathname
             });
         }, 800);
     });
@@ -798,10 +799,10 @@ function setupPageTransition() {
     document.querySelectorAll('a[href$=".html"]:not([target="_blank"])').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            
+
             transition.classList.add('active');
             loadingText.textContent = 'Loading page...';
-            
+
             setTimeout(() => {
                 window.location.href = link.href;
             }, 400);
@@ -823,7 +824,7 @@ function setupAccessibility() {
             }
         });
     }
-    
+
     // Enhanced keyboard navigation
     document.addEventListener('keydown', (e) => {
         // Escape key handling
@@ -831,13 +832,13 @@ function setupAccessibility() {
             closeActiveModals();
             closeMobileMenu();
         }
-        
+
         // Tab trap for modals
         if (e.key === 'Tab') {
             handleTabTrap(e);
         }
     });
-    
+
     // Announce page changes to screen readers
     announcePageChanges();
 }
@@ -849,14 +850,14 @@ function setupAnalytics() {
         console.log('📊 Analytics disabled by user preference');
         return;
     }
-    
+
     // Track page view
     trackAnalytics('page_view', {
         page: window.location.pathname,
         referrer: document.referrer ? new URL(document.referrer).hostname : 'direct',
         loadTime: perf.getLoadTime()
     });
-    
+
     // Track user engagement
     let engagementTimer = 0;
     const trackEngagement = setInterval(() => {
@@ -869,7 +870,7 @@ function setupAnalytics() {
             clearInterval(trackEngagement);
         }
     }, 5000);
-    
+
     // Track interactions
     document.addEventListener('click', (e) => {
         const element = e.target.closest('[data-track]');
@@ -894,7 +895,7 @@ function trackAnalytics(event, properties = {}) {
                 colorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
             }
         });
-        
+
         navigator.sendBeacon(CONFIG.API_BASE_URL + '/analytics', data);
     }
 }
@@ -902,19 +903,19 @@ function trackAnalytics(event, properties = {}) {
 // ==================== Parallax Effects ====================
 function setupParallaxEffect() {
     if (CONFIG.REDUCED_MOTION || CONFIG.PERFORMANCE_MODE) return;
-    
+
     const parallaxElements = document.querySelectorAll('.orb, .float-animation');
-    
+
     const handleScroll = throttle(() => {
         const scrollY = window.scrollY;
-        
+
         parallaxElements.forEach((element, index) => {
             const speed = 0.3 + (index * 0.1);
             const yPos = -(scrollY * speed);
             element.style.transform += ` translateY(${yPos}px)`;
         });
     }, 16);
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
@@ -933,7 +934,7 @@ function debounce(func, wait) {
 
 function throttle(func, limit) {
     let inThrottle;
-    return function() {
+    return function () {
         const args = arguments;
         const context = this;
         if (!inThrottle) {
@@ -947,7 +948,7 @@ function throttle(func, limit) {
 // ==================== Error Handling ====================
 function setupBasicFunctionality() {
     console.log('🔧 Setting up basic functionality fallback...');
-    
+
     // Basic form handling without advanced features
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -956,7 +957,7 @@ function setupBasicFunctionality() {
             alert('Form submitted! Please contact directly at jivitesh28@gmail.com');
         });
     }
-    
+
     // Basic navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -984,21 +985,21 @@ function announcePageChanges() {
     liveRegion.className = 'sr-only';
     liveRegion.id = 'live-region';
     document.body.appendChild(liveRegion);
-    
+
     return liveRegion;
 }
 
 function handleTabTrap(e) {
     const modal = document.querySelector('.modal.active');
     if (!modal) return;
-    
+
     const focusableElements = modal.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
-    
+
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
-    
+
     if (e.shiftKey && document.activeElement === firstElement) {
         lastElement.focus();
         e.preventDefault();
@@ -1012,19 +1013,19 @@ function handleTabTrap(e) {
 window.addEventListener('load', () => {
     perf.mark('page-fully-loaded');
     perf.measure('total-load-time', 'script-start', 'page-fully-loaded');
-    
+
     // Log performance metrics
     const metrics = {
         totalLoadTime: perf.getLoadTime(),
         domReady: perf.metrics.get('dom-ready') || 0,
         appInit: perf.metrics.get('app-initialization') || 0
     };
-    
+
     console.log('📊 Performance Metrics:', metrics);
-    
+
     // Send performance data (if analytics enabled)
     trackAnalytics('performance_metrics', metrics);
-    
+
     // Web Vitals monitoring (if available)
     if ('web-vitals' in window) {
         import('https://unpkg.com/web-vitals@3/dist/web-vitals.js').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
@@ -1065,7 +1066,7 @@ console.log('%c━━━━━━━━━━━━━━━━━━━━━�
 // ==================== Development Mode Features ====================
 if (window.location.hostname === 'localhost') {
     console.log('%c🔧 Development Mode Active', 'color: #f59e0b; font-weight: bold;');
-    
+
     // Add development helper functions
     window.debugPortfolio = {
         config: CONFIG,
@@ -1088,7 +1089,7 @@ if (window.location.hostname === 'localhost') {
             ring.style.display = display;
         }
     };
-    
+
     console.log('%cDevelopment helpers available: debugPortfolio', 'color: #64748b;');
 }
 
