@@ -1,0 +1,16 @@
+name = "portfolio-api"
+main = "src/index.ts"
+compatibility_date = "2025-12-22"
+
+# KV Namespace for storing contact messages
+[[kv_namespaces]]
+binding = "MESSAGES"
+id = "YOUR_KV_NAMESPACE_ID"  # Replace with actual KV namespace ID after creation
+
+# Environment variables (non-sensitive)
+[vars]
+CORS_ORIGIN = "*"
+
+# Secrets (set via: wrangler secret put SECRET_NAME)
+# RESEND_API_KEY - Get from resend.com
+# NOTIFICATION_EMAIL - Your email for receiving notifications
