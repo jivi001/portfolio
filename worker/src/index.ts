@@ -2,61 +2,61 @@
 // Replaces Flask backend with edge-native API
 
 interface Env {
-    MESSAGES: KVNamespace;
-    RESEND_API_KEY: string;
-    NOTIFICATION_EMAIL: string;
-    CORS_ORIGIN?: string;
+  MESSAGES: KVNamespace;
+  RESEND_API_KEY: string;
+  NOTIFICATION_EMAIL: string;
+  CORS_ORIGIN?: string;
 }
 
 interface ContactData {
-    name: string;
-    email: string;
-    title: string;
-    message: string;
-    company?: string;
-    project_type?: string;
+  name: string;
+  email: string;
+  title: string;
+  message: string;
+  company?: string;
+  project_type?: string;
 }
 
 // CORS headers
 const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
 };
 
 // Email validation
 function validateEmail(email: string): boolean {
-    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-Z]{2,}$/;
-    return pattern.test(email);
+  const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return pattern.test(email);
 }
 
 // Send email via Resend API
 async function sendEmail(env: Env, to: string, subject: string, html: string): Promise<boolean> {
-    try {
-        const response = await fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${env.RESEND_API_KEY}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                from: 'Portfolio <onboarding@resend.dev>', // Update with your verified domain
-                to: [to],
-                subject: subject,
-                html: html,
-            }),
-        });
+  try {
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Portfolio <onboarding@resend.dev>', // Update with your verified domain
+        to: [to],
+        subject: subject,
+        html: html,
+      }),
+    });
 
-        return response.ok;
-    } catch (error) {
-        console.error('Email error:', error);
-        return false;
-    }
+    return response.ok;
+  } catch (error) {
+    console.error('Email error:', error);
+    return false;
+  }
 }
 
 // Generate notification email HTML
 function getNotificationEmailHTML(data: ContactData & { timestamp: string }): string {
-    return `
+  return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,7 +185,7 @@ function getNotificationEmailHTML(data: ContactData & { timestamp: string }): st
 
 // Generate confirmation email HTML
 function getConfirmationEmailHTML(data: ContactData): string {
-    return `
+  return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -287,225 +287,225 @@ function getConfirmationEmailHTML(data: ContactData): string {
 }
 
 export default {
-    async fetch(request: Request, env: Env): Promise<Response> {
-        const url = new URL(request.url);
-        const path = url.pathname;
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    const path = url.pathname;
 
-        // Handle CORS preflight
-        if (request.method === 'OPTIONS') {
-            return new Response(null, { headers: corsHeaders });
+    // Handle CORS preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { headers: corsHeaders });
+    }
+
+    try {
+      // Health check
+      if (path === '/api/health' && request.method === 'GET') {
+        return new Response(
+          JSON.stringify({
+            status: 'healthy',
+            timestamp: new Date().toISOString(),
+            message: 'Worker is running',
+            email_configured: !!env.RESEND_API_KEY,
+          }),
+          {
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
+      }
+
+      // Contact form submission
+      if (path === '/api/contact' && request.method === 'POST') {
+        const data: ContactData = await request.json();
+
+        // Validation
+        if (!data.name || !data.email || !data.title || !data.message) {
+          return new Response(
+            JSON.stringify({ error: 'All fields are required' }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
         }
 
-        try {
-            // Health check
-            if (path === '/api/health' && request.method === 'GET') {
-                return new Response(
-                    JSON.stringify({
-                        status: 'healthy',
-                        timestamp: new Date().toISOString(),
-                        message: 'Worker is running',
-                        email_configured: !!env.RESEND_API_KEY,
-                    }),
-                    {
-                        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-                    }
-                );
-            }
-
-            // Contact form submission
-            if (path === '/api/contact' && request.method === 'POST') {
-                const data: ContactData = await request.json();
-
-                // Validation
-                if (!data.name || !data.email || !data.title || !data.message) {
-                    return new Response(
-                        JSON.stringify({ error: 'All fields are required' }),
-                        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-                    );
-                }
-
-                if (!validateEmail(data.email)) {
-                    return new Response(
-                        JSON.stringify({ error: 'Invalid email format' }),
-                        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-                    );
-                }
-
-                if (data.message.length < 10) {
-                    return new Response(
-                        JSON.stringify({ error: 'Message must be at least 10 characters' }),
-                        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-                    );
-                }
-
-                // Create message object
-                const contactMessage = {
-                    id: Date.now(),
-                    name: data.name,
-                    email: data.email,
-                    title: data.title,
-                    message: data.message,
-                    company: data.company || '',
-                    project_type: data.project_type || '',
-                    timestamp: new Date().toISOString(),
-                    read: false,
-                };
-
-                // Store in KV
-                const messagesKey = 'contact_messages';
-                const existingMessages = await env.MESSAGES.get(messagesKey, 'json') || [];
-                const messages = Array.isArray(existingMessages) ? existingMessages : [];
-                messages.push(contactMessage);
-                await env.MESSAGES.put(messagesKey, JSON.stringify(messages));
-
-                // Send emails
-                const notificationSent = await sendEmail(
-                    env,
-                    env.NOTIFICATION_EMAIL || 'jiviteshgd28@gmail.com',
-                    `🎯 New Portfolio Contact: ${data.title}`,
-                    getNotificationEmailHTML({ ...data, timestamp: contactMessage.timestamp })
-                );
-
-                const confirmationSent = await sendEmail(
-                    env,
-                    data.email,
-                    `✓ Message Received - ${data.title}`,
-                    getConfirmationEmailHTML(data)
-                );
-
-                return new Response(
-                    JSON.stringify({
-                        status: 'success',
-                        message: 'Contact message received successfully',
-                        data: contactMessage,
-                        email_notification: notificationSent,
-                        confirmation_sent: confirmationSent,
-                    }),
-                    {
-                        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-                    }
-                );
-            }
-
-            // Get projects
-            if (path === '/api/projects' && request.method === 'GET') {
-                const projects = [
-                    {
-                        id: 1,
-                        title: 'Cybersecurity Platform',
-                        description: 'ML/DL-based anomaly detection with automated response playbooks',
-                        tags: ['Python', 'ML', 'API', 'Security'],
-                        category: 'ai-ml',
-                        icon: '🛡️',
-                    },
-                    {
-                        id: 2,
-                        title: 'Movie Recommendation System',
-                        description: 'IMDb-like interface with AI-powered recommendations',
-                        tags: ['React', 'Python', 'AI'],
-                        category: 'ai-ml fullstack',
-                        icon: '🎬',
-                    },
-                    {
-                        id: 3,
-                        title: 'Mental Wellness Mirror',
-                        description: 'AI-powered emotional intelligence support platform',
-                        tags: ['AI', 'NLP', 'React'],
-                        category: 'ai-ml',
-                        icon: '🧠',
-                    },
-                    {
-                        id: 4,
-                        title: 'Smart Allocation Engine',
-                        description: 'AI-based matching for PM internship allocation',
-                        tags: ['Next.js', 'ML', 'Flask'],
-                        category: 'ai-ml fullstack',
-                        icon: '🎯',
-                    },
-                    {
-                        id: 5,
-                        title: 'Progressive Web Applications',
-                        description: 'Modern PWAs with fluid UI transitions',
-                        tags: ['React', 'Tailwind', 'PWA'],
-                        category: 'fullstack',
-                        icon: '💻',
-                    },
-                    {
-                        id: 6,
-                        title: 'Research & Innovation',
-                        description: 'Implementing state-of-the-art ML algorithms',
-                        tags: ['Research', 'DL', 'Papers'],
-                        category: 'research data',
-                        icon: '🔬',
-                    },
-                ];
-
-                return new Response(
-                    JSON.stringify({
-                        status: 'success',
-                        total: projects.length,
-                        projects,
-                    }),
-                    {
-                        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-                    }
-                );
-            }
-
-            // Get skills
-            if (path === '/api/skills' && request.method === 'GET') {
-                const skills = {
-                    'AI & Machine Learning': 95,
-                    'Full-Stack Development': 90,
-                    'Data Analysis': 88,
-                    'Cloud & DevOps': 80,
-                    'Python Programming': 92,
-                    'JavaScript/React': 88,
-                    'Database Design': 85,
-                    'API Development': 90,
-                };
-
-                return new Response(
-                    JSON.stringify({
-                        status: 'success',
-                        skills,
-                    }),
-                    {
-                        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-                    }
-                );
-            }
-
-            // Get messages
-            if (path === '/api/messages' && request.method === 'GET') {
-                const messages = await env.MESSAGES.get('contact_messages', 'json') || [];
-                const messageArray = Array.isArray(messages) ? messages : [];
-                const unreadCount = messageArray.filter((m: any) => !m.read).length;
-
-                return new Response(
-                    JSON.stringify({
-                        status: 'success',
-                        total: messageArray.length,
-                        unread: unreadCount,
-                        messages: messageArray,
-                    }),
-                    {
-                        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-                    }
-                );
-            }
-
-            // 404
-            return new Response(
-                JSON.stringify({ error: 'Endpoint not found' }),
-                { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-            );
-        } catch (error) {
-            console.error('Worker error:', error);
-            return new Response(
-                JSON.stringify({ error: 'Internal server error' }),
-                { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-            );
+        if (!validateEmail(data.email)) {
+          return new Response(
+            JSON.stringify({ error: 'Invalid email format' }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
         }
-    },
+
+        if (data.message.length < 10) {
+          return new Response(
+            JSON.stringify({ error: 'Message must be at least 10 characters' }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
+        // Create message object
+        const contactMessage = {
+          id: Date.now(),
+          name: data.name,
+          email: data.email,
+          title: data.title,
+          message: data.message,
+          company: data.company || '',
+          project_type: data.project_type || '',
+          timestamp: new Date().toISOString(),
+          read: false,
+        };
+
+        // Store in KV
+        const messagesKey = 'contact_messages';
+        const existingMessages = await env.MESSAGES.get(messagesKey, 'json') || [];
+        const messages = Array.isArray(existingMessages) ? existingMessages : [];
+        messages.push(contactMessage);
+        await env.MESSAGES.put(messagesKey, JSON.stringify(messages));
+
+        // Send emails
+        const notificationSent = await sendEmail(
+          env,
+          env.NOTIFICATION_EMAIL || 'jiviteshgd28@gmail.com',
+          `🎯 New Portfolio Contact: ${data.title}`,
+          getNotificationEmailHTML({ ...data, timestamp: contactMessage.timestamp })
+        );
+
+        const confirmationSent = await sendEmail(
+          env,
+          data.email,
+          `✓ Message Received - ${data.title}`,
+          getConfirmationEmailHTML(data)
+        );
+
+        return new Response(
+          JSON.stringify({
+            status: 'success',
+            message: 'Contact message received successfully',
+            data: contactMessage,
+            email_notification: notificationSent,
+            confirmation_sent: confirmationSent,
+          }),
+          {
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
+      }
+
+      // Get projects
+      if (path === '/api/projects' && request.method === 'GET') {
+        const projects = [
+          {
+            id: 1,
+            title: 'Cybersecurity Platform',
+            description: 'ML/DL-based anomaly detection with automated response playbooks',
+            tags: ['Python', 'ML', 'API', 'Security'],
+            category: 'ai-ml',
+            icon: '🛡️',
+          },
+          {
+            id: 2,
+            title: 'Movie Recommendation System',
+            description: 'IMDb-like interface with AI-powered recommendations',
+            tags: ['React', 'Python', 'AI'],
+            category: 'ai-ml fullstack',
+            icon: '🎬',
+          },
+          {
+            id: 3,
+            title: 'Mental Wellness Mirror',
+            description: 'AI-powered emotional intelligence support platform',
+            tags: ['AI', 'NLP', 'React'],
+            category: 'ai-ml',
+            icon: '🧠',
+          },
+          {
+            id: 4,
+            title: 'Smart Allocation Engine',
+            description: 'AI-based matching for PM internship allocation',
+            tags: ['Next.js', 'ML', 'Flask'],
+            category: 'ai-ml fullstack',
+            icon: '🎯',
+          },
+          {
+            id: 5,
+            title: 'Progressive Web Applications',
+            description: 'Modern PWAs with fluid UI transitions',
+            tags: ['React', 'Tailwind', 'PWA'],
+            category: 'fullstack',
+            icon: '💻',
+          },
+          {
+            id: 6,
+            title: 'Research & Innovation',
+            description: 'Implementing state-of-the-art ML algorithms',
+            tags: ['Research', 'DL', 'Papers'],
+            category: 'research data',
+            icon: '🔬',
+          },
+        ];
+
+        return new Response(
+          JSON.stringify({
+            status: 'success',
+            total: projects.length,
+            projects,
+          }),
+          {
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
+      }
+
+      // Get skills
+      if (path === '/api/skills' && request.method === 'GET') {
+        const skills = {
+          'AI & Machine Learning': 95,
+          'Full-Stack Development': 90,
+          'Data Analysis': 88,
+          'Cloud & DevOps': 80,
+          'Python Programming': 92,
+          'JavaScript/React': 88,
+          'Database Design': 85,
+          'API Development': 90,
+        };
+
+        return new Response(
+          JSON.stringify({
+            status: 'success',
+            skills,
+          }),
+          {
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
+      }
+
+      // Get messages
+      if (path === '/api/messages' && request.method === 'GET') {
+        const messages = await env.MESSAGES.get('contact_messages', 'json') || [];
+        const messageArray = Array.isArray(messages) ? messages : [];
+        const unreadCount = messageArray.filter((m: any) => !m.read).length;
+
+        return new Response(
+          JSON.stringify({
+            status: 'success',
+            total: messageArray.length,
+            unread: unreadCount,
+            messages: messageArray,
+          }),
+          {
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
+      }
+
+      // 404
+      return new Response(
+        JSON.stringify({ error: 'Endpoint not found' }),
+        { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    } catch (error) {
+      console.error('Worker error:', error);
+      return new Response(
+        JSON.stringify({ error: 'Internal server error' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+  },
 };
