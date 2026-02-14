@@ -12,6 +12,18 @@ export const projects = [
     featured: true
   },
   {
+    id: 'hybrid-nids',
+    title: 'Hybrid NIDS',
+    category: ['AI/ML', 'Cybersecurity'],
+    description: 'Network Intrusion Detection System combining Random Forest and Isolation Forest for robust anomaly detection. Features optimized preprocessing and real-time threat analysis.',
+    tech: ['Python (Scikit-learn)', 'Pandas', 'Flask', 'Docker'],
+    metrics: ['99% Detection Rate', 'Low False Positives'],
+    image: '/media/nids-thumb.jpg', 
+    repoUrl: 'https://github.com/jivi001/Hybrid-NIDS',
+    demoUrl: null,
+    featured: true
+  },
+  {
     id: 'allocation-engine',
     title: 'Smart Allocation Engine',
     category: ['AI/ML', 'Full Stack'],
@@ -37,4 +49,4 @@ export const projects = [
   }
 ];
 
-export const categories = ['All', 'AI/ML', 'Data Science', 'Full Stack', 'Frontend'];
+export const categories = ['All', 'AI/ML', 'Data Science', 'Cybersecurity', 'Full Stack', 'Frontend'];
