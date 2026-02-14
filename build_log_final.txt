@@ -1,0 +1,14 @@
+
+> portfolio-v3@0.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 455 modules transformed.
+rendering chunks...
+✗ Build failed in 4.92s
+error during build:
+EEXIST: file already exists, mkdir 'E:\programs\portfolio\dist\assets'
+    at async mkdir (node:internal/fs/promises:856:10)
+    at async writeOutputFile (file:///E:/programs/portfolio/node_modules/rollup/dist/es/shared/node-entry.js:23593:5)
+    at async Queue.work (file:///E:/programs/portfolio/node_modules/rollup/dist/es/shared/node-entry.js:22658:32)
