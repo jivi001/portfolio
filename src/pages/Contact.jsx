@@ -50,7 +50,7 @@ const Contact = () => {
                         </div>
                         <div>
                             <div className="text-sm text-slate-500 font-mono">EMAIL</div>
-                            <a href="mailto:hello@jivitesh.dev" className="text-white hover:text-cyan-400 transition-colors">hello@jivitesh.dev</a>
+                            <a href="mailto:jiviteshgd28@gmail.com" className="text-white hover:text-cyan-400 transition-colors">jiviteshgd28@gmail.com</a>
                         </div>
                     </div>
                      <div className="flex items-center gap-4">
@@ -60,9 +60,9 @@ const Contact = () => {
                         <div>
                             <div className="text-sm text-slate-500 font-mono">SOCIAL</div>
                             <div className="flex gap-4">
-                                <a href="#" className="text-white hover:text-cyan-400 transition-colors">LinkedIn</a>
-                                <a href="#" className="text-white hover:text-cyan-400 transition-colors">GitHub</a>
-                                <a href="#" className="text-white hover:text-cyan-400 transition-colors">Twitter</a>
+                                <a href="https://www.linkedin.com/in/jivi001/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-cyan-400 transition-colors">LinkedIn</a>
+                                <a href="https://github.com/jivi001" target="_blank" rel="noopener noreferrer" className="text-white hover:text-cyan-400 transition-colors">GitHub</a>
+                                <a href="https://www.instagram.com/exu_01/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-cyan-400 transition-colors">Instagram</a>
                             </div>
                         </div>
                     </div>
