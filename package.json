@@ -1,9 +1,0 @@
-{
-    "name": "portfolio",
-    "version": "4.0.0",
-    "private": true,
-    "description": "Static portfolio site",
-    "scripts": {
-        "build": "echo 'Static site - no build needed. Worker deployed separately.'"
-    }
-}

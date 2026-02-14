@@ -20,7 +20,7 @@
         rel="stylesheet" />
 
     <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+
 
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
@@ -154,40 +154,7 @@
     </footer>
 
     <!-- JS -->
-    <script type="module" src="js/core.js"></script>
-    <script>
-        /* FILTER */
-        const filters = document.querySelectorAll('.filter-btn');
-        const cards = document.querySelectorAll('.project-card');
 
-        filters.forEach(btn => {
-            btn.onclick = () => {
-                filters.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const f = btn.dataset.filter;
-
-                cards.forEach(c => {
-                    c.style.display = (f === 'all' || c.dataset.category.includes(f)) ? 'block' : 'none';
-                });
-            };
-        });
-
-        /* MODAL */
-        const modal = document.getElementById('projectModal');
-        const modalContent = document.getElementById('modalContent');
-        document.querySelectorAll('.view-details').forEach(btn => {
-            btn.onclick = () => {
-                modalContent.innerHTML = `<h2 class="text-3xl font-bold mb-4">Project Details</h2>
-      <p class="text-slate-300">Detailed breakdown available in case studies.</p>`;
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            };
-        });
-        document.getElementById('closeModal').onclick = () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        };
-    </script>
 
 </body>
 
