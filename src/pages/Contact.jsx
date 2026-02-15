@@ -1,33 +1,14 @@
-import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 
 const Contact = () => {
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-    }, 1500);
-  };
-
-  const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
-  };
-
   return (
     <>
       <Helmet>
         <title>Contact | Jivitesh</title>
-        <meta name="description" content="Get in touch for collaborations, consulting, or freelance projects." />
+        <meta name="description" content="Get in touch for cybersecurity and AI/ML consulting, projects, and opportunities." />
       </Helmet>
 
       <Section className="min-h-screen flex items-center pt-24">
@@ -35,12 +16,12 @@ const Contact = () => {
             {/* Left Col */}
             <div>
                  <h1 className="text-5xl font-bold mb-6">
-                    Let's Build <br/>
-                    <span className="gradient-text">Something Great</span>
+                    Let's Collaborate on <br/>
+                    <span className="gradient-text">Secure AI Solutions</span>
                 </h1>
                 <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                    I'm currently available for freelance projects and open to new opportunities. 
-                    If you have an idea or need help scaling your AI infrastructure, dropping a line is the best way to start.
+                    I'm available for consulting, freelance projects, and full-time opportunities in cybersecurity and AI/ML engineering. 
+                    Whether you need threat detection systems, ML infrastructure, or security architecture—let's discuss how I can help.
                 </p>
 
                 <div className="space-y-6">
@@ -69,63 +50,46 @@ const Contact = () => {
                 </div>
             </div>
 
-            {/* Right Col - Form */}
-            <Card className="p-8">
-                {submitted ? (
-                     <div className="h-full flex flex-col items-center justify-center text-center py-12">
-                        <div className="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center text-2xl mb-4">
-                            ✓
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                        <p className="text-slate-400">I'll get back to you within 24 hours.</p>
-                        <Button variant="outline" className="mt-8" onClick={() => setSubmitted(false)}>Send Another</Button>
-                     </div>
-                ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-slate-400 mb-2">Name</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                required
-                                value={formState.name}
-                                onChange={handleChange}
-                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all"
-                                placeholder="John Doe"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-slate-400 mb-2">Email</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                required
-                                value={formState.email}
-                                onChange={handleChange}
-                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all"
-                                placeholder="john@example.com"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="message" className="block text-sm font-medium text-slate-400 mb-2">Message</label>
-                            <textarea 
-                                id="message" 
-                                name="message" 
-                                required
-                                rows="4"
-                                value={formState.message}
-                                onChange={handleChange}
-                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all resize-none"
-                                placeholder="Tell me about your project..."
-                            />
-                        </div>
-                        <Button type="submit" className="w-full flex justify-center" disabled={isSubmitting}>
-                            {isSubmitting ? 'Sending...' : 'Send Message'}
+            {/* Right Col - Direct Email CTA */}
+            <Card className="p-8 flex flex-col justify-center">
+                <div className="text-center space-y-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
+                        📧
+                    </div>
+                    <h2 className="text-3xl font-bold text-white">Ready to Connect?</h2>
+                    <p className="text-slate-400 text-lg">
+                        Click the button below to send me an email directly. I typically respond within 24 hours.
+                    </p>
+                    <a 
+                        href="mailto:jiviteshgd28@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Jivitesh%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss..."
+                        className="inline-block"
+                    >
+                        <Button className="w-full sm:w-auto px-8 py-4 text-lg">
+                            📨 Email Me
                         </Button>
-                    </form>
-                )}
+                    </a>
+                    <div className="pt-6 border-t border-slate-700">
+                        <p className="text-sm text-slate-500 mb-3">Or connect with me on:</p>
+                        <div className="flex justify-center gap-4">
+                            <a 
+                                href="https://www.linkedin.com/in/jivi001/" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-white transition-colors text-sm"
+                            >
+                                LinkedIn
+                            </a>
+                            <a 
+                                href="https://github.com/jivi001" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-white transition-colors text-sm"
+                            >
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </Card>
         </div>
       </Section>

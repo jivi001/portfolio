@@ -22,3 +22,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.development
+
+# Build files
+build
+.cache
+
+# PWA
+dev-dist
+sw.js
+sw.js.map
+workbox-*.js
+workbox-*.js.map

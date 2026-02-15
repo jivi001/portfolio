@@ -18,9 +18,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Open Sans', 'sans-serif'],
+        display: ['Open Sans', 'sans-serif'],
+        mono: ['Open Sans', 'monospace'],
       },
     },
   },

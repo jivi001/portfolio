@@ -5,14 +5,14 @@
   --color-slate-950: #020617;
   --color-slate-900: #0f172a;
   --color-slate-800: #1e293b;
-  
+
   --color-primary-cyan: #22d3ee;
   --color-primary-blue: #3b82f6;
-  
+
   /* Typography */
-  --font-sans: "Inter", sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Open Sans", sans-serif;
+  --font-display: "Open Sans", sans-serif;
+  --font-mono: "Open Sans", monospace;
 }
 
 /* Base Styles */
@@ -20,12 +20,17 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-slate-950 text-slate-300 font-sans antialiased overflow-x-hidden;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display text-white;
   }
 }
@@ -35,36 +40,40 @@
   .glass {
     @apply backdrop-blur-md bg-white/5 border border-white/10;
   }
-  
+
   .glass-strong {
     @apply backdrop-blur-xl bg-slate-900/80 border border-slate-700/50;
   }
-  
+
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500;
   }
-  
+
   .btn-premium {
     @apply relative overflow-hidden rounded-full font-semibold transition-all duration-300;
-    background: linear-gradient(135deg, var(--color-primary-cyan), var(--color-primary-blue));
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-cyan),
+      var(--color-primary-blue)
+    );
     color: #000;
     box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
   }
-  
+
   .btn-premium:hover {
     box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
     transform: translateY(-2px);
   }
-  
+
   /* Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
     @apply bg-slate-950;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     @apply bg-slate-800 rounded-full hover:bg-slate-700;
   }

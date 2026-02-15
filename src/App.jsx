@@ -3,6 +3,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
+import Certifications from './pages/Certifications';
 import CaseStudies from './pages/CaseStudies';
 import Insights from './pages/Insights';
 import Contact from './pages/Contact';
@@ -15,6 +16,7 @@ function App() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/projects" component={Projects} />
+          <Route path="/certifications" component={Certifications} />
           <Route path="/case-studies" component={CaseStudies} />
           <Route path="/insights" component={Insights} />
           <Route path="/contact" component={Contact} />
